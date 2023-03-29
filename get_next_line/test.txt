@@ -1,4 +1,13 @@
-abcdeawd
+abcdeaw
 facdw
-czzza
+czzzasza
 Hello world!
+
+
+backup = ""
+
+
+line = ""
+backup = abcde
+
+10 - 

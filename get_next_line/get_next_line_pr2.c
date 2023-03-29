@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_pr2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/26 01:57:57 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/03/29 22:18:04 by jaeyojun         ###   ########seoul.kr  */
+/*   Created: 2023/03/29 14:58:51 by jaeyojun          #+#    #+#             */
+/*   Updated: 2023/03/29 21:32:46 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ char	*ft_readline(int fd, char *buff, char *backup)
 		backup = ft_strjoin(line, buff);
 		if (!backup)
 			return (0);
-		free (line);
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
@@ -74,19 +73,12 @@ char	*ft_check_null(char *line)
 	j = 0;
 	while (line[j] != '\0' && line[j] != '\n')
 		j++;
-	if (line[++j] == '\0')
-		return (0);
+	j++;
 	temp = (char *)malloc(sizeof(char) * j + 1);
-	if (!temp)
-		return (0);
-	if (temp[0] == '\0')
-	{
-		free(temp);
-		return (NULL);
-	}
-	while (line[i] != '\0' && j--)
+	while (line[i] != '\0' && j)
 	{
 		temp[i] = line[i];
+		j--;
 		i++;
 	}
 	temp[i] = '\0';
@@ -99,8 +91,6 @@ char	*get_next_line(int fd)
 	static char	*backup;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
 	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!buff)
 		return (0);
@@ -110,9 +100,28 @@ char	*get_next_line(int fd)
 	}
 	line = ft_readline(fd, buff, backup);
 	free (buff);
+	buff = 0;
 	backup = ft_nonewline(line);
 	line = ft_check_null(line);
-	if (!line)
-		return (0);
 	return (line);
+}
+
+int main(void)
+{
+  int fd;
+
+  fd = 0;
+  fd = open("./test.txt", O_RDONLY);
+  char *line;
+	int a = 3;
+  while (a--)
+  {
+	line  = get_next_line(fd);
+	printf("%s", line);
+  }
+
+//   printf("%p\n", line);
+//   printf("%s", line);
+
+  return (0);
 }

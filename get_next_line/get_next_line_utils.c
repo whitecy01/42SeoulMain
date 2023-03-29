@@ -1,16 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 21:33:06 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/03/29 21:45:18 by jaeyojun         ###   ########seoul.kr  */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	ft_strlen(const char *s);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -56,6 +47,7 @@ char	*ft_strdup(const char *string)
 	temp[i] = '\0';
 	return (temp);
 }
+ 
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -81,6 +73,28 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	*temp = '\0';
 	return ((temp - count));
+}
+
+
+char	*ft_strcat(char *buff, char *prev)
+{
+	char	*rst;
+	int		len;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = i;
+	len = ft_strlen(buff) + ft_strlen(prev);
+	rst = (char *)malloc(sizeof(char) * (len + 1));
+	while (prev[j])
+		rst[i++] = prev[j++];
+	j = 0;
+	while (buff[j])
+		rst[i++] = buff[j++];
+	free(prev);
+	rst[i] = 0;
+	return (rst);
 }
 
 size_t	ft_strlen(const char *s)

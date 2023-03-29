@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 19:45:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/03/26 20:00:37 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/03/29 14:44:39 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 char *get_next_line(int fd);
 int ft_strlen(char *str);
-
+char	*ft_strcat(char *buff, char *prev);
+char	*ft_strchr(const char *s, int c);
 
 int main()
 {
@@ -24,7 +25,13 @@ int main()
 	char *temp;
 
 	fd = open("test.txt", O_RDONLY);
-	temp = get_next_line(fd);
-	printf("%s", temp);
+	int a = 2;
+	while(a)
+	{
+		temp = get_next_line(fd);
+		printf("%s\n", temp);
+		a--;
+	}
+	//printf("%s", temp);
 	close(fd);
 }
