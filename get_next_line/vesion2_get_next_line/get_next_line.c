@@ -6,13 +6,11 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:24:29 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/03/31 16:31:51 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/03/31 17:52:50 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-
 
 char	*ft_strcat(char *str2, char *str1)
 {
@@ -61,9 +59,6 @@ char	*readline(int fd, char *backup)
 	char	*line;
 
 	readcount = 1;
-	// buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	// if (!buff)
-	// 	return (0);
 	while (readcount)
 	{
 		readcount = read(fd, buff, BUFFER_SIZE);
@@ -78,7 +73,7 @@ char	*readline(int fd, char *backup)
 		}
 		buff[readcount] = '\0';
 		if (!backup)
-		 	backup = ft_strdup("");
+			backup = ft_strdup("");
 		line = backup;
 		backup = ft_strjoin(line, buff);
 		if (!backup)
@@ -124,24 +119,9 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		// line = NULL;
-		// free(line);
-		// free(backup);
 		return (NULL);
 	}
-	// if (!backup)
-	// 	backup = ft_strdup("");
 	line = readline(fd, backup);
-	// if (line == 0)
-	// {
-	// 	free(backup);
-	// 	return (line);
-	// }
-	// if (line[0] == 0)
-	// {
-	// 	free(backup);
-	// 	return (line);
-	// }
 	backup = ft_checkline(line);
 	if (!line)
 	{
