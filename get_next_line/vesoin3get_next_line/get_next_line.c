@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:57:57 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/03/29 22:15:43 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/03/29 22:18:04 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*ft_readline(int fd, char *buff, char *backup)
 		backup = ft_strjoin(line, buff);
 		if (!backup)
 			return (0);
+		free (line);
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
@@ -73,14 +74,19 @@ char	*ft_check_null(char *line)
 	j = 0;
 	while (line[j] != '\0' && line[j] != '\n')
 		j++;
-	j++;
+	if (line[++j] == '\0')
+		return (0);
 	temp = (char *)malloc(sizeof(char) * j + 1);
 	if (!temp)
 		return (0);
-	while (line[i] != '\0' && j)
+	if (temp[0] == '\0')
+	{
+		free(temp);
+		return (NULL);
+	}
+	while (line[i] != '\0' && j--)
 	{
 		temp[i] = line[i];
-		j--;
 		i++;
 	}
 	temp[i] = '\0';
@@ -109,23 +115,4 @@ char	*get_next_line(int fd)
 	if (!line)
 		return (0);
 	return (line);
-}
-
-#include <stdio.h>
-#include <fcntl.h>
-int main(void)
-{
-  int fd;
-
-  fd = 0;
-  fd = open("./test.txt", O_RDONLY);
-  char *line;
-	int a = 3;
-  while (a--)
-  {
-	line  = get_next_line(fd);
-	printf("%s", line);
-  }
-  free(line);
-  return (0);
 }

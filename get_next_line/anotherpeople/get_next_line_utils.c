@@ -5,24 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 21:33:06 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/03/31 12:33:51 by jaeyojun         ###   ########seoul.kr  */
+/*   Created: 2023/03/31 12:26:26 by jaeyojun          #+#    #+#             */
+/*   Updated: 2023/03/31 12:26:43 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -93,6 +81,18 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	*temp = '\0';
 	return ((temp - count));
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
 
 char	*ft_strchr(const char *s, int c)

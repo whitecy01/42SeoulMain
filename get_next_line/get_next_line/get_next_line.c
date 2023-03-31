@@ -6,11 +6,12 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 01:57:57 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/03/29 22:18:04 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/03/31 13:56:06 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
 
 char	*ft_nonewline(char *line)
 {

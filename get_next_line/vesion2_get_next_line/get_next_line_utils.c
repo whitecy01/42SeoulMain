@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 21:33:06 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/03/31 12:33:51 by jaeyojun         ###   ########seoul.kr  */
+/*   Created: 2023/03/31 12:35:17 by jaeyojun          #+#    #+#             */
+/*   Updated: 2023/03/31 15:48:26 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
+	if (!s)
+		return (0);
 	i = 0;
 	while (s[i] != '\0')
 	{
@@ -74,6 +76,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		count;
 	char	*temp;
 
+	if (!s1 || !s2)
+		return (0);
 	count = ft_strlen(s1);
 	count += ft_strlen(s2);
 	temp = (char *)malloc(sizeof(char) * count + 1);

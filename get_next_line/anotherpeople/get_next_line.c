@@ -6,11 +6,13 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 22:20:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/03/29 22:21:58 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/03/31 16:27:05 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+#include <fcntl.h>
 
 static char	*ft_read_line(int fd, char *buf, char *backup)
 {
@@ -43,42 +45,66 @@ static char	*ft_read_line(int fd, char *buf, char *backup)
 static char	*ft_extract(char *line)
 {
 	int		i;
-	char		*result;
+	char	*result;
 
-  i = 0;
-  while (line[i] != '\n' && line[i] != '\0')
-    i++;
-  if (line[i] == '\0')
-    return (0);
-  result = ft_substr(line, i + 1, ft_strlen(line) - i);
-  if (!result)
-    return (NULL);
-  if (result[0] == '\0')
-  {
-    free(result);
-    result = NULL;
-    return (NULL);
-  }
-  line[i + 1] = '\0';
-  return (result);
+	i = 0;
+	while (line[i] != '\n' && line[i] != '\0')
+		i++;
+	if (line[i] == '\0')
+		return (0);
+	result = ft_substr(line, i + 1, ft_strlen(line) - i);
+	if (!result)
+	{
+		return (NULL);
+	}
+	if (result[0] == '\0')
+	{
+		free(result);
+		result = NULL;
+		return (NULL);
+	}
+	line[i + 1] = '\0';
+	return (result);
 }
 
 char	*get_next_line(int fd)
 {
-  char			*line;
-  char			*buf;
-  static char	*backup;
+	char			*line;
+	char			*buf;
+	static char		*backup;
 
-  if (fd < 0 || BUFFER_SIZE <= 0)
-    return (NULL);
-  buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-  if (!buf)
-    return (NULL);
-  line = ft_read_line(fd, buf, backup);
-  free(buf);
-  buf = NULL;
-  if (!line)
-    return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buf)
+		return (NULL);
+	line = ft_read_line(fd, buf, backup);
+	free(buf);
+	buf = NULL;
+	if (!line)
+	{//free(backup);
+		return (NULL);
+	}
 	backup = ft_extract(line);
-  return (line);
+	return (line);
 }
+
+// int main(void)
+// {
+//   int fd;
+
+//   fd = 0;
+//   fd = open("./test.txt", O_RDONLY);
+//   char *line;
+// 	int a = 3;
+//   while (a--)
+//   {
+// 	line  = get_next_line(fd);
+// 	printf("%s", line);
+//   }
+
+// //   printf("%p\n", line);
+// //   printf("%s", line);
+
+//   return (0);
+// }
