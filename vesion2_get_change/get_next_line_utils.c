@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:35:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/02 21:32:58 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/03 16:09:33 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int ft_strlen_new_line(const char *s2)
 	
 	count = 0;
 	i = 0;
+	if (!s2)
+		return (0);
 	while (s2[i] != '\0')
 	{
 		if (s2[i] == '\n')
