@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 20:26:01 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/03 20:26:02 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/04 10:15:30 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # endif
 
 char	*get_next_line(int fd);
+
 
 char	*ft_strdup(const char *src);
 void	free_all(char *a, char *b);

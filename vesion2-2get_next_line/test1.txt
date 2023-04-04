@@ -1,0 +1,11 @@
+abcdefghijklmnopqrstuvwxyz
+
+
+
+backup = awd\nawd\n
+
+temp = awd\n
+free(bacup);
+backup = temp;
+
+line = awd\n

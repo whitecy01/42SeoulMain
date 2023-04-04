@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:24:29 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/04 18:39:22 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/04 19:33:02 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 
-char	*readline(int fd, char **line)
+char	*readline(int fd, char *line)
 {
 	char	buff[BUFFER_SIZE + 1];
 	int		readcount;
@@ -27,18 +27,18 @@ char	*readline(int fd, char **line)
 			break ;
 		else if (readcount == -1)
 		{
-			free(*line);
-			*line = NULL;
+			free(line);
+			line = NULL;
 			return (0);
 		}
 		buff[readcount] = '\0';
-		*line = ft_strjoin(*line, buff, readcount);
-		if (!(*line))
+		line = ft_strjoin(line, buff, readcount);
+		if (!line)
 			return (NULL);
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
-	return (*line);
+	return (line);
 }
 
 static char	*ft_checkline(char *line)
@@ -161,26 +161,77 @@ char	*change_line(char *line)
 // 	return (temp);
 // }
 
+char	*check_newline(char **line)
+{
+	int		i;
+	char 	*backup;
+	int		len_line;
+	char	*temp;
+
+
+	if (!line)
+	{
+		line = NULL;
+		return (NULL);
+	}
+	i = 0;
+	len_line = ft_strlen(*line);
+	while (*line[i] != '\0' && *line[i] != '\n')
+	{
+		i++;
+	}
+	if (*line[i] == '\0')
+		return (NULL);
+	backup = ft_substr(*line, i + 1, len_line - i);
+	if (!backup)
+	{
+		free(backup);
+		backup = NULL;	
+		return (NULL);
+	}
+	temp = ft_substr(*line, 0, i + 1);
+	free(*line);
+	*line = temp;
+	free(temp);
+	return (backup);
+}
+
 
 char	*get_next_line(int fd)
 {
 	static char	*backup;
+	char		*line;
 	char		*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	//1. backup개행있을 때
 	//backup에 있는 친구 개행까지 출력한 다음 다시 backup에 넣기
-	if (strchr(backup, '\n'))
+	if (backup)
 	{
+		line = ft_strdup(backup);
+		if (!line)
+			return (NULL);
+		free(backup);
+		backup = NULL;
 	}
-	backup = readline(fd, backup);
-	if (!backup)
+	else
+		line = ft_strdup("");
+	// if (ft_strchr(line, '\n'))
+	// {
+	// 	backup = check_newline(&line);
+	// 	return (line);
+	// }
+	if (!(ft_strchr(line, '\n')))
+	{
+		line = readline(fd, line);
+	}
+	if (!line)
 		return (NULL);
-	backup = ft_checkbackup(backup);
-	temp = change_backup(backup);
-	free(backup);
-	backup = NULL;
+	backup = ft_checkline(line);
+	temp = change_line(line);
+	free(line);
+	line = NULL;
 	if (!temp)
 	{
 		backup = NULL;
@@ -188,6 +239,7 @@ char	*get_next_line(int fd)
 	}
 	return (temp);
 }
+
 // char	*get_next_line(int fd)
 // {
 // 	static char	*backup;

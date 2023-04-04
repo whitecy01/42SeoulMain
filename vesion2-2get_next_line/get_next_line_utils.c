@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:35:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/04 16:23:09 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/04 18:52:14 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,9 @@ char	*ft_strdup(char *string)
 	if (!string)
 		return (0);
 	count = ft_strlen(string);
-	temp = (char *)malloc(sizeof(char) * count + 1);
+	temp = (char *)malloc(sizeof(char) * (count + 1));
 	if (!temp)
-	{
 		return (0);
-	}
 	while (string[i])
 	{
 		temp[i] = string[i];
