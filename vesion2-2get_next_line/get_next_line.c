@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:24:29 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/05 15:41:30 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/05 20:37:24 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ char	*change_line(char **backup)
 	int		backup_len_newline;
 	int		backup_len;
 
-	if (*backup)
+	
+	if (!(*backup))
 	{
 		*backup = NULL;
 		return (NULL);
@@ -236,7 +237,7 @@ char	*print_backup(char **backup)
 char	*get_next_line(int fd)
 {
 	static char	*backup;
-	char		*line = NULL;
+	char		*line;
 	//char		*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -248,10 +249,11 @@ char	*get_next_line(int fd)
 		line = print_backup(&backup);
 		return (line);
 	}
-	//2. backup에 개행이 없을 때 
+	//2. backup에 개행이 없을 때
 	backup = readline(fd, backup);
-	printf("%s", backup);
+	//printf("%s", backup);
 	line = change_line(&backup);
+	printf("back : %s", backup);
 	//backup = ft_checkline(&backup);
 	if (!line)
 		return (NULL);
@@ -296,30 +298,70 @@ char	*get_next_line(int fd)
 // 	return (temp);
 // }
 
-int main(void)
-{
-  int fd;
+// int main(void)
+// {
+//   int fd;
 
-  fd = 0;
-  fd = open("./test.txt", O_RDONLY);
-  char *line;
-  int a =1;
-  while (a)
-  {
-	line  = get_next_line(fd);
-	// if (line == 0)
-	// 	break;
-	printf("%s", line);
-	a--;
-  }
+//   fd = 0;
+//   fd = open("./test.txt", O_RDONLY);
+//   char *line;
+//   int a =4;
+//   while (a)
+//   {
+// 	line  = get_next_line(fd);
+// 	// if (line == 0)
+// 	// 	break;
+// 	printf("%s", line);
+// 	a--;
+//   }
 
-	free(line);
-	// while(1)
-	// {
+// 	free(line);
+// 	// while(1)
+// 	// {
 
-	// }
-//   printf("%p\n", line);
-//   printf("%s", line);
+// 	// }
+// //   printf("%p\n", line);
+// //   printf("%s", line);
 
-//   return (0);
-}
+// //   return (0);
+// }
+
+
+
+// char	*get_next_line(int fd)
+// {
+// 	static char	*backup;
+// 	char		*line;
+// 	char		*temp;
+// 	int			line_len;
+	
+// 	// 에러체크
+// 	if (fd < 0 || BUFFER_SIZE <= 0)
+// 		return (NULL);
+// 	// 백업을 먼저 검사
+// 	// 있으면, 백업에 있는 문자열을 line에 복사
+// 	// 없으면, 백업 줄게 없으니깐 널로 초기화
+// 	if (backup)
+// 	{
+// 		line = ft_strdup(backup);
+// 		if (!line)
+// 			return (NULL);
+// 		free(backup);
+// 		backup = NULL;
+// 	}
+// 	else
+// 		line = NULL;
+// 	// line은 백업을 받아왔으니깐 make_buff 함수는 버퍼사이즈만큼 line 붙여주는 것
+// 	// 백업 0123456\n7
+// 	line = make_buff(line, fd, 0);
+// 	if (!line)
+// 		return (NULL);
+// 	line_len = ft_linelen(line);
+// 	// line : 012345\n
+// 	// temp : 012345\n
+// 	// backup : 
+// 	temp = make_line(line, line_len);
+// 	backup = make_cache(line, temp, line_len);
+// 	free(line);
+// 	return (temp);
+// }

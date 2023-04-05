@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:35:53 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/05 23:48:44 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/05 20:54:45 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -19,6 +19,8 @@
 
 # include <stdio.h>
 # include <fcntl.h>
+
+# define OPENMAX 49152
 
 char		*ft_check_null(char *line);
 char		*ft_strdup(char *string);

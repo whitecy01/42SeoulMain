@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:35:53 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/05 23:48:44 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/05 23:50:47 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 # include <stdlib.h>
 # include <string.h>
 
-# include <stdio.h>
-# include <fcntl.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 char		*ft_check_null(char *line);
 char		*ft_strdup(char *string);
-//char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_strjoin(char *s1, char *s2, int s2_len);
+char		*ft_strjoin(char *s1, char *s2, int s2_len, int count);
 char		*ft_strcat(char *buff, char *prev);
 char		*ft_strchr(const char *s, int c);
 size_t		ft_strlen(const char *s);

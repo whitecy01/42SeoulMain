@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:35:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/05 20:37:52 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/05 20:57:28 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ char	*ft_strjoin(char *s1, char *s2, int s2_len)
 	if (!temp)
 	{
 		free(s1);
-		//s1 = NULL;
+		s1 = NULL;
 		return (0);
 	}
 	while (i < count)

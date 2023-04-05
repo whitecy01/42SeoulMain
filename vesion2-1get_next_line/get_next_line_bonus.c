@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:24:29 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/05 20:38:55 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/05 20:57:37 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-#include <stdio.h>
+#include "get_next_line_bonus.h"
 
 char	*readline(int fd, char *line)
 {
@@ -41,7 +39,7 @@ char	*readline(int fd, char *line)
 	return (line);
 }
 
-static char	*ft_checkline(char *line, char **backup)
+char	*ft_checkline(char *line, char **backup)
 {
 	int		i;
 	//char	*backup;
@@ -107,11 +105,7 @@ char	*change_line(char **line)
 
 	i = 0;
 	if (!(*line))
-	{
-		//free(*line);
-		//*line = NULL;
 		return (NULL);
-	}
 	count = len_check(*line);
 	if (count == -1)
 	{
@@ -134,41 +128,6 @@ char	*change_line(char **line)
 	return (temp);
 }
 
-// char	*get_next_line(int fd)
-// {
-// 	static char	*backup;
-// 	char		*line;
-// 	char		*temp;
-
-// 	if (fd < 0 || BUFFER_SIZE <= 0)
-// 		return (NULL);
-// 	line = readline(fd, backup);
-// 	if (!line)
-// 	{
-// 		free(backup);
-// 		backup = NULL;
-// 		return (NULL);
-// 	}
-// 	backup = ft_checkline(line);
-// 	if (!backup)
-// 	{
-// 		free(line);
-// 		line = NULL;
-// 		free(backup);
-// 		backup = NULL;
-// 		return (NULL);
-// 	}
-// 	temp = change_line(line);
-// 	free(line);
-// 	line = NULL;
-// 	if (!temp)
-// 	{
-// 		free(backup);
-// 		backup = NULL;
-// 		return (NULL);
-// 	}
-// 	return (temp);
-// }
 
 // char	*check_newline(char **line)
 // {
@@ -208,7 +167,7 @@ char	*change_line(char **line)
 
 char	*get_next_line(int fd)
 {
-	static char	*backup;
+	static char	*backup[OPENMAX];
 	char		*line;
 	char		*temp;
 
@@ -216,70 +175,50 @@ char	*get_next_line(int fd)
 		return (NULL);
 	//1. backup개행있을 때
 	//backup에 있는 친구 개행까지 출력한 다음 다시 backup에 넣기
-	if (backup)
+	if (backup[fd])
 	{
-		line = ft_strdup(backup);
-		free(backup);
-		backup = NULL;
+		line = ft_strdup(backup[fd]);
+		free(backup[fd]);
+		backup[fd] = NULL;
 		if (!line)
 			return (NULL);
 	}
 	else
 		line = NULL;
-
-	line = readline(fd, line);
+		//line = ft_strdup("");
+		
+	// if (ft_strchr(line, '\n'))
+	// {
+	// 	backup = check_newline(&line);
+	// 	return (line);
+	// }
+	//if (!(ft_strchr(line, '\n')))
+	//{
+		line = readline(fd, line);
+	//}
 	if (!line)
 		return (NULL);
-	backup = ft_checkline(line, &backup);
+	backup[fd] = ft_checkline(line, &backup[fd]);
+	// if (!backup)
+	// {
+	// 	free(line);
+	// 	line = NULL;
+	// 	free(backup);
+	// 	backup = NULL;
+	// 	return (NULL);
+	// }
 	temp = change_line(&line);
 	free(line);
 	line = NULL;
 	if (!temp)
 	{
-		free(backup);
-		backup = NULL;
+		free(backup[fd]);
+		backup[fd] = NULL;
 		return (NULL);
 	}
 	return (temp);
 }
 
-// char	*get_next_line(int fd)
-// {
-// 	static char	*backup;
-// 	char		*line;
-// 	char		*temp;
-// 	int			line_len;
-	
-// 	// 에러체크
-// 	if (fd < 0 || BUFFER_SIZE <= 0)
-// 		return (NULL);
-// 	// 백업을 먼저 검사
-// 	// 있으면, 백업에 있는 문자열을 line에 복사
-// 	// 없으면, 백업 줄게 없으니깐 널로 초기화
-// 	if (backup)
-// 	{
-// 		line = ft_strdup(backup);
-// 		if (!line)
-// 			return (NULL);
-// 		free(backup);
-// 		backup = NULL;
-// 	}
-// 	else
-// 		line = NULL;
-// 	// line은 백업을 받아왔으니깐 make_buff 함수는 버퍼사이즈만큼 line 붙여주는 것
-// 	// 백업 0123456\n7
-// 	line = make_buff(line, fd, 0);
-// 	if (!line)
-// 		return (NULL);
-// 	line_len = ft_linelen(line);
-// 	// line : 012345\n
-// 	// temp : 012345\n
-// 	// backup : 
-// 	temp = make_line(line, line_len);
-// 	backup = make_cache(line, temp, line_len);
-// 	free(line);
-// 	return (temp);
-// }
 
 // int main(void)
 // {
