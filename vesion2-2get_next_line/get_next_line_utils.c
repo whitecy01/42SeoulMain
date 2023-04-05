@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:35:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/04 18:52:14 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/05 15:38:35 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	size_t			cou;
 
 	cou = ft_strlen(s);
-	if (cou <= start)
-		return (ft_strdup(""));
+	// if (cou <= start)
+	// 	return (ft_strdup(""));
 	if (len >= cou - start)
 		len = cou - start;
 	temp = (char *)malloc(sizeof(char) * len + 1);
@@ -120,7 +120,7 @@ char	*ft_strjoin(char *s1, char *s2, int s2_len)
 	if (!temp)
 	{
 		free(s1);
-		//s1 = NULL;
+		//*s1 = NULL;
 		return (0);
 	}
 	while (i < count)
@@ -172,6 +172,8 @@ char	*ft_strchr(const char *s, int c)
 	int				count;
 	unsigned char	ca;
 
+	if (!s)
+		return (NULL);
 	temp = (char *)s;
 	ca = (unsigned char)c;
 	if (ca == '\0')

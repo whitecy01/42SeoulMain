@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:24:29 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/04 19:33:02 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/05 15:41:30 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 
-char	*readline(int fd, char *line)
+char	*readline(int fd, char *backup)
 {
 	char	buff[BUFFER_SIZE + 1];
 	int		readcount;
@@ -27,54 +27,54 @@ char	*readline(int fd, char *line)
 			break ;
 		else if (readcount == -1)
 		{
-			free(line);
-			line = NULL;
-			return (0);
+			free(backup);
+			backup = NULL;
+			return (NULL);
 		}
 		buff[readcount] = '\0';
-		line = ft_strjoin(line, buff, readcount);
-		if (!line)
+		backup = ft_strjoin(backup, buff, readcount);
+		if (!backup)
 			return (NULL);
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
-	return (line);
-}
-
-static char	*ft_checkline(char *line)
-{
-	int		i;
-	char	*backup;
-	int		len_line;
-
-	i = 0;
-	if (!line)
-	{
-		line = NULL;
-		return (NULL);
-	}
-	while (line[i] != '\0' && line[i] != '\n')
-		i++;
-	if (line[i] == '\0')
-		return (NULL);
-	len_line = ft_strlen(line);
-	backup = ft_substr(line, i + 1, len_line - i);
-	if (!backup)
-	{
-		// free(line);
-		// line = NULL;
-		//backup = NULL;
-		return (NULL);
-	}
-	if (backup[0] == '\0')
-	{
-		free(backup);
-		line = NULL;
-		backup = NULL;
-		return (NULL);
-	}
 	return (backup);
 }
+
+// static char	*ft_checkline(char *line)
+// {
+// 	int		i;
+// 	char	*backup;
+// 	int		len_line;
+
+// 	i = 0;
+// 	if (!line)
+// 	{
+// 		line = NULL;
+// 		return (NULL);
+// 	}
+// 	while (line[i] != '\0' && line[i] != '\n')
+// 		i++;
+// 	if (line[i] == '\0')
+// 		return (NULL);
+// 	len_line = ft_strlen(line);
+// 	backup = ft_substr(line, i + 1, len_line - i);
+// 	if (!backup)
+// 	{
+// 		// free(line);
+// 		// line = NULL;
+// 		//backup = NULL;
+// 		return (NULL);
+// 	}
+// 	if (backup[0] == '\0')
+// 	{
+// 		free(backup);
+// 		line = NULL;
+// 		backup = NULL;
+// 		return (NULL);
+// 	}
+// 	return (backup);
+// }
 
 int	len_check(char *line)
 {
@@ -94,35 +94,49 @@ int	len_check(char *line)
 	return (-1);
 }
 
-char	*change_line(char *line)
+char	*change_line(char **backup)
 {
-	int		i;
-	int		count;
 	char	*temp;
+	char	*line;
+	int		backup_len_newline;
+	int		backup_len;
 
-	i = 0;
-	count = len_check(line);
-	if (!line)
+	if (*backup)
 	{
-		line = NULL;
+		*backup = NULL;
 		return (NULL);
 	}
-	if (count == -1)
-	{
-		temp = ft_strdup(line);
-		if (!temp)
-			return (NULL);
-	}
-	else
-	{
-		temp = ft_substrab(line, i, count + 1);
-		if (!temp)
-		{
-			temp = NULL;
-			return (NULL);
-		}
-	}
-	return (temp);
+	backup_len_newline = len_check(*backup);
+	//개행이 없을 때 처리 생각했는데 메인에서 어차피 걸림
+	//temp = malloc(sizeof(char) * (backup_len_newline + 1));
+	line = ft_substr(*backup, 0, backup_len_newline + 1);
+	if (!line)
+		return (NULL);
+	//2. line에 backup개행 전까지 넣어주기
+	backup_len = ft_strlen(*backup);
+	temp = ft_substr(*backup, backup_len_newline + 1, backup_len - backup_len_newline);
+	if (!temp)
+		return (NULL);
+	free(*backup);
+	*backup = temp;
+	return (line);
+
+	// if (count == -1)
+	// {
+	// 	temp = ft_strdup(*backup);
+	// 	if (!temp)
+	// 		return (NULL);
+	// }
+	// else
+	// {
+	// 	temp = ft_substrab(*backup, i, count + 1);
+	// 	if (!temp)
+	// 	{
+	// 		temp = NULL;
+	// 		return (NULL);
+	// 	}
+	// }
+	// return (temp);
 }
 
 // char	*get_next_line(int fd)
@@ -161,83 +175,87 @@ char	*change_line(char *line)
 // 	return (temp);
 // }
 
-char	*check_newline(char **line)
+// char	*check_newline(char **line)
+// {
+// 	int		i;
+// 	char 	*backup;
+// 	int		len_line;
+// 	char	*temp;
+
+
+// 	if (!line)
+// 	{
+// 		line = NULL;
+// 		return (NULL);
+// 	}
+// 	i = 0;
+// 	len_line = ft_strlen(*line);
+// 	while (*line[i] != '\0' && *line[i] != '\n')
+// 	{
+// 		i++;
+// 	}
+// 	if (*line[i] == '\0')
+// 		return (NULL);
+// 	backup = ft_substr(*line, i + 1, len_line - i);
+// 	if (!backup)
+// 	{
+// 		free(backup);
+// 		backup = NULL;	
+// 		return (NULL);
+// 	}
+// 	temp = ft_substr(*line, 0, i + 1);
+// 	free(*line);
+// 	*line = temp;
+// 	free(temp);
+// 	return (backup);
+// }
+
+char	*print_backup(char **backup)
 {
-	int		i;
-	char 	*backup;
-	int		len_line;
 	char	*temp;
+	char	*line;
+	int		backup_len_newline;
+	int		backup_len;
 
-
+	//1. line에 backup개행 전까지 넣어주기
+	backup_len_newline = len_check(*backup);
+	//temp = malloc(sizeof(char) * (backup_len_newline + 1));
+	line = ft_substr(*backup, 0, backup_len_newline + 1);
 	if (!line)
-	{
-		line = NULL;
 		return (NULL);
-	}
-	i = 0;
-	len_line = ft_strlen(*line);
-	while (*line[i] != '\0' && *line[i] != '\n')
-	{
-		i++;
-	}
-	if (*line[i] == '\0')
+	//2. backup에서 개행이후 다시 넣어주기
+	backup_len = ft_strlen(*backup);
+	temp = ft_substr(*backup, backup_len_newline + 1, backup_len - backup_len_newline);
+	if (!temp)
 		return (NULL);
-	backup = ft_substr(*line, i + 1, len_line - i);
-	if (!backup)
-	{
-		free(backup);
-		backup = NULL;	
-		return (NULL);
-	}
-	temp = ft_substr(*line, 0, i + 1);
-	free(*line);
-	*line = temp;
-	free(temp);
-	return (backup);
+	free(*backup);
+	*backup = temp;
+	return (line);
 }
-
 
 char	*get_next_line(int fd)
 {
 	static char	*backup;
-	char		*line;
-	char		*temp;
+	char		*line = NULL;
+	//char		*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	//1. backup개행있을 때
 	//backup에 있는 친구 개행까지 출력한 다음 다시 backup에 넣기
-	if (backup)
+	if (ft_strchr(backup, '\n'))
 	{
-		line = ft_strdup(backup);
-		if (!line)
-			return (NULL);
-		free(backup);
-		backup = NULL;
+		line = print_backup(&backup);
+		return (line);
 	}
-	else
-		line = ft_strdup("");
-	// if (ft_strchr(line, '\n'))
-	// {
-	// 	backup = check_newline(&line);
-	// 	return (line);
-	// }
-	if (!(ft_strchr(line, '\n')))
-	{
-		line = readline(fd, line);
-	}
+	//2. backup에 개행이 없을 때 
+	backup = readline(fd, backup);
+	printf("%s", backup);
+	line = change_line(&backup);
+	//backup = ft_checkline(&backup);
 	if (!line)
 		return (NULL);
-	backup = ft_checkline(line);
-	temp = change_line(line);
-	free(line);
-	line = NULL;
-	if (!temp)
-	{
-		backup = NULL;
-		return (NULL);
-	}
-	return (temp);
+	return (line);
 }
 
 // char	*get_next_line(int fd)
@@ -278,30 +296,30 @@ char	*get_next_line(int fd)
 // 	return (temp);
 // }
 
-// int main(void)
-// {
-//   int fd;
+int main(void)
+{
+  int fd;
 
-//   fd = 0;
-//   fd = open("./test1.txt", O_RDONLY);
-//   char *line;
-//   int a =1;
-//   while (a)
-//   {
-// 	line  = get_next_line(fd);
-// 	// if (line == 0)
-// 	// 	break;
-// 	printf("%s", line);
-// 	a--;
-//   }
+  fd = 0;
+  fd = open("./test.txt", O_RDONLY);
+  char *line;
+  int a =1;
+  while (a)
+  {
+	line  = get_next_line(fd);
+	// if (line == 0)
+	// 	break;
+	printf("%s", line);
+	a--;
+  }
 
-// 	free(line);
-// 	// while(1)
-// 	// {
+	free(line);
+	// while(1)
+	// {
 
-// 	// }
-// //   printf("%p\n", line);
-// //   printf("%s", line);
+	// }
+//   printf("%p\n", line);
+//   printf("%s", line);
 
-// //   return (0);
-// }
+//   return (0);
+}
