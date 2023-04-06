@@ -6,15 +6,15 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:35:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/05 22:57:11 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/06 16:31:13 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	if (!s)
 		return (0);
@@ -26,13 +26,13 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, unsigned int len)
 {
-	size_t			i;
+	unsigned int	i;
 	char			*temp;
-	size_t			cou;
+	unsigned int	cou;
 
-	cou = ft_strlen(s);
+	cou = (unsigned int)ft_strlen(s);
 	if (cou <= start)
 		return (ft_strdup(""));
 	if (len >= cou - start)
