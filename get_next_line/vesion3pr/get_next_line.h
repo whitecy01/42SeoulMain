@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:35:53 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/03/31 14:03:55 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/08 16:06:58 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,18 @@
 # include <stdlib.h>
 # include <string.h>
 
-# include <stdio.h>
-# include <fcntl.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 18
+# endif
 
 char		*ft_check_null(char *line);
-char		*ft_strdup(const char *string);
-char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strdup(char *string);
+char		*ft_strjoin(char *s1, char *s2, int s2_len, int count);
 char		*ft_strcat(char *buff, char *prev);
 char		*ft_strchr(const char *s, int c);
 size_t		ft_strlen(const char *s);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
-
+char		*ft_substr(char *s, unsigned int start, size_t len);
+char		*ft_substrab(char *s, unsigned int start, size_t len);
 char		*ft_nonewline(char *line);
 char		*ft_readline(int fd, char *buff, char *backup);
 char		*get_next_line(int fd);

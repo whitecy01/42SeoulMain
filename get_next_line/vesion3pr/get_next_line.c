@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:24:29 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/08 15:54:41 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/08 16:06:18 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	//printf("debuf");
 	backup = ft_checkline(line, &backup);
-	//printf("%s", backup);
+	printf("%s", backup);
 	temp = change_line(&line, &backup);
 	free(line);
 	if (!temp)
@@ -165,7 +165,7 @@ int main(void)
 
 		if (line == 0)
 		break;
-	printf("%s", line);
+	//printf("%s", line);
 	//a--;
   }
 

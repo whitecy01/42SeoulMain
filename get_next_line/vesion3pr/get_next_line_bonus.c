@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:24:29 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/05 23:41:42 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/06 14:09:09 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*readline(int fd, char *line)
 {
@@ -108,17 +108,17 @@ char	*change_line(char **line, char **backup)
 
 char	*get_next_line(int fd)
 {
-	static char	*backup;
+	static char	*backup[OPENMAX];
 	char		*line;
 	char		*temp;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPENMAX)
 		return (NULL);
-	if (backup)
+	if (backup[fd])
 	{
-		line = ft_strdup(backup);
-		free(backup);
-		backup = NULL;
+		line = ft_strdup(backup[fd]);
+		free(backup[fd]);
+		backup[fd] = NULL;
 		if (!line)
 			return (NULL);
 	}
@@ -127,8 +127,8 @@ char	*get_next_line(int fd)
 	line = readline(fd, line);
 	if (!line)
 		return (NULL);
-	backup = ft_checkline(line, &backup);
-	temp = change_line(&line, &backup);
+	backup[fd] = ft_checkline(line, &backup[fd]);
+	temp = change_line(&line, &backup[fd]);
 	free(line);
 	if (!temp)
 		return (NULL);

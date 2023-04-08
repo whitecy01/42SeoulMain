@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:35:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/02 17:05:07 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/06 16:34:55 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	if (!s)
 		return (0);
@@ -26,20 +26,20 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, unsigned int len)
 {
-	size_t			i;
+	unsigned int	i;
 	char			*temp;
-	size_t			cou;
+	unsigned int	cou;
 
-	cou = ft_strlen(s);
+	cou = (unsigned int)ft_strlen(s);
 	if (cou <= start)
 		return (ft_strdup(""));
 	if (len >= cou - start)
 		len = cou - start;
-	temp = (char *)malloc(sizeof(char) * (len + 1));
+	temp = (char *)malloc(sizeof(char) * len + 1);
 	if (!temp)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (s[start] != '\0' && i < len)
 	{
@@ -51,19 +51,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (temp);
 }
 
-char	*ft_strdup(const char *string)
+char	*ft_strdup(char *string)
 {
 	char	*temp;
 	int		i;
 	int		count;
 
 	i = 0;
-	//
 	if (!string)
 		return (0);
-	//
 	count = ft_strlen(string);
-	temp = (char *)malloc(count * sizeof(char) + 1);
+	temp = (char *)malloc(sizeof(char) * (count + 1));
 	if (!temp)
 		return (0);
 	while (string[i])
@@ -75,32 +73,33 @@ char	*ft_strdup(const char *string)
 	return (temp);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2, int s2_len, int count)
 {
-	int		count;
 	char	*temp;
+	int		i;
 
-	if (!s1 && !s2)
-		return (0);
-	count = ft_strlen(s1);
-	count += ft_strlen(s2);
-	temp = (char *)malloc(sizeof(char) * count + 1);
+	i = 0;
+	temp = (char *)malloc(sizeof(char) * (count + s2_len + 1));
 	if (!temp)
+	{
+		free(s1);
 		return (0);
-	while (*s1)
-	{
-		*temp = *s1;
-		s1++;
-		temp++;
 	}
-	while (*s2)
+	while (i < count)
 	{
-		*temp = *s2;
-		s2++;
-		temp++;
+		temp[i] = s1[i];
+		i++;
 	}
-	*temp = '\0';
-	return ((temp - count));
+	i = 0;
+	while (i < s2_len)
+	{
+		temp[count + i] = s2[i];
+		i++;
+	}
+	temp[count + i] = '\0';
+	free(s1);
+	s1 = NULL;
+	return (temp);
 }
 
 char	*ft_strchr(const char *s, int c)

@@ -6,11 +6,13 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:24:29 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/04/03 16:43:02 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/04/08 20:17:27 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+#include <stdio.h>
 
 char	*ft_strcat(char *str2, char *str1)
 {
@@ -63,26 +65,22 @@ char	*readline(int fd, char *backup)
 	{
 		readcount = read(fd, buff, BUFFER_SIZE);
 		if (readcount == 0)
-		{
 			break ;
-		}
 		else if (readcount == -1)
 		{
 			free(backup);
+			backup = NULL;
 			return (0);
 		}
 		buff[readcount] = '\0';
 		if (!backup)
 			backup = ft_strdup("");
-		line = backup;
-		if (!line)
-			return (0);
-		backup = ft_strjoin(line, buff);
 		if (!backup)
-		{
 			return (0);
-		}
+		line = backup;
+		backup = ft_strjoin(line, buff);
 		free (line);
+		line = NULL;
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
@@ -93,6 +91,7 @@ static char	*ft_checkline(char *line)
 {
 	int		i;
 	char	*backup;
+	int		len_line;
 
 	i = 0;
 	if (!line)
@@ -101,7 +100,8 @@ static char	*ft_checkline(char *line)
 		i++;
 	if (line[i] == '\0')
 		return (0);
-	backup = ft_substr(line, i + 1, ft_strlen(line) - i);
+	len_line = ft_strlen(line);
+	backup = ft_substr(line, i + 1, len_line - i);
 	if (!backup)
 		return (NULL);
 	if (backup[0] == '\0')
@@ -110,32 +110,114 @@ static char	*ft_checkline(char *line)
 		backup = NULL;
 		return (NULL);
 	}
-	line[i + 1] = '\0';
+	//line[i + 1] = '\0';
 	return (backup);
+}
+
+int	len_check(char *line)
+{
+	int i;
+
+	i = 0;
+	if (!line)
+		return (0);
+	while (line[i] != '\0')
+	{
+		if (line[i] == '\n')
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+char	*change_line(char *line)
+{
+	int	i;
+	int count;
+	char 	*temp;
+
+	if (!line)
+		return (0);
+	i = 0;
+	count = len_check(line);
+	//temp = (char *)malloc(sizeof(char) * count + 1);
+	temp = ft_substr(line, i, count + 1);
+	//printf("count : %d\n", count + 1);
+	while (i <= count)
+	{
+		temp[i] = line[i];
+		i++;
+	}
+	temp[i] = '\0';
+	if (!temp)
+		return (NULL);
+	if (temp[0] == '\0')
+	{
+		free(temp);
+		temp = NULL;
+		return (NULL);
+	}
+	//printf("i : %d\n", i);
+	//free(line);
+	return (temp);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*line;
 	static char	*backup;
+	char		*line;
+	char		*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-	{
 		return (NULL);
-	}
 	line = readline(fd, backup);
-	backup = ft_checkline(line);
-
-	// if (ft_strlen(backup) == 0)
-	// {
-	// 	free(backup);
-	// }
 	if (!line)
-	{
 		return (NULL);
-	}
-	return (line);
+	backup = ft_checkline(line);
+	temp = change_line(line);
+	free(line);
+	if (!temp)
+		return (0);
+	return (temp);
 }
+
+// char	*get_next_line(int fd)
+// {
+// 	static char	*backup;
+// 	char		*line;
+// 	char		*temp;
+// 	int			line_len;
+	
+// 	// 에러체크
+// 	if (fd < 0 || BUFFER_SIZE <= 0)
+// 		return (NULL);
+// 	// 백업을 먼저 검사
+// 	// 있으면, 백업에 있는 문자열을 line에 복사
+// 	// 없으면, 백업 줄게 없으니깐 널로 초기화
+// 	if (backup)
+// 	{
+// 		line = ft_strdup(backup);
+// 		if (!line)
+// 			return (NULL);
+// 		free(backup);
+// 		backup = NULL;
+// 	}
+// 	else
+// 		line = NULL;
+// 	// line은 백업을 받아왔으니깐 make_buff 함수는 버퍼사이즈만큼 line 붙여주는 것
+// 	// 백업 0123456\n7
+// 	line = make_buff(line, fd, 0);
+// 	if (!line)
+// 		return (NULL);
+// 	line_len = ft_linelen(line);
+// 	// line : 012345\n
+// 	// temp : 012345\n
+// 	// backup : 
+// 	temp = make_line(line, line_len);
+// 	backup = make_cache(line, temp, line_len);
+// 	free(line);
+// 	return (temp);
+// }
 
 // int main(void)
 // {
@@ -144,12 +226,14 @@ char	*get_next_line(int fd)
 //   fd = 0;
 //   fd = open("./test.txt", O_RDONLY);
 //   char *line;
+//   int a =1;
 //   while (1)
 //   {
 // 	line  = get_next_line(fd);
 // 	if (line == 0)
 // 		break;
 // 	printf("%s", line);
+// 	a--;
 //   }
 
 // 	free(line);
@@ -160,5 +244,5 @@ char	*get_next_line(int fd)
 // //   printf("%p\n", line);
 // //   printf("%s", line);
 
-//   return (0);
+// //   return (0);
 // }
