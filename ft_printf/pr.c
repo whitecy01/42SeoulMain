@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 17:11:55 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/05/14 16:32:05 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/05/15 17:52:27 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,16 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-void f(int n, ...)
-{
-	va_list v1;
-	va_start(v1, n);
-
-
-	printf("%d", va_arg(v1, int));
-	va_end(v1);
-}
-
+#include <stdio.h>
 int	main()
 {
-	//char 형
-	char ch = 'c';
+	//f(5, 1, 2, 3, 4, 5);
+	char s = 's';
+	int num = printf("%d  %c", 1234, s);
 	
-	f(1, ch);
-
+	printf("\n%d", num);
 }
+
 // void f(int n, ...)
 // {
 // 	va_list v1;

@@ -6,37 +6,32 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:53:34 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/05/14 21:07:50 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/05/15 21:26:43 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <stdio.h>
-#include <unistd.h>
+#include "ft_printf.h"
 
-void	output_char(va_list vl)
-{
-	char	alp;
-
-	alp = va_arg(vl, int);
-	write(1, &alp, 1);
-}
-
-
-
-void	check_percent(const char *str, int i, va_list vl)
+int	check_percent(const char *str, int i, va_list vl)
 {
 	i++;
+	int len;
+	
+	len = 0;
 	if (str[i] == 'c')
-		output_char(vl);
-	// else if (str[i] == 's')
-	// else if (str[i] == 'p')
-	// else if (str[i] == 'd')
+		len = output_char(vl);
+	else if (str[i] == 's')
+		len = output_string(vl);
+	else if (str[i] == 'p')
+		len = output_address(vl);
+	else if (str[i] == 'd')
+		len = output_int(vl);
 	// else if (str[i] == 'i')
 	// else if (str[i] == 'u')
 	// else if (str[i] == 'x')
 	// else if (str[i] == 'X')
 	// else if (str[i] == '%')
+	return (len);
 }
 
 int	ft_printf(const char *str, ...)
@@ -52,20 +47,64 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			check_percent(str, i, vl);
+			count_num += check_percent(str, i, vl);
+			i++;
+		}
+		else
+		{
+			write(1, &str[i], 1);
 			count_num++;
 		}
+		if (count_num == -1)
+			break ;
 		i++;
 	}
 	va_end(vl);
-	return (i);
+	return (count_num);
 }
 
 int main()
 {
-	char a = 'a';
-	int num = ft_printf("  %c", a);
-	printf("\n%d", num);
+	//char a = 'a';
+	char *sec = "aaaa";
+	printf("printf : %p awd\n", sec);
+	int num = ft_printf("ft_printf : %p awd", sec);
+	num = 0;
+	//printf("\n num : %d", num);
+	
+	//주소값
+	// printf("\n");
+	// printf("49606562: %d, ", 49606562 / 16);
+	// printf("%d\n", 49606562 % 16);
+	// printf("3100410: %d, ", 3100410 / 16);
+	// printf("%d\n", 3100410 % 16);
+	// printf("193775: %d, ", 193775 / 16);
+	// printf("%d\n", 193775 % 16);
+	// printf("12110: %d, ", 12110 / 16);
+	// printf("%d\n", 12110 % 16);
+	// printf("756: %d, ", 756 / 16);
+	// printf("%d\n", 756 % 16);
+	// printf("47: %d, ", 47 / 16);
+	// printf("%d\n", 47 % 16);
+	// printf("2: %d, ", 2 / 16);
+	// printf("%d\n", 2 % 16);
+	
+	//16진수 
+	// printf("\n");
+	// printf("49606562: %d, ", 49606562 / 16);
+	// printf("%d\n", 49606562 % 16);
+	// printf("3100410: %d, ", 3100410 / 16);
+	// printf("%d\n", 3100410 % 16);
+	// printf("193775: %d, ", 193775 / 16);
+	// printf("%d\n", 193775 % 16);
+	// printf("12110: %d, ", 12110 / 16);
+	// printf("%d\n", 12110 % 16);
+	// printf("756: %d, ", 756 / 16);
+	// printf("%d\n", 756 % 16);
+	// printf("47: %d, ", 47 / 16);
+	// printf("%d\n", 47 % 16);
+	// printf("2: %d, ", 2 / 16);
+	// printf("%d\n", 2 % 16);
 }
 
 
