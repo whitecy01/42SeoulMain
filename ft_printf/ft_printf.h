@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:55:37 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/05/15 20:38:23 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/05/16 14:22:51 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,6 @@ int	output_char(va_list vl);
 int	output_string(va_list vl);
 int	output_address(va_list vl);
 int	output_int(va_list vl);
+int	output_unsignedint(va_list vl);
+
 #endif

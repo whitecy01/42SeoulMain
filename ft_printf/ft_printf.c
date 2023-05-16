@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:53:34 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/05/15 21:26:43 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/05/16 14:24:59 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	check_percent(const char *str, int i, va_list vl)
 	else if (str[i] == 'd' || str[i] == 'i')
 		len = output_int(vl);
 	else if (str[i] == 'u')
+		len = output_unsignedint(vl);
 	// else if (str[i] == 'x')
 	// else if (str[i] == 'X')
 	// else if (str[i] == '%')
@@ -65,10 +66,15 @@ int	ft_printf(const char *str, ...)
 int main()
 {
 	//char a = 'a';
-	char *sec = "aaaa";
-	printf("printf : %p awd\n", sec);
-	int num = ft_printf("ft_printf : %p awd", sec);
+	// char *sec = "aaaa";
+	// printf("printf : %p awd\n", sec);
+	// int num = ft_printf("ft_printf : %p awd", sec);
+	// num = 0;
+	unsigned int s = -2;
+	int num = ft_printf("ft_printf : %u", s);
 	num = 0;
+	
+
 	//printf("\n num : %d", num);
 	
 	//주소값

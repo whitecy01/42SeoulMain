@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 18:00:09 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/05/15 21:28:38 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/05/16 14:28:14 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void output_address_2(unsigned long long output)
 	}
 }
 
+//len 수정
 int	output_address(va_list vl)
 {
 	unsigned long long	output;
@@ -66,6 +67,37 @@ int	output_address(va_list vl)
 	//printf("%llu\n", output);
 	write(1, "Ox" , 2);
 	output_address_2(output);
+	return (len);
+}
+
+//'u'
+void output_unsignedint2(unsigned int output)
+{
+	while ()
+	{
+		
+	}
+}
+
+
+int	output_unsignedint(va_list vl)
+{
+	unsigned int	output;
+	int				len;
+
+	len = 0;
+	output = va_arg(vl, unsigned int);
+	//printf("debug");
+	//printf("%u", output);
+	//값 출력
+	output_unsignedint2(output);
+
+	//길이 세어주기
+	while(output > 0)
+	{
+		output = output / 10;
+		len++;
+	}
 	return (len);
 }
 
