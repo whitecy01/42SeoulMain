@@ -24,10 +24,9 @@ int	check_percent(const char *str, int i, va_list vl)
 		len = output_string(vl);
 	else if (str[i] == 'p')
 		len = output_address(vl);
-	else if (str[i] == 'd')
+	else if (str[i] == 'd' || str[i] == 'i')
 		len = output_int(vl);
-	// else if (str[i] == 'i')
-	// else if (str[i] == 'u')
+	else if (str[i] == 'u')
 	// else if (str[i] == 'x')
 	// else if (str[i] == 'X')
 	// else if (str[i] == '%')

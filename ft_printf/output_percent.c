@@ -64,6 +64,7 @@ int	output_address(va_list vl)
 	len = 0;
 	output = (unsigned long long)va_arg(vl, void *);
 	//printf("%llu\n", output);
+	write(1, "Ox" , 2);
 	output_address_2(output);
 	return (len);
 }

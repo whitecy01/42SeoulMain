@@ -21,9 +21,13 @@ int	main()
 {
 	//f(5, 1, 2, 3, 4, 5);
 	char s = 's';
-	int num = printf("%d  %c", 1234, s);
+	//int num = printf("%d  %c", 1234, s);
+	unsigned int a = -1;
+	//printf("\n%d", num);
+
+	printf("%u", a);
 	
-	printf("\n%d", num);
+	
 }
 
 // void f(int n, ...)
