@@ -25,4 +25,11 @@ int	output_address(va_list vl);
 int	output_int(va_list vl);
 int	output_unsignedint(va_list vl);
 
+void output_six_smlletter(unsigned int output);
+void output_six_bigletter(unsigned int output);
+int	output_six(va_list vl, char check);
+
+int	output_percent(va_list vl);
+
+
 #endif

@@ -28,9 +28,10 @@ int	check_percent(const char *str, int i, va_list vl)
 		len = output_int(vl);
 	else if (str[i] == 'u')
 		len = output_unsignedint(vl);
-	// else if (str[i] == 'x')
-	// else if (str[i] == 'X')
-	// else if (str[i] == '%')
+	else if (str[i] == 'x' || str[i] == 'X')
+		len = output_six(vl, str[i]);
+	else if (str[i] == '%')
+		len = output_percent(vl);
 	return (len);
 }
 
@@ -70,10 +71,17 @@ int main()
 	// printf("printf : %p awd\n", sec);
 	// int num = ft_printf("ft_printf : %p awd", sec);
 	// num = 0;
-	unsigned int s = -2;
-	int num = ft_printf("ft_printf : %u", s);
-	num = 0;
-	
+	//unsigned int s = 100;
+	int a = 0;
+	int num = ft_printf("ft_printf : %%\n");
+	printf("ft_printf : %%\n");
+	//num = 0;
+	// printf("300: %d\n", 300 / 16);
+	// printf("300 나머지 : %d\n", 300 % 16);
+	// printf("18: %d\n", 18 / 16);
+	// printf("18 나머지 : %d\n", 18 % 16);
+	// printf("1: %d\n", 1 / 16);
+	// printf("1 나머지: %d", 1 % 16);
 
 	//printf("\n num : %d", num);
 	
