@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 18:00:09 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/05/16 14:28:14 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/05/17 18:24:40 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	output_char(va_list vl)
 
 	len = 0;
 	alp = va_arg(vl, int);
-	write(1, &alp, 1);
+	if (write(1, &alp, 1) == -1)
+		return (-1);
 	len++;
 	return (len);
 }
@@ -32,77 +33,137 @@ int	output_string(va_list vl)
 	int		len;
 
 	len = 0;
-	string = va_arg(vl, char *);
-	while(string[len])
+	string = (char *)va_arg(vl, void *);
+	if (string == NULL)
 	{
-		write(1, &string[len], 1);
+		if (write (1, "(null)", 6) == -1)
+			return (-1);
+		return (6);
+	}
+	while (string[len])
+	{
+		if (write(1, &string[len], 1) == -1)
+			return (-1);
 		len++;
 	}
-	len--;
 	return (len);
 }
 
-
-
-//'p'
-void output_address_2(unsigned long long output)
+//'p' ////////////////////
+int	output_address_2(unsigned long long output, int *len)
 {
+	int	check;
 
+	check = 0;
 	if (output > 0)
 	{
-		output_address_2(output / 16);
-		if (output / 16 <= 0)
-			return ;
-		write(1, &"0123456789abcdef"[output / 16], 1);
-		write(1, &"0123456789abcdef"[output % 16], 1);
+		output_address_2(output / 16, len);
+		check = write(1, &"0123456789abcdef"[output % 16], 1);
+		(*len)++;
+		if (check == -1)
+		{
+			*len = check;
+			return (*len);
+		}
 	}
+	return (*len);
 }
 
-//len 수정
 int	output_address(va_list vl)
 {
 	unsigned long long	output;
 	int					len;
 
-	len = 0;
+	len = 2;
 	output = (unsigned long long)va_arg(vl, void *);
-	//printf("%llu\n", output);
-	write(1, "Ox" , 2);
-	output_address_2(output);
+	if (output == 0)
+	{
+		if (write(1, "0x0", 3) == -1)
+			return (-1);
+		return (++len);
+	}
+	if (write(1, "0x", 2) == -1)
+		return (-1);
+	output_address_2(output, &len);
 	return (len);
 }
+/////////////////////////////
 
-//'d'
+
+//'d' 'i'
+int	output_int_2(int output, int *len)
+{
+	char	math;
+
+	if (*len == -1)
+		return (-1);
+	if (output == -2147483648)
+	{
+		if (write(1, "-2147483648", 11) == -1)
+			return (*len = -1);
+		return ((*len) = 11);
+	}
+	else if (output < 0)
+	{
+		if (write(1, "-", 1) == -1)
+			return (*len = -1);
+		output *= -1;
+		(*len)++;
+		output_int_2(output, len);
+	}
+	else
+	{
+		if (output <= 0)
+			return (0);
+		if (output_int_2(output / 10, len) == -1)
+			return (-1);
+		(*len)++;
+		math = output % 10 + '0';
+		if (write(1, &math, 1) == -1)
+			return (*len = -1);
+	}
+	return (*len);
+}
+
 int	output_int(va_list vl)
 {
-	int		output;
-	int		len;
+	int			output;
+	int			len;
 
 	len = 0;
 	output = va_arg(vl, int);
-	while (output > 0)
+	if (output == 0)
 	{
-		output = output / 10;
+		if (write (1, "0", 1) == -1)
+			return (-1);
 		len++;
+		return (len);
 	}
+	output_int_2(output, &len);
+	if (len == -1)
+		return (-1);
 	return (len);
 }
-
+//////////////////////////
 
 //'u'
-void output_unsignedint2(unsigned int output)
+int output_unsignedint2(unsigned int output, int *len)
 {
 	char	one_output_char;
 
-	if(output > 0)
+	if (*len == -1)
+		return (-1);
+	if (output > 0)
 	{
-		output_unsignedint2(output / 10);
+		if (output_unsignedint2(output / 10, len) == -1)
+			return (*len = -1);
+		(*len)++;
 		one_output_char = (output % 10) + '0';
-		write(1, &one_output_char, 1);
+		if (write(1, &one_output_char, 1) == -1)
+			return (*len = -1);
 	}
-	//printf("%d", len); 
+	return (*len);
 }
-
 
 int	output_unsignedint(va_list vl)
 {
@@ -112,46 +173,45 @@ int	output_unsignedint(va_list vl)
 
 	len = 0;
 	output = va_arg(vl, unsigned int);
-	//값 출력
 	if (output == 0)
 	{
 		output_char = output + '0';
-		write(1, &output_char, 1);
+		if (write(1, &output_char, 1) == -1)
+			return (-1);
 		len++;
 		return (len);
 	}
-	output_unsignedint2(output);
-	//길이 세어주기
-	while(output > 0)
-	{
-		output = output / 10;
-		len++;
-	}
+	output_unsignedint2(output, &len);
+	if (len == -1)
+		return (-1);
 	return (len);
 }
 
-
-
-
-//'16진수', len 수정
-void output_six_smlletter(unsigned int output)
+//'x' 'X'
+int output_six_smlletter(unsigned int output, int *len)
 {
 	if (output > 0)
 	{
-		output_six_smlletter(output / 16);
-		write(1, &"0123456789abcdef"[output % 16], 1);
+		if (output_six_smlletter(output / 16, len) == -1)
+			return (*len = -1);
+		if (write(1, &"0123456789abcdef"[output % 16], 1) == -1)
+			return (*len = -1);
+		(*len)++;
 	}
+	return (*len);
 }
 
-void output_six_bigletter(unsigned int output)
+int output_six_bigletter(unsigned int output, int *len)
 {
 	if (output > 0)
 	{
-		output_six_bigletter(output / 16);
-		//printf("output : %d\n", output);
-		// write(1, &"0123456789ABCDEF"[output / 16], 1);
-		write(1, &"0123456789ABCDEF"[output % 16], 1);
+		if (output_six_bigletter(output / 16, len) == -1)
+			return (*len = -1);
+		if (write(1, &"0123456789ABCDEF"[output % 16], 1) == -1)
+			return (*len = -1);
+		(*len)++;
 	}
+	return (*len);
 }
 
 int	output_six(va_list vl, char check)
@@ -165,28 +225,15 @@ int	output_six(va_list vl, char check)
 	if (output == 0)
 	{
 		output_char = output + '0';
-		write(1, &output_char, 1);
+		if (write(1, &output_char, 1) == -1)
+			return (-1);
 		len++;
 		return (len);
 	}
 	if (check == 'x')
-		output_six_smlletter(output);
+		output_six_smlletter(output, &len);
 	else if (check == 'X')
-		output_six_bigletter(output);
+		output_six_bigletter(output, &len);
 	return (len);
 }
-
-//%% 이거는 사용할 필요가 없음
-int	output_percent(va_list vl)
-{
-	char			output_char;
-	int				len;
-
-	len = 0;
-	//output = (unsigned int)va_arg(vl, unsigned int);
-	write(1, "%%", 1);
-	return (len);
-}
-
-
 
