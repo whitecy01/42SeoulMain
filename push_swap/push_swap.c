@@ -118,10 +118,10 @@ void	print_error(int error)
 
 int	check_input_separator(char c)
 {
-	if ('0' <= c && '9' >= c)
-	//if (c == 32)
-		return (0);
-	return (1);
+	//if ('0' <= c && '9' >= c)
+	if (c == 32)
+		return (1);
+	return (0);
 }
 
 
@@ -325,7 +325,7 @@ int	main(int argc, char **argv)
 	int i = 0;
 	while (i < array_size)
 	{
-		//printf("array_split: %s\n", array_split[i]);
+		printf("array_split: %s\n", array_split[i]);
 		i++;
 	}
 
