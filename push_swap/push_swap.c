@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:19:08 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/05/29 21:14:12 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/05/29 21:26:52 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,9 @@ int	main(int argc, char **argv)
 	char		**array_split;
 	int			*array;
 	int			int_array_len;
-	t_info		*s;
+	t_stack		*a;
+	t_stack		*b;
+	
 
 	if (argc < 2)
 		print_error(-1);
@@ -233,9 +235,9 @@ int	main(int argc, char **argv)
 	array = change_int(array_split, array_size, &int_array_len);
 	//printf("int_array_size : %d\n", int_array_len);
 	//3. a,b 스택 만들기
-	// a = create_stack(int_array_len);
-	// b = create_stack(int_array_len);
-	// printf("a->size : %d", a->size);
+	a = create_stack(int_array_len);
+	b = create_stack(int_array_len);
+	printf("a->size : %d", a->size);
 	//4. int array를 a스택에 넣기
 	
 	
