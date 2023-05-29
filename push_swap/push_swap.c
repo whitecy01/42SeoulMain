@@ -311,11 +311,34 @@ char	**check_input_spilt(int argc, char **argv, int *array_size)
 	return (str);
 }
 
+t_info 	*new_s_number(char **array_split, int array_size)
+{
+	t_info *start;
+	t_info *loc;
+
+//노드를 추가 한후 붙여주야 할 듯
+	start = (t_info *)malloc(sizeof(t_info));
+	loc = start;
+	start->content = 10;
+	start->next =
+
+	while (array_size)
+	{
+		start = (t_info *)malloc(sizeof(t_info));
+		loc = start;
+		start->content = 10;
+		start->next = 
+		array_size--;
+	}
+
+}
+
 int	main(int argc, char **argv)
 {
 	int		array_size;
 	//int		*array;
 	char	**array_split;
+	t_info 	*s_number;
 
 	if (argc < 2)
 		print_error(-1);
@@ -328,6 +351,11 @@ int	main(int argc, char **argv)
 		printf("array_split: %s\n", array_split[i]);
 		i++;
 	}
+	
+	// s_number = NULL;
+	// s_number = new_s_number(array_split, array_size);
+	//1. 2차원을 말록한 후에 a 스택에 넣기
+
 
 	// 2. atoi로 숫자 문자열이 잘 들어오는지 확인
 	printf("-------------------\n");
