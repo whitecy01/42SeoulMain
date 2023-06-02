@@ -50,5 +50,6 @@ typedef struct s_stack
 // }	t_info;
 
 void	print_error(int error);
+t_stack	*create_stack(int array_size, char name);
 
 #endif 

@@ -13,24 +13,24 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-void	print_error(int error)
+void print_error(int error)
 {
 	if (error == -1)
 		write(2, "Error\n", 6);
 	exit(1);
 }
 
-int	check_input_separator(char c)
+int check_input_separator(char c)
 {
 	if (c == 32)
 		return (1);
 	return (0);
 }
 
-int	check_input_size(char *argv)
+int check_input_size(char *argv)
 {
-	int	i;
-	int	count;
+	int i;
+	int count;
 
 	count = 0;
 	i = 0;
@@ -49,16 +49,16 @@ int	check_input_size(char *argv)
 	return (count);
 }
 
-int	string_check(char s)
+int string_check(char s)
 {
 	if (s == 32)
 		return (1);
 	return (0);
 }
 
-int	ft_strlen(const char *s, int start)
+int ft_strlen(const char *s, int start)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	if (!s)
@@ -66,17 +66,17 @@ int	ft_strlen(const char *s, int start)
 	while (s[start] != '\0' && s[start] != 32)
 	{
 		if (s[start] == 32)
-			break ;
+			break;
 		start++;
 		i++;
 	}
 	return (i);
 }
 
-char	*ft_substr(char *s, int *start)
+char *ft_substr(char *s, int *start)
 {
-	int		i;
-	char	*temp;
+	int i;
+	char *temp;
 
 	temp = (char *)malloc((sizeof(char) * ft_strlen(s, *start)) + 1);
 	if (!temp)
@@ -92,9 +92,9 @@ char	*ft_substr(char *s, int *start)
 	return (temp);
 }
 
-char	**input_split_argv(char **str, char *argv, int *two_malloc_count)
+char **input_split_argv(char **str, char *argv, int *two_malloc_count)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (argv[i])
@@ -112,11 +112,11 @@ char	**input_split_argv(char **str, char *argv, int *two_malloc_count)
 	return (str);
 }
 
-char	**input_split(char **argv, int argc, int array_size)
+char **input_split(char **argv, int argc, int array_size)
 {
-	char	**str;
-	int		i;
-	int		j;
+	char **str;
+	int i;
+	int j;
 
 	j = 0;
 	i = 1;
@@ -131,15 +131,15 @@ char	**input_split(char **argv, int argc, int array_size)
 	return (str);
 }
 
-char	**check_input_spilt(int argc, char **argv, int *array_size)
+char **check_input_spilt(int argc, char **argv, int *array_size)
 {
-	char	**str;
-	int		i;
+	char **str;
+	int i;
 
 	i = 1;
 	while (i < argc)
 		*array_size += check_input_size(argv[i++]);
-	//2차원 자체를 만들고 넣어줘야함.
+	// 2차원 자체를 만들고 넣어줘야함.
 	str = input_split(argv, argc, *array_size);
 	return (str);
 }
@@ -160,7 +160,7 @@ char	**check_input_spilt(int argc, char **argv, int *array_size)
 // 		start = (t_info *)malloc(sizeof(t_info));
 // 		loc = start;
 // 		start->content = 10;
-// 		start->next = 
+// 		start->next =
 // 		array_size--;
 // 	}
 
@@ -168,9 +168,9 @@ char	**check_input_spilt(int argc, char **argv, int *array_size)
 
 int ft_atoi(char *str)
 {
-	int	i;
-	int	result;
-	int	min;
+	int i;
+	int result;
+	int min;
 
 	i = 0;
 	min = 1;
@@ -193,58 +193,56 @@ int ft_atoi(char *str)
 	return (result * min);
 }
 
-int		*change_int(char **array_split, int array_size, int *int_array_len)
+int *change_int(char **array_split, int *array_size)
 {
 	int *temp;
-	int	i;
+	int i;
 
-	temp = (int *)malloc(sizeof(int) * array_size);
+	temp = (int *)malloc(sizeof(int) * (*array_size));
 	i = 0;
-	while (i < array_size)
+	while (i < *array_size)
 	{
 		temp[i] = ft_atoi(array_split[i]);
 		i++;
 	}
 	i = 0;
+	*array_size = 0;
 	while (temp[i])
 	{
-		(*int_array_len)++;
+		(*array_size)++;
 		i++;
 	}
 	return (temp);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	int			array_size;
-	char		**array_split;
-	int			*array;
-	int			int_array_len;
-	t_stack		*a;
-	t_stack		*b;
-	
+	int array_size;
+	char **array_split;
+	int *array;
+	t_stack *a;
+	t_stack *b;
 
 	if (argc < 2)
 		print_error(-1);
 	array_size = 0;
-	//1. 2차원을 말록한 후에 거기에다가 값을 넣기
+	// 1. 2차원을 말록한 후에 거기에다가 값을 넣기
 	array_split = check_input_spilt(argc, argv, &array_size);
 	if (array_size == 0)
 		print_error(-1);
-	//2. char 2차원 배열을 1차원 배열에 넣어주기
-	array = change_int(array_split, array_size, &int_array_len);
-	//printf("int_array_size : %d\n", int_array_len);
-	//3. a,b 스택 만들기
-	a = create_stack(int_array_len);
-	b = create_stack(int_array_len);
-	printf("a->size : %d", a->size);
-	//4. int array를 a스택에 넣기
-	
-	
+	// 2. char 2차원 배열을 1차원 배열에 넣어주기
+	array = change_int(array_split, &array_size);
+	printf("int_array_size : %d\n", array_size);
+	// 3. a,b 스택 만들기
+	a = create_stack(array_size, 'a');
+	b = create_stack(array_size, 'b');
+	create_node(array, array_size, &a);
+	printf("a->size : %d\n", a->size);
+	// 4. int array를 a스택에 넣기
+
 	// s_number = NULL;
 	// s_number = new_s_number(array_split, array_size);
-	//1. 2차원을 말록한 후에 a 스택에 넣기
-
+	// 1. 2차원을 말록한 후에 a 스택에 넣기
 
 	// 2. atoi로 숫자 문자열이 잘 들어오는지 확인
 	printf("-------------------\n");
