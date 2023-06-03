@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:09:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/05/29 21:56:51 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/03 03:53:04 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_node
 {
 	int				content;
 	struct s_node	*prev;
-	struct s_node	*next;
+	struct s_node	*next; 
 }	t_node;
 
 typedef struct s_stack
@@ -51,5 +51,10 @@ typedef struct s_stack
 
 void	print_error(int error);
 t_stack	*create_stack(int array_size, char name);
+
+t_node	*create_node(int array_answer);
+void	stack_a_create_node(int *array, int array_size, t_stack **a);
+
+void	ft_lstadd_back(t_node **lst, t_node *new);
 
 #endif 

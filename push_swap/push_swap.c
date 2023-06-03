@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:19:08 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/05/29 21:26:52 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/03 03:52:03 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,28 +144,6 @@ char **check_input_spilt(int argc, char **argv, int *array_size)
 	return (str);
 }
 
-// t_info 	*new_s_number(char **array_split, int array_size)
-// {
-// 	t_info *start;
-// 	t_info *loc;
-
-// //노드를 추가 한후 붙여주야 할 듯
-// 	start = (t_info *)malloc(sizeof(t_info));
-// 	loc = start;
-// 	start->content = 10;
-// 	start->next =
-
-// 	while (array_size)
-// 	{
-// 		start = (t_info *)malloc(sizeof(t_info));
-// 		loc = start;
-// 		start->content = 10;
-// 		start->next =
-// 		array_size--;
-// 	}
-
-// }
-
 int ft_atoi(char *str)
 {
 	int i;
@@ -217,11 +195,11 @@ int *change_int(char **array_split, int *array_size)
 
 int main(int argc, char **argv)
 {
-	int array_size;
-	char **array_split;
-	int *array;
-	t_stack *a;
-	t_stack *b;
+	int		array_size;
+	char	**array_split;
+	int		*array;
+	t_stack	*a;
+	t_stack	*b;
 
 	if (argc < 2)
 		print_error(-1);
@@ -236,10 +214,24 @@ int main(int argc, char **argv)
 	// 3. a,b 스택 만들기
 	a = create_stack(array_size, 'a');
 	b = create_stack(array_size, 'b');
-	create_node(array, array_size, &a);
+	stack_a_create_node(array, array_size, &a);
 	printf("a->size : %d\n", a->size);
 	// 4. int array를 a스택에 넣기
 
+	// t_stack *pr;
+	
+	// pr = a->top;
+	//int i = 0;
+	printf("a_top :  %d  \n", a->top->content);
+	// printf("a_top :  %d  \n", a->top->next->content);
+	printf("a_bottom :  %d  \n", a->bottom->content);
+	printf("a_bottom :  %d  \n", a->bottom->prev->content);
+	// while (a->top)
+	// {
+	// 	printf("pr->content : %d\n", a->top->content);
+	// 	a->top = a->top->next;
+	// }
+	
 	// s_number = NULL;
 	// s_number = new_s_number(array_split, array_size);
 	// 1. 2차원을 말록한 후에 a 스택에 넣기
