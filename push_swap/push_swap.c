@@ -204,39 +204,11 @@ int main(int argc, char **argv)
 	if (argc < 2)
 		print_error(-1);
 	array_size = 0;
-	// 1. 2차원을 말록한 후에 거기에다가 값을 넣기
 	array_split = check_input_spilt(argc, argv, &array_size);
 	if (array_size == 0)
 		print_error(-1);
-	// 2. char 2차원 배열을 1차원 배열에 넣어주기
 	array = change_int(array_split, &array_size);
-	printf("int_array_size : %d\n", array_size);
-	// 3. a,b 스택 만들기
 	a = create_stack(array_size, 'a');
 	b = create_stack(array_size, 'b');
-	stack_a_create_node(array, array_size, &a);
-	printf("a->size : %d\n", a->size);
-	// 4. int array를 a스택에 넣기
-
-	// t_stack *pr;
-	
-	// pr = a->top;
-	//int i = 0;
-	printf("a_top :  %d  \n", a->top->content);
-	// printf("a_top :  %d  \n", a->top->next->content);
-	printf("a_bottom :  %d  \n", a->bottom->content);
-	printf("a_bottom :  %d  \n", a->bottom->prev->content);
-	// while (a->top)
-	// {
-	// 	printf("pr->content : %d\n", a->top->content);
-	// 	a->top = a->top->next;
-	// }
-	
-	// s_number = NULL;
-	// s_number = new_s_number(array_split, array_size);
-	// 1. 2차원을 말록한 후에 a 스택에 넣기
-
-	// 2. atoi로 숫자 문자열이 잘 들어오는지 확인
-	printf("-------------------\n");
-	printf("argc : %d\n", argc);
+	stack_a_push_node(array, array_size, &a);
 }

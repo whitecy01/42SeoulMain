@@ -31,30 +31,25 @@ typedef struct s_stack
 	struct s_node		*bottom;
 }	t_stack;
 
-// typedef struct s_number
-// {
-// 	struct s_number	*prev;
-// 	int				content;
-// 	struct s_number	*next;
-// }	t_number;
-
-// typedef struct s_info
-// {
-// 	int					*array;
-// 	int					size_a;
-// 	int					size_b;
-// 	struct s_number		*top_a;
-// 	struct s_number		*top_b;
-// 	struct s_number		*bottom_a;
-// 	struct s_number		*bottom_b;
-// }	t_info;
 
 void	print_error(int error);
+
+char	**check_input_spilt(int argc, char **argv, int *array_size);
+int		check_input_size(char *argv);
+char	**input_split(char **argv, int argc, int array_size);
+char	**input_split_argv(char **str, char *argv, int *two_malloc_count);
+int		check_input_separator(char c);
+char	*ft_substr(char *s, int *start);
+int		ft_strlen(const char *s, int start);
+
+
+int		*change_int(char **array_split, int *array_size);
+int 	ft_atoi(char *str);
+
 t_stack	*create_stack(int array_size, char name);
-
 t_node	*create_node(int array_answer);
-void	stack_a_create_node(int *array, int array_size, t_stack **a);
+void	stack_a_push_node(int *array, int array_size, t_stack **stack);
+t_node 	*node_pushback(t_node **pr, t_node *new);
 
-void	ft_lstadd_back(t_node **lst, t_node *new);
 
 #endif 

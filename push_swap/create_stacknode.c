@@ -39,41 +39,55 @@ t_node	*create_node(int array_answer)
 	return (new_node);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+t_node *node_pushback(t_node **pr, t_node *new)
 {
-	t_list	*tmp;
+	t_node  *tmp;
 
-	if (*lst == NULL)
+	if (*pr == NULL)
 	{
-		*lst = new;
-		return ;
+		*pr = new;
+		return (NULL);
 	}
-	if (new == NULL)
-		return ;
-	tmp = *lst;
+	if (!new)
+		return (NULL);
+	tmp = *pr;
 	while (tmp->next)
+	{
 		tmp = tmp->next;
+	}
 	tmp->next = new;
+	new->prev = tmp;
 }
 
+//노드들을 붙여서 넣어주기 
 
-void	stack_a_create_node(int *array, int array_size, t_stack **stack)
+void	stack_a_push_node(int *array, int array_size, t_stack **stack)
 {
-	t_node	*append_new_node;
-	int		i;
-
-	i = 0;
+	int i;
+	t_node *new_node;
+	t_node	*pr;
+	
+	new_node = create_node(array[0]);
+	if (!(((*stack)->top)))
+		(*stack)->top = new_node;
+	if (array_size == 1)
+	{
+		(*stack)->bottom = new_node;
+		new_node->next = (*stack)->top;
+		return ;
+	}
+	i = 1;
 	while (i < array_size)
 	{
-		append_new_node = create_node(array[i]);
-		if ((*stack->top) == NULL)
-			(*stack)->top = append_new_node;
-		else
-		{
-			ft_lstaddback(&((*stack)->top), append_new_node);
-		}	
+		pr = create_node(array[i]);
+		node_pushback(&new_node, pr);
+		i++;
 	}
+	(*stack)->bottom = pr;
+	pr->next = (*stack)->top;
 }
+
+//top 위치를 이용해서 넣어주기
 
 // void	stack_a_create_node(int *array, int array_size, t_stack **stack)
 // {
