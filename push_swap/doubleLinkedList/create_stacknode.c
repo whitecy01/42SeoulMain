@@ -6,12 +6,11 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 20:25:19 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/03 14:03:04 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/05 18:46:48 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include <stdio.h>
+#include "../push_swap.h"
 
 t_stack	*create_stack(int array_size, char name)
 {
@@ -39,17 +38,17 @@ t_node	*create_node(int array_answer)
 	return (new_node);
 }
 
-t_node *node_pushback(t_node **pr, t_node *new)
+void	node_pushback(t_node **pr, t_node *new)
 {
-	t_node  *tmp;
+	t_node	*tmp;
 
 	if (*pr == NULL)
 	{
 		*pr = new;
-		return (NULL);
+		return ;
 	}
 	if (!new)
-		return (NULL);
+		return ;
 	tmp = *pr;
 	while (tmp->next)
 	{
@@ -59,14 +58,12 @@ t_node *node_pushback(t_node **pr, t_node *new)
 	new->prev = tmp;
 }
 
-//노드들을 붙여서 넣어주기 
-
 void	stack_a_push_node(int *array, int array_size, t_stack **stack)
 {
-	int i;
-	t_node *new_node;
+	int		i;
+	t_node	*new_node;
 	t_node	*pr;
-	
+
 	new_node = create_node(array[0]);
 	if (!(((*stack)->top)))
 		(*stack)->top = new_node;
