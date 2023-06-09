@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:09:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/05 18:48:52 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/09 18:25:03 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,17 @@ void	node_pushback(t_node **pr, t_node *new);
 void    sort_algorithm(t_stack **a, t_stack **b, int array_size);
 void	sa(t_stack **a);
 void	sb(t_stack **b);
+void	ss(t_stack **a, t_stack **b);
 
 void    pb(t_stack **a, t_stack **b);
+void	pa(t_stack **a, t_stack **b);
+
+void	ra(t_stack **a);
+void	rb(t_stack **b);
+void	rr(t_stack **a, t_stack **b);
+
+void	rra(t_stack **a);
+void	rrb(t_stack **b);
+void	rrr(t_stack **a, t_stack **b);
 
 #endif 

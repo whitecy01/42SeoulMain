@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 20:25:19 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/05 18:46:48 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/09 20:13:20 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	stack_a_push_node(int *array, int array_size, t_stack **stack)
 	}
 	(*stack)->bottom = pr;
 	pr->next = (*stack)->top;
+	(*stack)->top->prev = pr;
 }
 
 //top 위치를 이용해서 넣어주기
