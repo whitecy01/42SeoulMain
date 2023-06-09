@@ -17,9 +17,12 @@ SRCS = ./main/push_swap.c \
 		./split/input_split.c\
 		./split/libft_changeint.c\
 		./doubleLinkedList/create_stacknode.c\
+		./command_sort/sa_sb_ss.c\
+		./command_sort/sorting_algorithm.c\
+		./command_sort/pa_pb.c
 
 OBJS = $(SRCS:.c=.o)
-INCLUDE = ./push_swap.h
+INCLUDE = head
 
 
 all : $(NAME)

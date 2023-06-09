@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../head/push_swap.h"
 
 void	print_error(int error)
 {
@@ -37,4 +37,5 @@ int	main(int argc, char **argv)
 	a = create_stack(array_size, 'a');
 	b = create_stack(array_size, 'b');
 	stack_a_push_node(array, array_size, &a);
+	sort_algorithm(&a, &b, array_size);
 }

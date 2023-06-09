@@ -52,4 +52,10 @@ t_node	*create_node(int array_answer);
 void	stack_a_push_node(int *array, int array_size, t_stack **stack);
 void	node_pushback(t_node **pr, t_node *new);
 
+void    sort_algorithm(t_stack **a, t_stack **b, int array_size);
+void	sa(t_stack **a);
+void	sb(t_stack **b);
+
+void    pb(t_stack **a, t_stack **b);
+
 #endif 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../head/push_swap.h"
 
 t_stack	*create_stack(int array_size, char name)
 {

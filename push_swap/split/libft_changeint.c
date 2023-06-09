@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../head/push_swap.h"
 
 int	check_input_separator(char c)
 {

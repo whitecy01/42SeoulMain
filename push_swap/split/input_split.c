@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../head/push_swap.h"
 
 char	**check_input_spilt(int argc, char **argv, int *array_size)
 {
