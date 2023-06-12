@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:09:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/09 18:25:03 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/12 01:35:50 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,9 @@ void	rra(t_stack **a);
 void	rrb(t_stack **b);
 void	rrr(t_stack **a, t_stack **b);
 
+
+int	partiton(int *array, int start, int end);
+void	swap(int *first, int *second);
+void	quick_sort(int *array, int start, int end);
+int		*ch_array_quick_sort(t_stack **a, int array_size);
 #endif 
