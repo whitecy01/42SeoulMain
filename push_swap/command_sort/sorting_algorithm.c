@@ -74,26 +74,94 @@ int	*ch_array_quick_sort(t_stack **a, int array_size)
 	return (array);
 }
 
-void	stack_sort_algroithm(t_stack **a, t_stack **b, int array_size, int *array)
-{
-	int	pivot1;
-	int	pivot2;
-	int	i;
+//알고리즘
 
-	i = 0;
-	while (i < array_size)
+int	pivot_answer(t_stack **stack, int count)
+{
+	int *array;
+
+	t_node *tmp;
+	int j = 0;
+	tmp = (*stack)->top;
+	while (j < count)
 	{
-		pivot1 = array_size / 3;
-		pivot2 = (array_size / 3) - pivot1;
+		printf("struct[%d] : %d\n", j , tmp->content);
+		j++;
+		tmp =tmp->next;
 	}
+	array = ch_array_quick_sort(stack, count);
+	
+	for (int i =0; i<count; i++)
+		printf("array[%d] : %d\n", i, array[i]);
+
+    if (count % 2 == 0) {
+			printf("debug\n");
+        return (array[count / 2 - 1] + array[count / 2]) / 2;
+    } else {
+		printf("debug\n");
+        return array[count / 2];
+    }
 }
+
+int	pivot_answer2(t_stack **stack, int pivot1)
+{
+	int *array;
+	t_node *tmp;
+	int count;
+	t_node	*loc;
+	int i;
+	
+	count = 0;
+	tmp = (*stack)->bottom;
+	while (1)
+	{
+		if (tmp->content == pivot1)
+			break;
+		count++;
+	}
+	loc = (*stack)->bottom;
+	array = (int *)malloc(sizeof(int) * count);
+	i = 0;
+	while (i < count)
+	{
+		array[i] = loc->content;
+		i++;
+		loc = loc->next;
+	}
+	quick_sort(array, 0, count - 1);
+    if (count % 2 == 0) {
+        return (array[count / 2 - 1] + array[count / 2]) / 2;
+    } else {
+        return array[count / 2];
+    }
+}
+
+
+
+void	a_to_b(t_stack **a, t_stack **b, int array_size)
+{
+	int pivot1;
+	//int pivot2;
+
+	// if (array_size == 3)
+	// 	return ;
+	pivot1 = pivot_answer(a, array_size);
+	//pivot2 = pivot_answer2(a, array_size - pivot1);
+	printf("pivot 1 : %d \n", pivot1);
+	//printf("pivot 2 : %d \n", pivot2);
+	printf("b->size : %d \n", (*b)->size);
+}
+
+//
 
 void	sort_algorithm(t_stack **a, t_stack **b, int array_size)
 {
-	int	*array;
+	//int	*array;
 
 	printf("%d\n", (*b)->size);
-	array = ch_array_quick_sort(a, array_size);
-	stack_sort_algroithm(a, b, array_size, array);
+	//array = ch_array_quick_sort(a, array_size);
+
+
+	a_to_b(a, b, array_size);
 
 }

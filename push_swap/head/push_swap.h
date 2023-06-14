@@ -73,4 +73,8 @@ int	partiton(int *array, int start, int end);
 void	swap(int *first, int *second);
 void	quick_sort(int *array, int start, int end);
 int		*ch_array_quick_sort(t_stack **a, int array_size);
+int	pivot_answer(t_stack **stack, int count);
+int	pivot_answer2(t_stack **stack, int pivot1);
+void	a_to_b(t_stack **a, t_stack **b, int array_size);
+
 #endif 
