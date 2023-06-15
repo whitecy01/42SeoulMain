@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:15:21 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/05 18:48:23 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/14 17:08:02 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,24 @@ char	**input_split(char **argv, int argc, int array_size)
 	char	**str;
 	int		i;
 	int		j;
+	// int		q;
 
+	// q = 1;
+	// i = 0;
+	// while (q < argc)
+	// {
+	// 	i = 0;
+	// 	while (argv[q][i] != '\0')
+	// 	{
+	// 		if (argv[q][i] == ' ')
+	// 			print_error(-1);
+	// 		i++;
+	// 	}
+	// 	q++;
+	// }
 	j = 0;
 	i = 1;
 	str = (char **)malloc(array_size * sizeof(char *) + 1);
-	printf("array_size : %d\n", array_size);
 	while (i < argc)
 	{
 		str = input_split_argv(str, *(argv + i), &j);
@@ -69,6 +82,7 @@ char	**input_split_argv(char **str, char *argv, int *two_malloc_count)
 {
 	int	i;
 
+	empty_string_number_check(argv);
 	i = 0;
 	while (argv[i])
 	{

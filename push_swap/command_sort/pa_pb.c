@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:37:13 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/09 17:42:45 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/15 02:17:12 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ void	push_b(t_stack **b, t_node *change)
 	else
 	{
 		location = (*b)->top;
-		while (location)
-			location = location->next;
-		location->next = new;
-		new->prev = location;
-		(*b)->bottom = new;
+		location->prev = new;
+		new->next = (*b)->top;
+		(*b)->top = (*b)->top->prev;
 	}
 }
 
@@ -43,9 +41,12 @@ void	pb(t_stack **a, t_stack **b)
 	change = (*a)->top;
 	(*a)->top = (*a)->top->next;
 	push_b(b, change);
-	(*a)->top->prev = NULL;
+	if (((*a)->top))
+		(*a)->top->prev = NULL;
+	if (!((*a)->top))
+		(*a)->bottom = NULL;
 	free(change);
-	(*a)->bottom->next = (*a)->top;
+	write(1, "pb\n", 3);
 }
 
 void	push_a(t_stack **a, t_node *change)
@@ -62,11 +63,9 @@ void	push_a(t_stack **a, t_node *change)
 	else
 	{
 		location = (*a)->top;
-		while (location)
-			location = location->next;
-		location->next = new;
-		new->prev = location;
-		(*a)->bottom = new;
+		location->prev = new;
+		new->next = (*a)->top;
+		(*a)->top = (*a)->top->prev;
 	}
 }
 
@@ -79,7 +78,10 @@ void	pa(t_stack **a, t_stack **b)
 	change = (*b)->top;
 	(*b)->top = (*b)->top->next;
 	push_a(a, change);
-	(*b)->top->prev = NULL;
+	if (((*b)->top))
+		(*b)->top->prev = NULL;
+	if (!((*b)->top))
+		(*b)->bottom = NULL;
 	free(change);
-	(*b)->bottom->next = (*b)->top;
+	write(1, "pa\n", 3);
 }

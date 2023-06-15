@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:18:20 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/05 18:48:27 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/14 18:14:44 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	*change_int(char **array_split, int *array_size)
 		(*array_size)++;
 		i++;
 	}
+	overlap_check(temp, (*array_size));
 	return (temp);
 }
 
@@ -85,6 +86,7 @@ int	ft_atoi(char *str)
 
 	i = 0;
 	min = 1;
+	empty_string_number_check(str);
 	if (str[i] == 32)
 		print_error(-1);
 	if (str[i] == '-')
