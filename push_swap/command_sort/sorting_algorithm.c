@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:38:25 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/15 15:00:53 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/16 04:09:22 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	pivot_answer(t_stack **stack, int count)
 	
 	while (j < count && tmp->next)
 	{
-		//printf("struct[%d] : %d\n", j , tmp->content);
+		printf("struct[%d] : %d\n", j , tmp->content);
 		j++;
 		tmp = tmp->next;
 	}
@@ -246,13 +246,15 @@ void	b_to_a(t_stack **a, t_stack **b, int array_size)
 	int	pa_count = 0;
 	//write(1, "fucking : 1\n" , 12);
 
-	//printf("array_size : %d\n" ,array_size);
+	printf("b_to_a : array_size : %d\n" ,array_size);
 	if (array_size <= 3)
 	{
 		//3개 이하 일 때 정렬
 		under_cnt_three_b(a, b, array_size);
+		check_list(a, b);
 		while (array_size--)
 			pa(a, b);
+		
 		return ;
 	}
 	
@@ -261,9 +263,10 @@ void	b_to_a(t_stack **a, t_stack **b, int array_size)
 	pivot2 = pivot_answer2(b, array_size);
 
 	//printf("pivod1 : %d, pivot2 : %d\n", pivot1, pivot2);
-	//printf("p1 : %d p2 : %d arrayy_size : %d\n", pivot1, pivot2, array_size);
+	printf("p1 : %d p2 : %d arrayy_size : %d\n", pivot1, pivot2, array_size);
 	// printf("top : %d", (*b)->size);
 	//exit(1);
+	
 	while (array_size--)
 	{
 		if ((*b)->top->content <= pivot2)
@@ -277,27 +280,74 @@ void	b_to_a(t_stack **a, t_stack **b, int array_size)
 			pa_count++;
 			if ((*a)->top->content <= pivot1)
 			{
-				ra(b);
+				ra(a);
 				ra_count++;
 			}
 		}
+		//printf("array size : %d\n" , array_size);
+		check_list(a, b);
 	}
+	//-----------------------------일성--------------------
+	// while (array_size--)
+	// {
+	// 	if ((*b)->top->content <= pivot2)
+	// 	{
+	// 		rb(b);
+	// 		rb_count++;
+	// 	}
+	// 	else
+	// 	{
+	// 		pa(a, b);
+	// 		pa_count++;
+	// 		if ((*a)->top->content <= pivot1)
+	// 		{
+	// 			ra(b);
+	// 			ra_count++;
+	// 		}
+	// 	}
+	// }
 	//printf("ra_count : %d pa_count : %d, ra_count : %d\n", ra_count, pa_count, ra_count);
-	a_to_b(a, b, ra_count);
+		//-----------------------------일성--------------------
+	
+	//큰놈 정렬
+	a_to_b(a, b, pa_count - ra_count);
+	
 	turn = -1;
 	while (++turn < ra_count)
 	{
 		printf("turn : %d\n", turn);
 		rra(a);
 	}
-	a_to_b(a, b, pa_count);
+	//중간놈 정렬 
+	a_to_b(a, b, ra_count);
+	turn = -1;
 	while (++turn < rb_count)
 	{
 		printf("turn : %d\n", turn);
 		rrb(b);
 	}
 	//printf("rb_cou : %d pb_cou : %d\n", rb_count, pa_count);
+	//작은놈 정렬 
 	b_to_a(a, b, rb_count);
+	
+
+	//-----------------------------일성--------------------
+	// a_to_b(a, b, ra_count);
+	// // turn = -1;
+	// // while (++turn < ra_count)
+	// // {
+	// // 	printf("turn : %d\n", turn);
+	// // 	rra(a);
+	// // }
+	// a_to_b(a, b, pa_count);
+	// while (++turn < rb_count)
+	// {
+	// 	printf("turn : %d\n", turn);
+	// 	rrb(b);
+	// }
+	// //printf("rb_cou : %d pb_cou : %d\n", rb_count, pa_count);
+	// b_to_a(a, b, rb_count);
+	//------------------------일성---------------------
 }
 
 
@@ -312,7 +362,7 @@ void	a_to_b(t_stack **a, t_stack **b, int array_size)
 	int	pb_count = 0;
 	
 	//write(1, "here fuck : 1\n" , 14);
-	//printf("array_size : %d\n", array_size);
+	printf("a_to_b_array_size : %d\n", array_size);
 	//if (check_sorted(a))
 	if (array_size <= 3)
 	{
@@ -321,6 +371,8 @@ void	a_to_b(t_stack **a, t_stack **b, int array_size)
 		//printf("debug");
 		under_cnt_three_a(a, b, array_size);
 		//ㅊㅔ크리스트 넣기 
+		write(1, "check!!!!\n", 10);
+		check_list(a, b);
 		return ;
 	}
 	pivot1 = pivot_answer(a, array_size);
@@ -330,7 +382,7 @@ void	a_to_b(t_stack **a, t_stack **b, int array_size)
 	//printf("pivod1 : %d, pivot2 : %d\n", pivot1, pivot2);
 	// printf("top : %d", (*b)->size);
 	//exit(1);
-	while (array_size--)
+	while (array_size)
 	{
 		if ((*a)->top->content >= pivot1)
 		{
@@ -344,20 +396,35 @@ void	a_to_b(t_stack **a, t_stack **b, int array_size)
 			if ((*b)->top->content >= pivot2)
 			{
 				rb(b);
+				//rb_count = 4인데 4번 중에 1번은 값이 하나라서 rb가 실행되지 않음.
 				rb_count++;
 			}
 		}
+		printf("array size : %d\n" , array_size);
 		check_list(a, b);
+		array_size--;
 	}
-	//printf("ra_count : %d pb_count : %d, rb_count : %d\n", ra_count, pb_count, rb_count);
+	printf("ra_count : %d pb_count : %d, rb_count : %d\n", ra_count, pb_count, rb_count);
 	
-	turn = -1;
-	while (++turn < ra_count)
-		rra(a);
+	
 	turn = -1;
 	while (++turn < rb_count)
 		rrb(b);
+		
+
+	//---------------------일성----------------
+
+	//이 부분필요없음	
+	turn = -1;
+	while (++turn < ra_count)
+		rra(a);
+	// turn = -1;
+	// while (++turn < rb_count)
+	// 	rrb(b);
 	//printf("ra_count : %d pb_count : %d, rb_count : %d\n", ra_count, pb_count, rb_count);
+	//---------------------일성----------------
+
+	check_list(a, b);
 	a_to_b(a, b, ra_count);
 	//write(1, "here : 1\n" , 9);
 	//printf("debug");
@@ -367,6 +434,16 @@ void	a_to_b(t_stack **a, t_stack **b, int array_size)
 
 void	sort_algorithm(t_stack **a, t_stack **b, int array_size)
 {
+	// rra(a);
+	// rra(a);
+	// rra(a);
 
+	// printf("b->size : %d\n" , (*b)->size);
+	// printf("array_size : %d\n" , array_size);
+	// while((*a)->top)
+	// {
+	// 	printf("a->top : %d\n" , (*a)->top->content);
+	// 	(*a)->top = (*a)->top->next;
+	// }
 	a_to_b(a, b, array_size);
 }
