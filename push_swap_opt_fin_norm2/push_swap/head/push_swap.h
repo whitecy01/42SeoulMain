@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:09:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/18 06:58:40 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/18 20:04:50 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,40 +86,52 @@ void	sb(t_stack **b);
 void	ss(t_stack **a, t_stack **b);
 
 //5. sort
-//quick_sort.c
+//quick_sort.c o
 void	swap(int *first, int *second);
 int		partiton(int *array, int start, int end);
 void	quick_sort(int *array, int start, int end);
 int		*ch_array_quick_sort(t_stack **a, int array_size);
 
-//sorting_algorithm.c
+//sorting_algorithm.c o
 void	sort_alogorithm_ra(t_stack **a, int *ra_count);
 void	sort_alogorithm_pb(t_stack **a, t_stack **b, int *pb_count);
 void	sort_alogorithm_rb(t_stack **b, int *rb_count);
 void	ra_rb_pb_reset(int *ra_count, int *rb_count, int *pb_count);
 void	sort_algorithm(t_stack **a, t_stack **b, int array_size);
 
-//stackcount_pivot.c
+//stackcount_pivot.c o
 int		stack_top_count(t_stack **stack);
 int		pivot_answer(t_stack **stack, int count);
 int		pivot_answer2(t_stack **stack, int array_size);
 
-//three_underonly.c
+//three_underonly.c o
+void	three_underonly_fuc_a(t_stack **a, int array_size);
+void	three_underonly_fuc_b(t_stack **a, t_stack **b, int array_size);
+//three_underonlyhardecode.c o
 void	three_only_a(t_stack **stacks, int cnt);
 void	under_three_a(t_stack **a_stack, int cnt);
 void	three_only_b(t_stack **stacks, int cnt);
 void	under_three_b(t_stack **b_stack, int cnt);
-void	three_underonly_fuc_a(t_stack **a, int array_size);
 
-//a_to_b.c, 알고리즘 == norm 잡기
+//a_to_b.c o
 void	a_to_b(t_stack **a, t_stack **b, int array_size);
+void	ra_rb_pb_while(t_stack **a, t_stack **b, int array_size, int *count);
+//a_to_b2.c o
+void	one_plus_one_rr(t_stack **a, t_stack **b, int *ra_count, int *turn);
+int		ra_rb_sum_rrr(int ra_count, int rb_count, t_stack **a, t_stack **b);
+void	rrb_a_to_b(int rb_count, t_stack **b, int turn);
+void	rra_a_to_b(int ra_count, t_stack **a, int turn, int array_size);
+void	reset_count_array(int *count);
 
-//b_to_a.c, 알고리즘 == norm 잡기
+//b_to_a.c o 
 void	b_to_a(t_stack **a, t_stack **b, int array_size);
+void	ra_rb_pb_while_b(t_stack **a, t_stack **b, int array_size, int *count);
+//b_to_a2.c o
+void	push_pa(t_stack **a, t_stack **b, int array_size);
+void	sort_alogorithm_rb_b(t_stack **b, int *rb_count);
+void	sort_alogorithm_pa_b(t_stack **a, t_stack **b, int *pa_count);
+void	sort_alo_rr_b(t_stack **a, t_stack **b, int *rb_count, int *turn);
 
 //check_sorted_sor.c
 int		check_sorted(t_node *tmp, int cnt, int stack);
-
-//pr
-//void	check_list(t_stack **a, t_stack **b);
 #endif 

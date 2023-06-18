@@ -6,7 +6,7 @@
 #    By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 14:11:15 by jaeyojun          #+#    #+#              #
-#    Updated: 2023/06/18 06:59:46 by jaeyojun         ###   ########seoul.kr   #
+#    Updated: 2023/06/18 20:13:49 by jaeyojun         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,11 @@ SRCS = ./main/push_swap.c\
 		./sort/three_underonly.c\
 		./sort/sorting_algorithm.c\
 		./sort/a_to_b.c\
+		./sort/a_to_b2.c\
 		./sort/b_to_a.c\
+		./sort/b_to_a2.c\
 		./sort/check_sorted_sor.c\
+		./sort/three_underonlyhardcode.c\
 
 OBJS = $(SRCS:.c=.o)
 INCLUDE = head
@@ -40,11 +43,9 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS)
 
-# $(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-
 .c.o : $(OBJS)
 	$(CC) $(CFLAGS) -c -o $@ $< -I $(INCLUDE)
-	
+
 
 
 clean:
