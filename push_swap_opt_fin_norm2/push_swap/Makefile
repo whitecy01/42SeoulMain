@@ -6,7 +6,7 @@
 #    By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 14:11:15 by jaeyojun          #+#    #+#              #
-#    Updated: 2023/06/18 20:13:49 by jaeyojun         ###   ########seoul.kr   #
+#    Updated: 2023/06/19 12:05:04 by jaeyojun         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS = ./main/push_swap.c\
 		./split/input_split.c\
 		./split/libft_changeint.c\
 		./split/empty_overlap.c\
+		./split/atoi_intchange.c\
 		./doubleLinkedList/create_stacknode.c\
 		./command/sa_sb_ss.c\
 		./command/pa_pb.c\

@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:09:17 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/18 20:04:50 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/19 12:05:33 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char	*ft_substr(char *s, int *start);
 int		ft_strlen(const char *s, int start);
 int		*change_int(char **array_split, int *array_size);
 int		ft_atoi(char *str);
+//atoi_intchange.c
+long	atoi_while(char *str);
 
 //free
 char	**ft_free(char **word);

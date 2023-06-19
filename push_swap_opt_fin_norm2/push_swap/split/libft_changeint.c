@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:18:20 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/18 03:38:46 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/19 12:04:36 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int	ft_strlen(const char *s, int start)
 
 int	*change_int(char **array_split, int *array_size)
 {
-	int	*temp;
-	int	i;
+	int		*temp;
+	int		i;
 
 	temp = (int *)malloc(sizeof(int) * (*array_size));
 	i = 0;
@@ -73,9 +73,9 @@ int	*change_int(char **array_split, int *array_size)
 
 int	ft_atoi(char *str)
 {
-	int	i;
-	int	result;
-	int	min;
+	int		i;
+	long	result;
+	int		min;
 
 	i = 0;
 	min = 1;
@@ -87,14 +87,9 @@ int	ft_atoi(char *str)
 		min = -1;
 		i++;
 	}
-	result = 0;
-	while (str[i])
-	{
-		if ('0' <= str[i] && str[i] <= '9')
-			result = (10 * result) + str[i] - '0';
-		else
-			print_error(-1);
-		i++;
-	}
-	return (result * min);
+	result = atoi_while((str + i));
+	result = result * min;
+	if (!((-2147483648 <= result) && (result <= 2147483647)))
+		print_error(-1);
+	return (result);
 }

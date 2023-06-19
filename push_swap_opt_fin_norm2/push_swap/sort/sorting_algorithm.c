@@ -6,13 +6,11 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:38:25 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/18 07:06:44 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/19 12:08:03 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../head/push_swap.h"
-
-
 
 void	sort_alogorithm_ra(t_stack **a, int *ra_count)
 {
@@ -38,7 +36,6 @@ void	ra_rb_pb_reset(int *ra_count, int *rb_count, int *pb_count)
 	*rb_count = 0;
 	*pb_count = 0;
 }
-
 
 void	sort_algorithm(t_stack **a, t_stack **b, int array_size)
 {

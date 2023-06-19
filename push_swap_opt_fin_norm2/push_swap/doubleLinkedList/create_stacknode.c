@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 20:25:19 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/18 03:36:56 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/19 12:12:23 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	stack_a_push_node(int *array, int array_size, t_stack **stack)
 	if (array_size == 1)
 	{
 		(*stack)->bottom = new_node;
-		new_node->next = (*stack)->top;
 		return ;
 	}
 	i = 1;

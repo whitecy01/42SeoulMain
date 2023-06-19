@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 03:52:49 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/18 04:11:35 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/19 12:12:35 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	stack_top_count(t_stack **stack)
 
 	count = 0;
 	tmp = (*stack)->top;
+
 	while (tmp)
 	{
 		count++;
