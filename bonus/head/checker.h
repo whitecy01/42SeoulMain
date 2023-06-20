@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 21:31:25 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/19 22:25:09 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/20 16:41:28 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	stack_a_push_node(int *array, int array_size, t_stack **stack);
 
 
 //4.check.c
-void	checker_yes(t_stack **a, t_stack **b, int array_size);
+void	checker_yes(t_stack **a, t_stack **b);
 
 char	*ft_check_null(char *line);
 char	*ft_strdup(char *string);
@@ -88,5 +88,23 @@ char	*ft_substrab(char *s, unsigned int start, int len);
 char	*ft_nonewline(char *line);
 char	*ft_readline(int fd, char *buff, char *backup);
 char	*get_next_line(int fd);
+
+//pa_pb.c
+void	push_a(t_stack **a, t_node *change);
+void	push_b(t_stack **b, t_node *change);
+void	pb(t_stack **a, t_stack **b);
+void	pa(t_stack **a, t_stack **b);
+//ra_rb_rr.c
+void	ra(t_stack **a);
+void	rb(t_stack **b);
+void	rr(t_stack **a, t_stack **b);
+//rra_rrb_rrr.c
+void	rra(t_stack **a);
+void	rrb(t_stack **b);
+void	rrr(t_stack **a, t_stack **b);
+//sa_sb_ss.c
+void	sa(t_stack **a);
+void	sb(t_stack **b);
+void	ss(t_stack **a, t_stack **b);
 
 #endif 
