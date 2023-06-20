@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "./head/checker.h"
 
 t_stack	*create_stack(int array_size, int flag)
 {

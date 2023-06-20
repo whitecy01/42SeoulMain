@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "./head/checker.h"
 
 char	*readline(int fd, char *line)
 {
@@ -30,7 +30,7 @@ char	*readline(int fd, char *line)
 			return (NULL);
 		}
 		buff[readcount] = '\0';
-		line = ft_strjoin(line, buff, readcount, ft_strlen(line));
+		line = ft_strjoin(line, buff, readcount, ft_strlen_gnl(line));
 		if (!line)
 			return (NULL);
 		if (ft_strchr(buff, '\n'))
@@ -54,8 +54,8 @@ static char	*ft_checkline(char *line, char **backup)
 		i++;
 	if (line[i] == '\0')
 		return (NULL);
-	len_line = ft_strlen(line);
-	*backup = ft_substr(line, i + 1, len_line - i);
+	len_line = ft_strlen_gnl(line);
+	*backup = ft_substr_gnl(line, i + 1, len_line - i);
 	if (!(*backup))
 		return (NULL);
 	if (*backup[0] == '\0')
@@ -95,7 +95,7 @@ char	*change_line(char **line, char **backup)
 	if (count == -1)
 		temp = ft_strdup(*line);
 	else
-		temp = ft_substr(*line, 0, count + 1);
+		temp = ft_substr_gnl(*line, 0, count + 1);
 	if (!temp)
 	{
 		free(*backup);

@@ -10,47 +10,74 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "./head/checker.h"
 
-void	print_error(int error)
+void print_error(int error)
 {
 	if (error == -1)
 		write(2, "Error\n", 6);
 	exit(1);
 }
 
-int	check_newline(char *temp)
+int count_array(char *temp)
+{
+	int i = 0;
+	while (temp[i])
+		i++;
+	return (i);
+}
+
+int check_newline(char *temp)
 {
 	int i;
 
 	i = 0;
+	int count = count_array(temp);
+	if ( temp[count - 1] != '\n')
+	{
+		write(1, "Error\n", 6);
+		exit(1);
+	}
 	if (temp[i] == '\n')
+	{
 		return (1);
+	}
 	return (0);
 }
 
-void	checker_yes(t_stack **a, t_stack **b, int array_size)
+void	sort_alo_checker(t_stack **a, t_stack **b, char *temp)
 {
-	char *temp;
-	(void) array_size;
+	int i;
 
-	printf("%d %d\n", (*a)->size, (*b)->size);
-	temp = get_next_line(0);
-	// while (1)
-	// {
-	// 	if (check_newline(temp) == 1)
-	// 		break ;
-	// 	temp = get_next_line(0);
-	// }
+	i = 0;
+	//체커 확인해봐야함
+	//1. pa 같은 거를 그냥 띄어쓰기 해서 넣어도 되는지 아니면 그거 없이 해야하는지 
 }
 
-int	main(int argc, char **argv)
+void checker_yes(t_stack **a, t_stack **b, int array_size)
 {
-	int		array_size;
-	char	**array_split;
-	int		*array;
-	t_stack	*a;
-	t_stack	*b;
+	char *temp;
+
+	printf("%d %d %d\n", (*a)->size, (*b)->size, array_size);
+	temp = get_next_line(0);
+	printf("temp : %s\n", temp);
+	while (temp)
+	{
+		if (check_newline(temp) == 1)
+			break;
+		sort_alo_checker(a, b, temp);
+
+		temp = get_next_line(0);
+	}
+}
+
+int main(int argc, char **argv)
+{
+	char **array_split;
+	int *array;
+	int array_size;
+	t_stack *a;
+	t_stack *b;
 
 	if (argc < 2)
 		print_error(-1);

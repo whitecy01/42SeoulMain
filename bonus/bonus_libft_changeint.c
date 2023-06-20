@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "./head/checker.h"
 
 int	check_input_separator(char c)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "./head/checker.h"
 
 long	atoi_while(char *str)
 {

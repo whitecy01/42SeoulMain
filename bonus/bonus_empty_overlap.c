@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "./head/checker.h"
 
 void	empty_string_number_check(char *argv)
 {

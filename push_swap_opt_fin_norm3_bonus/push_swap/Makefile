@@ -81,8 +81,8 @@ $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) 
 
 #bonus##
-$(BONUS) : $(OBJS_BONUS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS_BONUS) 
+# $(BONUS) : $(OBJS_BONUS)
+# 	$(CC) $(CFLAGS) -o $@ $(OBJS_BONUS) 
 	
 #$(OBJS_BONUS) : 
 #	$(CC) $(CFLAGS) -c -o $@ $< -I $(INCLUDE_BONUS)
@@ -92,7 +92,7 @@ $(BONUS) : $(OBJS_BONUS)
 .c.o : $(OBJS) 
 		$(CC) $(CFLAGS) -c -o $@ $< -I $(INCLUDE)
 
-bonus: all $(BONUS)
+# bonus: all $(BONUS)
 
 clean:
 	rm -f $(OBJS)

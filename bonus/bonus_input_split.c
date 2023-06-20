@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "./head/checker.h"
 
 char	**check_input_spilt(int argc, char **argv, int *array_size)
 {

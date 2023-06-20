@@ -88,4 +88,5 @@ char	*ft_substrab(char *s, unsigned int start, int len);
 char	*ft_nonewline(char *line);
 char	*ft_readline(int fd, char *buff, char *backup);
 char	*get_next_line(int fd);
+
 #endif 

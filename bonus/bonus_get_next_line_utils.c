@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "./head/checker.h"
 
 int	ft_strlen_gnl(const char *s)
 {
@@ -32,7 +32,7 @@ char	*ft_substr_gnl(char *s, unsigned int start, unsigned int len)
 	char			*temp;
 	unsigned int	cou;
 
-	cou = (unsigned int)ft_strlen(s);
+	cou = (unsigned int)ft_strlen_gnl(s);
 	if (cou <= start)
 		return (ft_strdup(""));
 	if (len >= cou - start)
@@ -60,7 +60,7 @@ char	*ft_strdup(char *string)
 	i = 0;
 	if (!string)
 		return (0);
-	count = ft_strlen(string);
+	count = ft_strlen_gnl(string);
 	temp = (char *)malloc(sizeof(char) * (count + 1));
 	if (!temp)
 		return (0);
@@ -112,7 +112,7 @@ char	*ft_strchr(const char *s, int c)
 	ca = (unsigned char)c;
 	if (ca == '\0')
 	{
-		count = ft_strlen(s);
+		count = ft_strlen_gnl(s);
 		return (temp + count);
 	}
 	while (*temp)
