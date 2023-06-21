@@ -19,69 +19,7 @@ void print_error(int error)
 	exit(1);
 }
 
-int count_array(char *temp)
-{
-	int i = 0;
-	while (temp[i])
-		i++;
-	return (i);
-}
 
-int check_newline(char *temp)
-{
-	int i;
-
-	i = 0;
-
-	if (!temp)
-		return (1);
-
-	int count = count_array(temp);
-	if (temp[count - 1] != '\n')
-	{
-		write(1, "Error\n", 6);
-		exit(1);
-	}
-	if (temp[i] == '\n')
-	{
-		return (1);
-	}
-	return (0);
-}
-
-void	check_temp(char *temp)
-{
-	int i;
-	int count;
-	
-	write(1, "awd\n", 4);
-	if (!temp)
-		return ;
-	write(1, "awd\n", 4);
-	count = count_array(temp);
-	if (count != 3)
-	{
-		write(1, "Error\n", 6);
-		exit(1);
-	}
-	i = 0;
-	while(temp[i])
-	{
-		if (i == 0 || i == 1)
-			if (!(temp[i] >= 'a' && temp[i] <= 'z'))
-			{
-				write(1, "Error\n", 6);
-				exit(1);
-			}
-		if (i == 2)
-			if(temp[i] != '\n')
-			{
-				write(1, "Error\n", 6);
-				exit(1);
-			}
-	}
-	i++;
-}
 //pa pb sa sb ss 
 void	command_p(char *temp, t_stack **a, t_stack **b)
 {
@@ -168,31 +106,80 @@ int	sort_check_stack(t_stack **a)
 	return (1);
 }
 
-void	sort_alo_checker(t_stack **a, t_stack **b, char *temp)
+int count_array(char *temp)
+{
+	int i = 0;
+	while (temp[i])
+		i++;
+	return (i);
+}
+
+int check_newline(char *temp)
 {
 	int i;
 
 	i = 0;
-	//체커 확인해봐야함
-	//1. 명령어는 무조건 다른 거 없이 넣어야함
-	//체크하는 함수 넣자
-	
-	check_temp(temp);
-	if(!temp)
-		return ;
-	write(1, "check\n", 4);
-	check_command(temp, a, b);
+
+	if (!temp)
+		return (1);
+	int count = count_array(temp);
+	if (temp[count - 1] != '\n')
+	{
+		write(1, "Error\n", 6);
+		exit(1);
+	}
+	if (temp[i] == '\n')
+	{
+		return (1);
+	}
+	return (0);
 }
 
-void	input_one(t_stack **a, char *temp)
+void	check_temp(char *temp)
 {
-	if (check_newline(temp) == 1)
-		;
-	if (sort_check_stack(a) == 0)
-		write(1, "KO\n", 3);
-	else
-		write(1, "OK\n", 3);
+	int i;
+	int count;
+	
+	if(temp[2] != '\n')
+		exit(1);
+	write(1, "awd\n", 4);
+	if (!temp)
+		return ;
+	write(1, "awd\n", 4);
+	count = count_array(temp);
+	if (count != 3)
+	{
+		write(1, "Error\n", 6);
+		exit(1);
+	}
+	i = 0;
+	while(temp[i])
+	{
+		if (i == 0 || i == 1)
+			if (!(temp[i] >= 'a' && temp[i] <= 'z'))
+			{
+				write(1, "Error\n", 6);
+				exit(1);
+			}
+		if (i == 2)
+			if(temp[i] != '\n')
+			{
+				write(1, "Error\n", 6);
+				exit(1);
+			}
+	}
+	i++;
 }
+
+
+// void	input_one(t_stack **a, char *temp)
+// {
+// 	if (check_newline(temp) == 1)
+// 	if (sort_check_stack(a) == 0)
+// 		write(1, "KO\n", 3);
+// 	else
+// 		write(1, "OK\n", 3);
+// }
 
 void checker_yes(t_stack **a, t_stack **b)
 {
@@ -207,15 +194,15 @@ void checker_yes(t_stack **a, t_stack **b)
 	// 	return ;
 	// }
 	while (temp)
-	{
-		
+	{	
+		check_temp(temp);
+		check_command(temp, a, b);
 		if (check_newline(temp) == 1)
 			break ;
-
 		temp = get_next_line(0);
 	}
 	write(1, "awd\n", 4);
-	sort_alo_checker(a, b, temp);
+
 	if (sort_check_stack(a) == 0)
 	{
 		write(1, "KO\n", 3);
