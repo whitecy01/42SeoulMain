@@ -6,7 +6,7 @@
 #    By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/19 21:32:35 by jaeyojun          #+#    #+#              #
-#    Updated: 2023/06/20 16:18:16 by jaeyojun         ###   ########seoul.kr   #
+#    Updated: 2023/06/22 15:57:04 by jaeyojun         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,9 @@ SRCS = check.c\
 		bonus_ra_rb_rr.c\
 		bonus_rra_rrb_rrr.c\
 		bonus_sa_sb_ss.c\
+		bonus_command.c\
+		bonus_error.c\
+		bonus_command_temp.c
 
 
 OBJS = $(SRCS:.c=.o)
