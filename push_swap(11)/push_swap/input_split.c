@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_input_split.c                                :+:      :+:    :+:   */
+/*   input_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:15:21 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/23 19:41:28 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/23 14:27:23 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 char	**check_input_spilt(int argc, char **argv, int *array_size)
 {
@@ -54,7 +54,7 @@ char	**input_split(char **argv, int argc, int array_size)
 
 	j = 0;
 	i = 1;
-	str = (char **)malloc((array_size + 1) * sizeof(char *));
+	str = (char **)malloc(((array_size + 1) * sizeof(char *)));
 	while (i < argc)
 	{
 		str = input_split_argv(str, *(argv + i), &j);
