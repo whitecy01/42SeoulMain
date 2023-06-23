@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 03:37:39 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/22 20:02:38 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/23 13:34:51 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char **argv)
 		print_error(-1);
 	array = change_int(array_split, &array_size);
 	array_split = ft_free(array_split);
+	//argv = ft_free(argv);
 	a = create_stack(array_size, A);
 	b = create_stack(array_size, B);
 	stack_a_push_node(array, array_size, &a);

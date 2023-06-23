@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 21:31:25 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/22 16:11:07 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/23 12:23:05 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+#include <stdio.h>
 
 # define A 1
 # define B 2
@@ -35,7 +36,7 @@ typedef struct s_stack
 }	t_stack;
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 100
 # endif
 
 //bonus_atoi_intchange.c

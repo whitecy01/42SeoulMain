@@ -6,12 +6,12 @@
 #    By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/24 14:11:15 by jaeyojun          #+#    #+#              #
-#    Updated: 2023/06/22 19:01:37 by jaeyojun         ###   ########seoul.kr   #
+#    Updated: 2023/06/23 13:42:00 by jaeyojun         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 NAME = push_swap
 SRCS = push_swap.c\
 		free_char.c\

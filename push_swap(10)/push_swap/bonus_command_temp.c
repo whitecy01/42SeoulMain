@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:55:16 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/22 20:46:17 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/23 13:21:36 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	check_two_command(char *temp)
 		}
 		else if (i == 1)
 		{
-			if (!(temp[i] == 'a' || temp[i] == 'b' || temp[i] == 'r'))
+			if (!(temp[i] == 'a' || temp[i] == 'b' || temp[i] == 'r'
+					|| temp[i] == 's'))
 				print_error(-1);
 		}
 		else if (i == 2)

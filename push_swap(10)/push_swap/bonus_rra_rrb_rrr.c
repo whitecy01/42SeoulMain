@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 21:17:25 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/22 22:08:10 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/23 13:01:58 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	rra(t_stack **a)
 	bottom_new_location->next = (*a)->top;
 	(*a)->top->prev = bottom_new_location;
 	(*a)->top = (*a)->top->prev;
+	//write(1, "rra\n", 4);
 }
 
 void	rrb(t_stack **b)
@@ -40,6 +41,7 @@ void	rrb(t_stack **b)
 	bottom_new_location->next = (*b)->top;
 	(*b)->top->prev = bottom_new_location;
 	(*b)->top = (*b)->top->prev;
+	//write(1, "rrb\n", 4);
 }
 
 void	rrr(t_stack **a, t_stack **b)
@@ -75,4 +77,5 @@ void	rrr(t_stack **a, t_stack **b)
 		(*b)->top->prev = bottom_new_location_b;
 		(*b)->top = (*b)->top->prev;
 	}
+	//write(1, "rrr\n", 4);
 }

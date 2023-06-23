@@ -6,49 +6,49 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 21:32:00 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/22 22:07:56 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/23 13:20:45 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./checker.h"
 
-#include <stdio.h>
-int		print_max = 0;
-void    check_list(t_stack **a, t_stack **b)
-{
-	if (print_max == 3000)
-		return ;//exit(1);
-	print_max++;
-	printf("print_max_idx: %d\n", print_max);
-    printf("\n");
-    int    cnt = 1;
-    printf("============\t============\n");
+// #include <stdio.h>
+// int		print_max = 0;
+// void    check_list(t_stack **a, t_stack **b)
+// {
+// 	if (print_max == 3000)
+// 		return ;//exit(1);
+// 	print_max++;
+// 	printf("print_max_idx: %d\n", print_max);
+//     printf("\n");
+//     int    cnt = 1;
+//     printf("============\t============\n");
 	
-	t_node *aa;
-	t_node *bb;
+// 	t_node *aa;
+// 	t_node *bb;
 	
-	aa = (*a)->top;
-	bb = (*b)->top;
-    while (aa || bb)
-    {
-        if (aa)
-        {
-            printf("A_ %d: %d", cnt, aa->content);
-            aa = aa->next;
-        }
-        printf("\t\t");
-        if (bb)
-        {
-            printf("B_ %d: %d", cnt, bb->content);
-            bb = bb->next;
-        }
-        printf("\n");
-        cnt++;
-		if (aa == NULL && bb == NULL)
-			break ;
-    }
-    printf("============\t============\n\n");
-}
+// 	aa = (*a)->top;
+// 	bb = (*b)->top;
+//     while (aa || bb)
+//     {
+//         if (aa)
+//         {
+//             printf("A_ %d: %d", cnt, aa->content);
+//             aa = aa->next;
+//         }
+//         printf("\t\t");
+//         if (bb)
+//         {
+//             printf("B_ %d: %d", cnt, bb->content);
+//             bb = bb->next;
+//         }
+//         printf("\n");
+//         cnt++;
+// 		if (aa == NULL && bb == NULL)
+// 			break ;
+//     }
+//     printf("============\t============\n\n");
+// }
 
 int	count_array(char *temp)
 {
@@ -100,8 +100,6 @@ void	checker_yes(t_stack **a, t_stack **b)
 	while (temp)
 	{
 		check_command(temp, a, b);
-		if (check_newline(temp) == 1)
-			break ;
 		temp = get_next_line(0);
 	}
 	if (sort_check_stack(a) == 0)
@@ -128,6 +126,4 @@ int	main(int argc, char **argv)
 	b = create_stack(array_size, B);
 	stack_a_push_node(array, array_size, &a);
 	checker_yes(&a, &b);
-		
-	//check_list(&a, &b);
 }
