@@ -18,15 +18,9 @@ void	three_underonly_fuc_a(t_stack **a, int array_size)
 
 	stack_a_count = stack_top_count(a);
 	if (array_size == stack_a_count)
-	{
 		three_only_a(a, array_size);
-		check_list(a,b);
-	}
 	else
-	{
 		under_three_a(a, array_size);
-		check_list(a,b);
-	}
 	return ;
 }
 
@@ -40,13 +34,11 @@ void	three_underonly_fuc_b(t_stack **a, t_stack **b, int array_size)
 		three_only_b(b, array_size);
 		while (array_size-- > 0)
 			pa(a, b);
-		check_list(a,b);
 	}
 	else
 	{
 		under_three_b(b, array_size);
 		while (array_size-- > 0)
 			pa(a, b);
-		check_list(a,b);
 	}
 }

@@ -24,12 +24,8 @@ void	three_only_a(t_stack **stacks, int cnt)
 	{
 		a = (*stacks)->top->content;
 		b = (*stacks)->top->next->content;
-		printf("a : %d, b : %d\n" , a ,b);
 		if (cnt == 3)
-		{
 			c = (*stacks)->top->next->next->content;
-			printf("c : %d\n" , c);
-		}
 		if (cnt == 2 || (a < b && b > c && a < c) || (a > b && b < c && a < c)
 			|| (a > b && b > c && a > c))
 		{
@@ -55,12 +51,8 @@ void	under_three_a(t_stack **a_stack, int cnt)
 	{
 		a = (*a_stack)->top->content;
 		b = (*a_stack)->top->next->content;
-		printf("a : %d, b : %d\n" , a ,b);
 		if (cnt == 3)
-		{
 			c = (*a_stack)->top->next->next->content;
-			printf("c : %d\n" , c);
-		}
 		if (cnt == 2 || (a > b && a > c) || (c > a && c > b))
 			sa(a_stack);
 		else if ((b > a && b > c))
@@ -84,12 +76,8 @@ void	three_only_b(t_stack **stacks, int cnt)
 	{
 		a = (*stacks)->top->content;
 		b = (*stacks)->top->next->content;
-		printf("a : %d, b : %d\n" , a ,b);
 		if (cnt == 3)
-		{
 			c = (*stacks)->top->next->next->content;
-			printf("c : %d\n" , c);
-		}
 		if (cnt == 2 || (a > b && b < c && a > c) || (a < b && b > c && a > c)
 			|| (a < b && b < c && a < c))
 		{
@@ -115,12 +103,8 @@ void	under_three_b(t_stack **b_stack, int cnt)
 	{
 		a = (*b_stack)->top->content;
 		b = (*b_stack)->top->next->content;
-		printf("a : %d, b : %d\n" , a ,b);
 		if (cnt == 3)
-		{
 			c = (*b_stack)->top->next->next->content;
-			printf("c : %d\n" , c);
-		}
 		if (cnt == 2 || (a < b && a < c) || (c < a && c < b))
 		{
 			sb(b_stack);
