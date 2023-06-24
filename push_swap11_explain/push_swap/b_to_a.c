@@ -74,12 +74,12 @@ void	b_to_a(t_stack **a, t_stack **b, int array_size)
 	printf("pb_count == count[1] : %d\n", count[1]);
 	printf("rb_count == count[2] : %d\n", count[2]);
 
-	printf("b_to_a -> come_a_to_b_ pa_count - rb_count : %d\n", count[1] - count[0]);
+	printf("b_to_a -> come_a_to_b_ pa_count - ra_count : %d\n", count[1] - count[0]);
 	a_to_b(a, b, count[1] - count[0]);
 	turn = -1;
 	while (++turn < count[0])
 		rra(a);
-	printf("b_to_a -> come_a_to_b_rb_count : %d\n", count[0]);
+	printf("b_to_a -> come_a_to_b_ra_count : %d\n", count[0]);
 	a_to_b(a, b, count[0]);
 	turn = -1;
 	while (++turn < count[2])
