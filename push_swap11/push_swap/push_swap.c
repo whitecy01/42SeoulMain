@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 03:37:39 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/23 19:54:06 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/25 20:37:08 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,8 @@ int	main(int argc, char **argv)
 	t_stack	*a;
 	t_stack	*b;
 
-	if (argc < 2)
-		print_error(-1);
 	array_size = 0;
 	array_split = check_input_spilt(argc, argv, &array_size);
-	if (array_size == 0)
-		print_error(-1);
 	array = change_int(array_split, &array_size);
 	array_split = ft_free(array_split);
 	a = create_stack(array_size, A);

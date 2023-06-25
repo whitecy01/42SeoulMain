@@ -6,17 +6,19 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 19:56:53 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/22 19:03:04 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/25 20:43:31 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+#include <stdio.h>
 void	three_only_a(t_stack **stacks, int cnt)
 {
 	int	a;
 	int	b;
 	int	c;
+	
 
 	if (check_sorted((*stacks)->top, cnt, A))
 		return ;
@@ -26,8 +28,8 @@ void	three_only_a(t_stack **stacks, int cnt)
 		b = (*stacks)->top->next->content;
 		if (cnt == 3)
 			c = (*stacks)->top->next->next->content;
-		if (cnt == 2 || (a < b && b > c && a < c) || (a > b && b < c && a < c)
-			|| (a > b && b > c && a > c))
+		if (cnt == 2 || (a < b && b > c && a < c) || (a > b && b < c && a < c) || 
+			(a > b && b > c && a > c))
 		{
 			sa(stacks);
 			continue ;

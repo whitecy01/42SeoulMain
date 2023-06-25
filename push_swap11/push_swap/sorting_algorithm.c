@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:38:25 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/22 19:06:05 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/25 20:45:06 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void	sort_algorithm(t_stack **a, t_stack **b, int array_size)
 
 	ra_rb_pb_reset(&ra_count, &rb_count, &pb_count);
 	if (array_size <= 3)
+	{
 		three_underonly_fuc_a(a, array_size);
+		return ;
+	}
 	pivot1 = pivot_answer(a, array_size);
 	pivot2 = pivot_answer2(a, array_size);
 	while (array_size--)
