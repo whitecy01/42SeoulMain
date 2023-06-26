@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 12:04:31 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/25 21:02:53 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/25 21:38:48 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,11 @@ long	atoi_while(char *str)
 	if (i >= 11)
 		print_error(-1);
 	return (result);
+}
+
+int	check_b(t_stack **b)
+{
+	if (((*b)->top))
+		return (0);
+	return (1);
 }

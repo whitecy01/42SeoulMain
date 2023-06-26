@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 21:32:00 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/23 19:52:49 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/25 21:37:54 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	checker_yes(t_stack **a, t_stack **b)
 		free(temp);
 		temp = get_next_line(0);
 	}
-	if (sort_check_stack(a) == 0)
+	if (sort_check_stack(a) == 0 || check_b(b) == 0)
 		write(1, "KO\n", 3);
 	else
 		write(1, "OK\n", 3);

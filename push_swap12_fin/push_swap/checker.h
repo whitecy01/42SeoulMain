@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 21:31:25 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/25 15:19:01 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/25 21:38:34 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ void	rrr(t_stack **a, t_stack **b);
 void	sa(t_stack **a);
 void	sb(t_stack **b);
 void	ss(t_stack **a, t_stack **b);
+int		check_b(t_stack **b);
 
 #endif 
