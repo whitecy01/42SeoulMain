@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sa_sb_ss.c                                         :+:      :+:    :+:   */
+/*   bonus_sa_sb_ss.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:36:12 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/06/26 20:28:11 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/06/23 19:47:51 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 void	sa(t_stack **a)
 {
@@ -26,7 +26,6 @@ void	sa(t_stack **a)
 	tmp = change->content;
 	change->content = (*a)->top->content;
 	(*a)->top->content = tmp;
-	write(1, "sa\n", 3);
 }
 
 void	sb(t_stack **b)
@@ -43,7 +42,6 @@ void	sb(t_stack **b)
 	tmp = change->content;
 	change->content = (*b)->top->content;
 	(*b)->top->content = tmp;
-	write(1, "sb\n", 3);
 }
 
 void	ss(t_stack **a, t_stack **b)
@@ -72,5 +70,4 @@ void	ss(t_stack **a, t_stack **b)
 		change_b->content = (*b)->top->content;
 		(*b)->top->content = tmp;
 	}
-	write(1, "ss\n", 3);
 }
