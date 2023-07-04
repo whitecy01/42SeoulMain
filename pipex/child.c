@@ -1,23 +1,23 @@
 
-// #include <unistd.h>
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <sys/stat.h>
-// #include <string.h>
-// #include <fcntl.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <string.h>
+#include <fcntl.h>
 
-// int main()
-// {
-// 	pid_t pid;
+int main()
+{
+	pid_t pid;
 
-// 	pid = fork();
-// 	if (pid > 0)
-// 	{
-// 		printf("부모\n");
-// 	}
-// 	else
-// 		printf("자식\n");
-// }
+	pid = fork();
+	if (pid == 0)
+	{
+		printf("부모\n");
+	}
+	else
+		printf("자식\n");
+}
 
 
 // #include <stdio.h>
@@ -129,26 +129,26 @@
 // }
 
 
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
+// #include <stdio.h>
+// #include <unistd.h>
+// #include <fcntl.h>
 
-int main() {
-    int fd = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (fd == -1) {
-        perror("open");
-        return 1;
-    }
+// int main() {
+//     int fd = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+//     if (fd == -1) {
+//         perror("open");
+//         return 1;
+//     }
 
-    printf("Standard output\n");  // 기존의 표준 출력
+//     printf("Standard output\n");  // 기존의 표준 출력
 
-    if (dup2(fd, STDOUT_FILENO) == -1) {
-        perror("dup2");
-        return 1;
-    }
+//     if (dup2(fd, STDOUT_FILENO) == -1) {
+//         perror("dup2");
+//         return 1;
+//     }
 
-    printf("Redirected output\n");  // 파일로 재지정된 출력
+//     printf("Redirected output\n");  // 파일로 재지정된 출력
 
-    close(fd);
-    return 0;
-}
+//     close(fd);
+//     return 0;
+// }
