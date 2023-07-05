@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:24:58 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/04 18:24:32 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/05 12:59:14 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	pipe_start(t_info loc, char **envp)
 
 	printf("loc.pipe_fds[0] -> %d, loc.pipe_fds[1] -> %d\n", loc.pipe_fds[0], loc.pipe_fds[1]);
 	loc.pid = fork();
-
+			printf("loc.com_path_combine : %s, loc.argv_command_one : %s\n" , loc.com_path_combine1, loc.argv_command_one[1]);
 	// pid 값을 이용하여 에러와 자식 프로세스와 부모 프로세스를 분기한다
 	if (loc.pid == -1)
 		perror("fork error");
@@ -97,6 +97,7 @@ void	pipe_start(t_info loc, char **envp)
 		dup2(loc.pipe_fds[1], STDOUT_FILENO);
 		close(loc.pipe_fds[1]);
 		close(loc.infile);
+
 		execve(loc.com_path_combine1, loc.argv_command_one, envp);
 	}
 	else
