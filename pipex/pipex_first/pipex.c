@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:24:58 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/06 22:11:33 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/06 14:17:23 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ char	*combine_command(char *first_loc_command, char **path)
 	char	*tmp;
 	int		fd;
 
-	fd = access(first_loc_command, X_OK);
-	if (fd != -1)
-		return (first_loc_command);
 	combine = ft_strjoin("/", first_loc_command);
 	i = 0;
 	while (path[i])
@@ -79,24 +76,14 @@ char	*combine_command(char *first_loc_command, char **path)
 	return (NULL);
 }
 
-void	ft_putstr_fd(char *str, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		write(fd, &str[i], 1);
-		i++;
-	}
-	exit(127);
-}
-
 void	pipe_start(t_info loc, char **envp)
 {
 	if (pipe(loc.pipe_fds) < 0)
 		perror("pipe error");
+
+	printf("loc.pipe_fds[0] -> %d, loc.pipe_fds[1] -> %d\n", loc.pipe_fds[0], loc.pipe_fds[1]);
 	loc.pid = fork();
+	//printf("loc.com_path_combine : %s, loc.argv_command_one : %s\n" , loc.com_path_combine1, loc.argv_command_one[1]);
 	if (loc.pid == -1)
 		perror("fork error");
 	else if (loc.pid == 0)
@@ -106,8 +93,7 @@ void	pipe_start(t_info loc, char **envp)
 		dup2(loc.pipe_fds[1], STDOUT_FILENO);
 		close(loc.pipe_fds[1]);
 		close(loc.infile);
-		if (execve(loc.com_path_combine1, loc.argv_command_one, envp) == -1)
-			ft_putstr_fd("bash : command not found\n", 2);
+		execve(loc.com_path_combine1, loc.argv_command_one, envp);
 	}
 	else
 	{
@@ -116,41 +102,61 @@ void	pipe_start(t_info loc, char **envp)
 		dup2(loc.outfile, STDOUT_FILENO);
 		close(loc.pipe_fds[0]);
 		close(loc.outfile);
-		waitpid(loc.pid, NULL, WNOHANG);
-		if (execve(loc.com_path_combine2, loc.argv_command_two, envp) == -1)
-			ft_putstr_fd("bash : command not found\n", 2);
+		waitpid(loc.pid, NULL, 0);
+		execve(loc.com_path_combine2, loc.argv_command_two, envp);
 	}
 }
-
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	loc;
 
+    //infile open
 	if (argc != 5)
-		error("argument error\n");
+		error("argument error");
 	loc.infile = open(argv[1], O_RDONLY);
+	
+	//
 	if (loc.infile == -1)
-		perror("infile error");
+		error("infile error");
+	
+	//
 	loc.outfile = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	//
 	if (loc.outfile == -1)
 		error("outfile error");
+
+	//
+	printf("argc : %d\n", argc);
 	loc.PATH = find_path(envp);
 	//command split
 	loc.argv_command_one = ft_split(argv[2], ' ');
 	loc.argv_command_two = ft_split(argv[3], ' ');
+	if (loc.argv_command_one  == NULL || loc.argv_command_two  == NULL)
+		error("cmd missing error");
 	// int i = 0;
-	// int j = 0;
-	// while(loc.argv_command_one[i])
-	// 	printf("loc.argv_command_one : %s\n", loc.argv_command_one[i++]);
-	// while(loc.argv_command_one[j])
-	// 	printf("loc.argv_command_one : %s\n", loc.argv_command_two[j++]);
+	// while (loc.argv_command_one[i])
+	// {
+	// 	printf("loc.argv_command_one -> %s\n", loc.argv_command_one[i]);
+	// 	i++;
+	// }
+	// i = 0;
+	// while (loc.argv_command_two[i])
+	// {
+	// 	printf("loc.argv_command_two -> %s\n", loc.argv_command_two[i]);
+	// 	i++;
+	// }
+	
+	printf("loc.infile -> %d loc.outfile -> %d\n", loc.infile, loc.outfile);
 
 	//acces를 하기 위해 인자들을 각 loc.argv_command_숫자[0]를 붙여주어야함.
 	loc.com_path_combine1 = combine_command(loc.argv_command_one[0], loc.PATH);
 	loc.com_path_combine2 = combine_command(loc.argv_command_two[0], loc.PATH);
+
+	//printf("loc.com_path_combine1 : %s\n", loc.com_path_combine1);
+	//printf("loc.com_path_combine2 : %s\n", loc.com_path_combine2);
 	
-	// printf("loc.com_path_combine1 : %s\n", loc.com_path_combine1);
-	// printf("loc.com_path_combine2 : %s\n", loc.com_path_combine2);
 	pipe_start(loc, envp);
+	
+	printf("loc.infile2 -> %d\n", loc.infile);
 }

@@ -1,40 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_free.c                                       :+:      :+:    :+:   */
+/*   findpath.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/03 14:27:46 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/06 22:00:39 by jaeyojun         ###   ########seoul.kr  */
+/*   Created: 2023/07/03 14:24:56 by jaeyojun          #+#    #+#             */
+/*   Updated: 2023/07/03 14:28:45 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	error(char *error)
+int	number_compare(const char *str1, const char *str2, size_t n)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (error[i])
+	while ((str1[i] != '\0' || str2[i] != '\0') && i < n)
 	{
-		write(1, &error[i], 1);
+		if (str1[i] != str2[i])
+			return ((unsigned char)str1[i] - (unsigned char)str2[i]);
 		i++;
 	}
-	exit(2);
+	return (0);
 }
 
-char	**ft_free(char **word)
+char	**find_path(char **envp)
 {
-	int	i;
+	int		i;
+	char	**envp_split_reslt;
 
 	i = 0;
-	while (word[i])
-	{
-		free(word[i]);
+	while (number_compare(envp[i], "PATH", 4) != 0)
 		i++;
-	}
-	free(word);
-	return (0);
+	envp_split_reslt = envp_split(envp[i]);
+	i = 0;
+	while (envp_split_reslt[i])
+		i++;
+	return (envp_split_reslt);
 }
