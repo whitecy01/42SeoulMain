@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:24:58 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/07 16:35:46 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/07 16:33:59 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_info	loc;
 
+
+	// exit(1);
 	if (argc != 5)
 		error("argument error\n");
 	loc.infile = open(argv[1], O_RDONLY);
@@ -136,10 +138,27 @@ int	main(int argc, char **argv, char **envp)
 	if (loc.outfile == -1)
 		error("outfile error");
 	loc.PATH = find_path(envp);
+	//command split
+	// loc.argv_command_one = ft_split(argv[2], ' ');
+	// loc.argv_command_two = ft_split(argv[3], ' ');
 
-	loc.argv_command_one = ft_split(argv[2], ' ');
-	loc.argv_command_two = ft_split(argv[3], ' ');
+	loc.argv_command_one = choice_split(argv[2]);
+	loc.argv_command_two = choice_split(argv[3]);
+	
+
+	
+	// i = 0;
+	// j = 0;
+	// while(loc.argv_command_one[i])
+	// 	printf("loc.argv_command_one : %s\n", loc.argv_command_one[i++]);
+	// while(loc.argv_command_one[j])
+	// 	printf("loc.argv_command_one : %s\n", loc.argv_command_two[j++]);
+	//exit(1);
+	//acces를 하기 위해 인자들을 각 loc.argv_command_숫자[0]를 붙여주어야함.
 	loc.com_path_combine1 = combine_command(loc.argv_command_one[0], loc.PATH);
 	loc.com_path_combine2 = combine_command(loc.argv_command_two[0], loc.PATH);
+	
+	// printf("loc.com_path_combine1 : %s\n", loc.com_path_combine1);
+	// printf("loc.com_path_combine2 : %s\n", loc.com_path_combine2);
 	pipe_start(loc, envp);
 }

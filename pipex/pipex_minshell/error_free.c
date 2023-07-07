@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:27:46 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/07 17:59:14 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/06 22:00:39 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	error(char *error)
 		write(1, &error[i], 1);
 		i++;
 	}
-	exit(1);
+	exit(2);
 }
 
 char	**ft_free(char **word)
@@ -35,21 +35,6 @@ char	**ft_free(char **word)
 		free(word[i]);
 		i++;
 	}
-	free(word);
-	return (0);
-}
-
-
-char	*ft_free_one(char *word)
-{
-// 	int	i;
-
-// 	i = 0;
-// 	while (word[i])
-// 	{
-// 		free(word[i]);
-// 		i++;
-// 	}
 	free(word);
 	return (0);
 }

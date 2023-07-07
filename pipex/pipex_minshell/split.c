@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:14:38 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/07 16:36:03 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/07 13:07:54 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,27 @@ char	**ft_split(char const *s, char c)
 	}
 	temp[count] = 0;
 	return (temp);
+}
+
+char	**choice_split(char *argv)
+{
+	int i;
+	int temp;
+
+	temp = 0;
+	i = 0;
+	while (argv[i])
+	{
+		if (argv[i] == '\'')
+		{
+			temp = 1;
+			break ;
+		}
+		i++;
+	}
+	if (temp == 0)
+		return (ft_split(argv, ' '));
+	else if (temp == 1)
+		return (another_split(argv, ' '));
+	return (NULL);
 }

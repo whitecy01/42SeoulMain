@@ -17,8 +17,10 @@ typedef struct s_info
     //2. 명령어를 공백 기준으로 split 한 다음 넣기 
     char **argv_command_one;
     char **argv_command_two;
+	
 	//3. 환경변수 PATH split 한 후 가져오기
 	char **PATH;
+
 	//acces를 하기 위한 자료
 	char *com_path_combine1;
 	char *com_path_combine2;
@@ -54,4 +56,6 @@ int		malloc_count(char const *s, char c);
 char	*word_input(char const *s, char c);
 char	**ft_split(char const *s, char c);
 
+
+char	*ft_free_one(char *word);
 #endif 

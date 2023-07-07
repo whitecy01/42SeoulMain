@@ -6,7 +6,7 @@
 #    By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 13:58:29 by jaeyojun          #+#    #+#              #
-#    Updated: 2023/07/07 16:35:55 by jaeyojun         ###   ########seoul.kr   #
+#    Updated: 2023/07/07 13:03:47 by jaeyojun         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC = error_free.c\
 		path_split.c\
 		pipex.c\
 		split.c\
+		split_another.c
 
 OBJ = $(SRC:.c=.o)
 INCLUDE = pipex.h
