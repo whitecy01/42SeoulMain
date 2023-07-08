@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:24:58 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/08 17:09:49 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/08 19:25:31 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +149,8 @@ void	pipe_start(t_info loc, char **envp, char **argv, int argc)
 			dup2(loc.pipe_fds[0], STDIN_FILENO);
 			dup2(loc.outfile, STDOUT_FILENO);
 			close(loc.pipe_fds[0]);
-			close(loc.outfile);
-			
+			close(loc.outfile);			
 			waitpid(loc.pid, NULL, WNOHANG);
-			
 			loc.argv_command_two = ft_split(argv[argc - 2], ' ');
 			loc.com_path_combine2 = combine_command(loc.argv_command_two[0], loc.PATH);
 			if (execve(loc.com_path_combine2, loc.argv_command_two, envp) == -1)

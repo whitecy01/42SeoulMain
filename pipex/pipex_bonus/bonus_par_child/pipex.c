@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:24:58 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/08 17:58:13 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/08 22:00:17 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,28 +183,26 @@ void	pipe_start(t_info loc, char **envp, char **argv, int argc)
 {
 	int i = 2;
 	int fork_count = argc - 3;
-	int start = 0;
-
+	int start = -1;
 
 	//loc.pid = fork();
 	printf("argv : %s\n", argv[1]);
 	printf("envp : %s\n", envp[1]);
 	printf("fork_count : %d\n", fork_count);
-	//if (loc.pid == -1)
-	//	perror("fork error");
-	while (start < fork_count - 1)
+	while (++start < fork_count - 1)
 	{
+		printf("start : %d\n", start);
 		if (pipe(loc.pipe_fds) < 0)
 			perror("pipe error");
 		loc.pid = fork();
 		if (loc.pid == -1)
 			perror("fork error");
-		if (loc.pid == 0)
+		else if (loc.pid == 0)
 		{
-			printf("자식 프로세스 %d에서 자식 프로세스 %d로 파일 목록 전송\n", getpid(), loc.pid);
+			//printf("자식 프로세스 %d에서 자식 프로세스 %d로 파일 목록 전송\n", getpid(), loc.pid);
 			if (start == 0)
 			{
-				//printf("자식 프로세스 %d에서 자식 프로세스 %d로 파일 목록 전송\n", getpid(), loc.pid);
+				//printf("자식 프로세스 %d에서 자식 프로세스 %d로 파일 목록 전송 first\n", getpid(), loc.pid);
 				close(loc.pipe_fds[0]);
 				dup2(loc.infile, STDIN_FILENO);
 				dup2(loc.pipe_fds[1], STDOUT_FILENO);
@@ -216,7 +214,7 @@ void	pipe_start(t_info loc, char **envp, char **argv, int argc)
 					ft_putstr_fd("bash : command not found\n", 2);
 			}
 			else
-			{
+			{//printf("자식 프로세스 %d에서 자식 프로세스 %d로 파일 목록 전송 second\n", getpid(), loc.pid);
 				close(loc.pipe_fds[0]);
 				dup2(loc.pipe_fds[0], STDIN_FILENO);
 				dup2(loc.pipe_fds[1], STDOUT_FILENO);
@@ -227,13 +225,12 @@ void	pipe_start(t_info loc, char **envp, char **argv, int argc)
 				if (execve(loc.com_path_combine1, loc.argv_command_one, envp) == -1)
 					ft_putstr_fd("bash : command not found\n", 2);
 			}
-
 		}
 		else
 		{
 			//printf("부모 프로세스 %d에서 자식 프로세스 %d로 파일 목록 전송\n", getpid(), loc.pid);
 			if (start == fork_count - 2)
-			{
+			{//printf("부모 프로세스 %d에서 자식 프로세스 %d로 파일 목록 전송 frist \n", getpid(), loc.pid);
 				close(loc.pipe_fds[1]);
 				dup2(loc.pipe_fds[0], STDIN_FILENO);
 				dup2(loc.outfile, STDOUT_FILENO);
@@ -246,14 +243,26 @@ void	pipe_start(t_info loc, char **envp, char **argv, int argc)
 					ft_putstr_fd("bash : command not found\n", 2);
 			}
 			else
-			{
-				close(loc.pipe_fds[1]);
+			{//printf("부모 프로세스 %d에서 자식 프로세스 %d로 파일 목록 전송 second \n", getpid(), loc.pid);
+				
+				// 			loc.argv_command_two = ft_split(argv[argc - 2], ' ');
+				// loc.com_path_combine2 = combine_command(loc.argv_command_two[0], loc.PATH);
+				// if (execve(loc.com_path_combine2, loc.argv_command_two, envp) == -1)
+				// 	ft_putstr_fd("bash : command not found\n", 2);
+			    //close(loc.pipe_fds[1]);
+				//waitpid(loc.pid, NULL, WNOHANG);
 				dup2(loc.pipe_fds[0], STDIN_FILENO);
-				dup2(loc.outfile, STDOUT_FILENO);
+				dup2(loc.pipe_fds[1], STDOUT_FILENO);
+				//dup2(loc.pipe_fds[1], STDOUT_FILENO);
 				close(loc.pipe_fds[0]);
+				close(loc.pipe_fds[1]);
+				//dup2(loc.pipe_fds[0], STDIN_FILENO);
+				// loc.com_path_combine2 = combine_command(loc.argv_command_two[0], loc.PATH);
+				// if (execve(loc.com_path_combine2, loc.argv_command_two, envp) == -1)
+				// 	ft_putstr_fd("bash : command not found\n", 2);
+				//dup2(loc.outfile, STDOUT_FILENO);
 			}
 		}
-		start++;
 	}
 }
 
