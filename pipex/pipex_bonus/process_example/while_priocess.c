@@ -9,11 +9,11 @@ int main()
 {
     pid_t pid;
 
-    int time = 2;
-    while(time--)
+    int time = 0;
+    while(time < 2)
     {
-
-        pid = fork();
+		if (pid != 0 && time != 1)
+       		pid = fork();
 
         if (pid == 0)
         {
@@ -27,6 +27,7 @@ int main()
             //printf("자식 프로세스 PID:%d\n", getpid());
             printf("부모 프로세스 입니다\n");
         }
+		time++;
     }
 
 }

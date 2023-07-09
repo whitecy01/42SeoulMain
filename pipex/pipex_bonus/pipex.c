@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:24:58 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/08 19:25:31 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/09 12:34:36 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ void	pipe_start(t_info loc, char **envp, char **argv, int argc)
 			perror("fork error");
 		if (loc.pid == 0)
 		{
-			
 			if (start == 0)
 			{
 				printf("자식 프로세스 %d에서 자식 프로세스 %d로 파일 목록 전송\n", getpid(), loc.pid);
