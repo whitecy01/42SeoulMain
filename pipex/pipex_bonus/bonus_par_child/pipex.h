@@ -9,6 +9,9 @@
 # include <stdio.h>
 # include <string.h>
 
+#include <sys/types.h>
+  #include <sys/wait.h>
+
 typedef struct s_info
 {
     //1. infile, outfile 검사

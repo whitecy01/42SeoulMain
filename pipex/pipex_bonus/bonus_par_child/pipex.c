@@ -242,26 +242,6 @@ void	pipe_start(t_info loc, char **envp, char **argv, int argc)
 				if (execve(loc.com_path_combine2, loc.argv_command_two, envp) == -1)
 					ft_putstr_fd("bash : command not found\n", 2);
 			}
-			else
-			{//printf("부모 프로세스 %d에서 자식 프로세스 %d로 파일 목록 전송 second \n", getpid(), loc.pid);
-				
-				// 			loc.argv_command_two = ft_split(argv[argc - 2], ' ');
-				// loc.com_path_combine2 = combine_command(loc.argv_command_two[0], loc.PATH);
-				// if (execve(loc.com_path_combine2, loc.argv_command_two, envp) == -1)
-				// 	ft_putstr_fd("bash : command not found\n", 2);
-			    //close(loc.pipe_fds[1]);
-				//waitpid(loc.pid, NULL, WNOHANG);
-				dup2(loc.pipe_fds[0], STDIN_FILENO);
-				dup2(loc.pipe_fds[1], STDOUT_FILENO);
-				//dup2(loc.pipe_fds[1], STDOUT_FILENO);
-				close(loc.pipe_fds[0]);
-				close(loc.pipe_fds[1]);
-				//dup2(loc.pipe_fds[0], STDIN_FILENO);
-				// loc.com_path_combine2 = combine_command(loc.argv_command_two[0], loc.PATH);
-				// if (execve(loc.com_path_combine2, loc.argv_command_two, envp) == -1)
-				// 	ft_putstr_fd("bash : command not found\n", 2);
-				//dup2(loc.outfile, STDOUT_FILENO);
-			}
 		}
 	}
 }
