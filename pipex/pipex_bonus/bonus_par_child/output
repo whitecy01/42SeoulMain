@@ -1,18 +1,1 @@
-total 248
--rw-r--r--  1 jaeyojun  2023_seoul   1273 Jul  8 21:23 Makefile
--rw-r--r--  1 jaeyojun  2023_seoul   1293 Jul  8 21:23 error_free.c
--rw-r--r--  1 jaeyojun  2023_seoul   1140 Jul  8 21:23 error_free.o
--rw-r--r--  1 jaeyojun  2023_seoul   1417 Jul  8 21:23 findpath.c
--rw-r--r--  1 jaeyojun  2023_seoul   1208 Jul  8 21:23 findpath.o
--rw-r--r--  1 jaeyojun  2023_seoul      0 Jul  9 17:19 grep split
--rw-r--r--  1 jaeyojun  2023_seoul      6 Jul  9 14:32 input
--rw-r--r--  1 jaeyojun  2023_seoul      0 Jul  9 12:32 outfile
--rw-r--r--  1 jaeyojun  2023_seoul      0 Jul  9 20:04 output
--rw-r--r--  1 jaeyojun  2023_seoul   2361 Jul  8 21:23 path_split.c
--rw-r--r--  1 jaeyojun  2023_seoul   2212 Jul  8 21:23 path_split.o
--rwxr-xr-x  1 jaeyojun  2023_seoul  51048 Jul  9 20:04 pipex
--rw-r--r--  1 jaeyojun  2023_seoul  20479 Jul  9 20:04 pipex.c
--rw-r--r--  1 jaeyojun  2023_seoul   1300 Jul  9 20:01 pipex.h
--rw-r--r--  1 jaeyojun  2023_seoul   4660 Jul  9 20:04 pipex.o
--rw-r--r--  1 jaeyojun  2023_seoul   2135 Jul  8 21:23 split.c
--rw-r--r--  1 jaeyojun  2023_seoul   2188 Jul  8 21:23 split.o
+0

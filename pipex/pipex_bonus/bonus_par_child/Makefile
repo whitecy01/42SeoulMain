@@ -20,7 +20,7 @@ SRC = error_free.c\
 		split.c
 
 OBJ = $(SRC:.c=.o)
-INCLUDE = pipex.h
+INCLUDE =  /head/pipex.h
 
 
 all : $(NAME)
@@ -29,7 +29,7 @@ $(NAME) : $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $(OBJ) 
 
 .c.o : $(OBJS)
-	$(CC) $(CFLAGS) -c -o $@ $^ -I $(INCLUDE)
+	$(CC) $(CFLAGS)  -c -o $@ $^ -I $(INCLUDE)
 
 
 	

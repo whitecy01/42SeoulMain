@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+
+#include "./head/pipex.h"
 
 int	number_compare(const char *str1, const char *str2, size_t n)
 {

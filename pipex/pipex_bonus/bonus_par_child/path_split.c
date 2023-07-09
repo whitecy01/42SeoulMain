@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+
+#include "./head/pipex.h"
 
 int	separator_slash(char tmp)
 {

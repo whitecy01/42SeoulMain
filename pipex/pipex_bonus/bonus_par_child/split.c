@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+
+#include "./head/pipex.h"
 
 int	string_check(char s, char c)
 {

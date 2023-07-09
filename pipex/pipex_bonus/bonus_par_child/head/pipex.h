@@ -30,7 +30,7 @@ typedef struct s_info
 	//pipe
 	int	pid;
 	//pipe_fds
-	int pipe_fds[2];
+	//int pipe_fds[2];
 	int pipe_fds_from_prev[2];
 	int pipe_fds_to_next[2];
 
