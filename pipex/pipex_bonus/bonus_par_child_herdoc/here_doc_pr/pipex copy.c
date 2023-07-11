@@ -128,7 +128,6 @@ void	pipe_start(t_info loc, char **envp, char **argv, int argc)
 				if (execve(loc.com_path_combine1, loc.argv_command_one, envp) == -1)
 				{
 					ft_putstr_fd("bash : command not found\n", 2);
-					exit(127);
 				}
 			}
 			else if (start == fork_count - 1)
@@ -145,7 +144,7 @@ void	pipe_start(t_info loc, char **envp, char **argv, int argc)
 				if (execve(loc.com_path_combine1, loc.argv_command_one, envp) == -1)
 				{
 					ft_putstr_fd("bash : command not found\n", 2);
-					exit(127);
+
 				}
 			}
 			else
@@ -161,7 +160,6 @@ void	pipe_start(t_info loc, char **envp, char **argv, int argc)
 				if (execve(loc.com_path_combine2, loc.argv_command_two, envp) == -1)
 				{
 					ft_putstr_fd("bash : command not found\n", 2);
-					exit(127);
 				}
 			}
 		}
@@ -178,24 +176,141 @@ void	pipe_start(t_info loc, char **envp, char **argv, int argc)
 }
 
 
+void get_next(int fd)
+{
+	//char	*temp;
+    char    buf[7];
+ 
+	//temp = get_next_line(0);
+
+    while (read(0, buf, 1))
+	{
+		if (number_compare(buf, "LIMITER", 7) == 0)
+			break;
+         write(fd, buf, 1);
+	}
+/*	while (temp)
+	{
+		check_command(temp, a, b);
+		free(temp);
+		temp = get_next_line(0);
+	} */
+/*     	
+	if (sort_check_stack(a) == 0 || check_b(b) == 0)
+	 	write(1, "KO\n", 3);
+	else
+	 	write(1, "OK\n", 3); */
+	//free(temp);
+}
+
+void here_doc_pipe_start(t_info loc, char **envp, char **argv, int argc)
+{
+	int i = 3;
+	int fork_count = argc - 4;
+	int start = -1;
+
+	while (++start < fork_count)
+	{
+		if (start > 1)
+		{
+			close(loc.pipe_fds_from_prev[0]);
+			close(loc.pipe_fds_from_prev[1]);
+		}
+		loc.pipe_fds_from_prev[0] = loc.pipe_fds_to_next[0];
+		loc.pipe_fds_from_prev[1] = loc.pipe_fds_to_next[1];
+		if (start < fork_count -1)
+			if (pipe(loc.pipe_fds_to_next) < 0)
+				perror("pipe error");
+		loc.pid = fork();
+		if (loc.pid == -1)
+			perror("fork error");
+		else if (loc.pid == 0)
+		{
+			if (start == 0)
+			{
+				close(loc.pipe_fds_to_next[0]);
+                get_next(loc.pipe_fds_to_next[0]);
+				dup2(loc.pipe_fds_to_next[0], STDIN_FILENO);
+				dup2(loc.pipe_fds_to_next[1], STDOUT_FILENO);
+				close(loc.pipe_fds_to_next[1]);
+			 	close(loc.pipe_fds_to_next[0]);
+				loc.argv_command_one = ft_split(argv[i], ' ');
+				loc.com_path_combine1 = combine_command(loc.argv_command_one[0], loc.PATH);
+				if (execve(loc.com_path_combine1, loc.argv_command_one, envp) == -1)
+				{
+					ft_putstr_fd("bash : command not found\n", 2);
+				}
+			}
+			else if (start == fork_count - 1)
+			{
+				// close(loc.pipe_fds_to_next[0]); (위의 조건문으로 생생성  안안함함)
+				// close(loc.pipe_fds_to_next[1]);
+				close(loc.pipe_fds_from_prev[1]);
+				dup2(loc.pipe_fds_from_prev[0], STDIN_FILENO);
+				dup2(loc.outfile, STDOUT_FILENO);
+				close(loc.pipe_fds_from_prev[0]);
+				close(loc.outfile);
+				loc.argv_command_one = ft_split(argv[i], ' ');
+				loc.com_path_combine1 = combine_command(loc.argv_command_one[0], loc.PATH);
+				if (execve(loc.com_path_combine1, loc.argv_command_one, envp) == -1)
+				{
+					ft_putstr_fd("bash : command not found\n", 2);
+
+				}
+			}
+			else
+			{
+				close(loc.pipe_fds_to_next[0]);
+				close(loc.pipe_fds_from_prev[1]);
+				dup2(loc.pipe_fds_from_prev[0], STDIN_FILENO);
+				dup2(loc.pipe_fds_to_next[1], STDOUT_FILENO);
+				close(loc.pipe_fds_to_next[1]);
+				close(loc.pipe_fds_from_prev[0]);
+				loc.argv_command_two = ft_split(argv[i], ' ');
+				loc.com_path_combine2 = combine_command(loc.argv_command_two[0], loc.PATH);
+				if (execve(loc.com_path_combine2, loc.argv_command_two, envp) == -1)
+				{
+					ft_putstr_fd("bash : command not found\n", 2);
+				}
+			}
+		}
+		else
+		{
+			waitpid(loc.pid, NULL, WNOHANG);
+		}
+		i++;
+	}
+	close(loc.pipe_fds_from_prev[0]);
+	close(loc.pipe_fds_from_prev[1]);
+	while(wait(NULL) > 0)
+			;	
+} 
+
+
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	loc;
+    
 
-	// if (argc != 5)
-	// 	error("argument error\n");
-	loc.infile = open(argv[1], O_RDONLY);
-	if (loc.infile == -1)
+ 	loc.check_here_doc = 0;
+	if (number_compare(argv[1], "here_doc", 8) == 0 && number_compare(argv[2], "LIMITER", 7) == 0)
+	{
+		//get_line(loc);
+		loc.outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_APPEND, 0644);
+		loc.check_here_doc = 1;
+	}
+	else
+	{
+		loc.infile = open(argv[1], O_RDONLY);
+		if (loc.infile == -1)
 		perror("infile error");
-
-	// argc를 통해 제일 마지막꺼를 들고오자 
-
-
-	loc.outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+		loc.outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	}
 	if (loc.outfile == -1)
 		error("outfile error");
-	loc.PATH = find_path(envp);
+
+	loc.PATH = find_path(envp); 
 	//command split -> 인자가 여러개 들어 올 수 있기 때문에 변수를 다르게 주어야함.
 	// loc.argv_command_one = ft_split(argv[2], ' ');
 	// loc.argv_command_two = ft_split(argv[3], ' ');
@@ -216,5 +331,8 @@ int	main(int argc, char **argv, char **envp)
 	// //acces를 하기 위해 인자들을 각 loc.argv_command_숫자[0]를 붙여주어야함.
 	// loc.com_path_combine1 = combine_command(loc.argv_command_one[0], loc.PATH);
 	// loc.com_path_combine2 = combine_command(loc.argv_command_two[0], loc.PATH);
-	pipe_start(loc, envp, argv, argc);
+	if (loc.check_here_doc == 0)
+		pipe_start(loc, envp, argv, argc);
+	else if (loc.check_here_doc == 1)
+		here_doc_pipe_start(loc, envp, argv, argc);
 }
