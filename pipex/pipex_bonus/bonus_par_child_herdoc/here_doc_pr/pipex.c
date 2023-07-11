@@ -188,16 +188,60 @@ int	check_command(char *temp)
 	return (1);
 }
 
-void get_next(int fd)
+char* my_strstr(const char* haystack, const char* needle) {
+    if (*needle == '\0')
+        return (char*)haystack;
+
+    while (*haystack) {
+        const char* h = haystack;
+        const char* n = needle;
+
+        while (*h == *n && *n) {
+            h++;
+            n++;
+        }
+
+        if (*n == '\0')
+            return (char*)haystack;
+
+        haystack++;
+    }
+
+    return NULL;
+}
+/* 
+
+#define MAX_LINE_LENGTH 100
+#define LIMITER_STRING "LIMITER"
+
+int main() {
+    char line[MAX_LINE_LENGTH];
+
+    while (fgets(line, sizeof(line), stdin)) {
+        // LIMITER 문자열을 찾아서 입력 종료
+        if (strstr(line, LIMITER_STRING) != NULL)
+            break;
+
+        // 입력을 계속 처리
+        printf("%s", line);
+    }
+
+    return 0;
+} */
+
+
+ void get_next(int fd)
 {
+	printf("awdaw : %d", fd);
 	//char	*temp;
     char    buff[BUFFER_SIZE + 1];
 	char	*line;
 
 	int readcount = 1;
-    while (readcount  )
+		
+    while (readcount )
 	{
-		readcount = read(fd, buff, BUFFER_SIZE);
+		readcount = read(0, buff, BUFFER_SIZE);
 		if (readcount == 0)
 			break ;
 		else if (readcount == -1)
@@ -210,15 +254,22 @@ void get_next(int fd)
 		line = ft_strjoin(line, buff, readcount, ft_strlen_gnl(line));
 		if (!line)
 			return ;
-		if(number_compare(line, "LIMITER", 7) == 0)
-			break;
+		printf("biff : %s\n", buff);
 		if (ft_strchr(buff, '\n'))
 		{
+			
+			if(my_strstr(buff, "LIMITER") == 0)
+			{
+				close(fd);
+				break;
+			}
+			else
 				write(fd, buff, 1);
 		} 
 
 	}
-	
+	close(fd);
+	printf("debug");
 /* 	temp = get_next_line(0);
 	while (temp)
 	{
@@ -231,13 +282,15 @@ void get_next(int fd)
 		free(temp);
 		temp = get_next_line(0);
 	} */
+
 /*     	
 	if (sort_check_stack(a) == 0 || check_b(b) == 0)
 	 	write(1, "KO\n", 3);
 	else
 	 	write(1, "OK\n", 3); */
 	//free(temp);
-}
+}  
+ 
 
 void here_doc_pipe_start(t_info loc, char **envp, char **argv, int argc)
 {
@@ -245,6 +298,7 @@ void here_doc_pipe_start(t_info loc, char **envp, char **argv, int argc)
 	int fork_count = argc - 4;
 	int start = -1;
 
+	printf("start : %d", start);
 	while (++start < fork_count)
 	{
 		if (start > 1)
@@ -265,13 +319,18 @@ void here_doc_pipe_start(t_info loc, char **envp, char **argv, int argc)
 			if (start == 0)
 			{
 				close(loc.pipe_fds_to_next[0]);
-                get_next(loc.pipe_fds_to_next[0]);
+				
+                //g
 				dup2(loc.pipe_fds_to_next[0], STDIN_FILENO);
+				get_next(loc.pipe_fds_to_next[0]);
+				close(loc.pipe_fds_to_next[0]);
+
 				dup2(loc.pipe_fds_to_next[1], STDOUT_FILENO);
 				close(loc.pipe_fds_to_next[1]);
-			 	close(loc.pipe_fds_to_next[0]);
 				loc.argv_command_one = ft_split(argv[i], ' ');
+	
 				loc.com_path_combine1 = combine_command(loc.argv_command_one[0], loc.PATH);
+		
 				if (execve(loc.com_path_combine1, loc.argv_command_one, envp) == -1)
 				{
 					ft_putstr_fd("bash : command not found\n", 2);
@@ -370,5 +429,7 @@ int	main(int argc, char **argv, char **envp)
 	if (loc.check_here_doc == 0)
 		pipe_start(loc, envp, argv, argc);
 	else if (loc.check_here_doc == 1)
+	{
 		here_doc_pipe_start(loc, envp, argv, argc);
+	}
 }
