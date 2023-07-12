@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:24:58 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/10 14:24:12 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/12 12:57:17 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,67 +209,77 @@ char* my_strstr(const char* haystack, const char* needle) {
 
     return NULL;
 }
-/* 
-
-#define MAX_LINE_LENGTH 100
-#define LIMITER_STRING "LIMITER"
-
-int main() {
-    char line[MAX_LINE_LENGTH];
-
-    while (fgets(line, sizeof(line), stdin)) {
-        // LIMITER 문자열을 찾아서 입력 종료
-        if (strstr(line, LIMITER_STRING) != NULL)
-            break;
-
-        // 입력을 계속 처리
-        printf("%s", line);
-    }
-
-    return 0;
-} */
 
 
- void get_next(int fd)
+void get_next(t_info loc)
 {
-	printf("awdaw : %d", fd);
-	//char	*temp;
-    char    buff[BUFFER_SIZE + 1];
-	char	*line;
+	char	*buff;
+	char	herefd;
+	char	*endflag;
 
-	int readcount = 1;
-		
-    while (readcount )
+	loc.her_doc_fd = 0;
+	buff = 0;
+	herefd = open(".here_doc_tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	endflag = ft_strjoin_gnl("LIMITER", "\n");
+	while (1)
 	{
-		readcount = read(0, buff, BUFFER_SIZE);
-		if (readcount == 0)
-			break ;
-		else if (readcount == -1)
+		write(1, "> ", 2);
+		buff = get_next_line(0);
+		if (number_compare(buff, endflag, ft_strlen_gnl(endflag)) == 0)
 		{
-			free(line);
-			line = NULL;
+			free(buff);
+			free(endflag);
+			close(herefd);
 			return ;
 		}
-		buff[readcount] = '\0';
-		line = ft_strjoin(line, buff, readcount, ft_strlen_gnl(line));
-		if (!line)
-			return ;
-		printf("biff : %s\n", buff);
-		if (ft_strchr(buff, '\n'))
-		{
-			
-			if(my_strstr(buff, "LIMITER") == 0)
-			{
-				close(fd);
-				break;
-			}
-			else
-				write(fd, buff, 1);
-		} 
-
+		write(herefd, buff, ft_strlen_gnl(buff));
+		if (buff)
+			free(buff);
+		buff = 0;
 	}
-	close(fd);
-	printf("debug");
+	return ;
+}
+
+//  void get_next(int fd)
+// {
+// 	printf("awdaw : %d", fd);
+// 	//char	*temp;
+//     char    buff[BUFFER_SIZE + 1];
+// 	char	*line;
+
+// 	int readcount = 1;
+		
+//     while (readcount )
+// 	{
+// 		readcount = read(0, buff, BUFFER_SIZE);
+// 		if (readcount == 0)
+// 			break ;
+// 		else if (readcount == -1)
+// 		{
+// 			free(line);
+// 			line = NULL;
+// 			return ;
+// 		}
+// 		buff[readcount] = '\0';
+// 		line = ft_strjoin(line, buff, readcount, ft_strlen_gnl(line));
+// 		if (!line)
+// 			return ;
+// 		printf("biff : %s\n", buff);
+// 		if (ft_strchr(buff, '\n'))
+// 		{
+			
+// 			if(my_strstr(buff, "LIMITER") == 0)
+// 			{
+// 				close(fd);
+// 				break;
+// 			}
+// 			else
+// 				write(fd, buff, 1);
+// 		} 
+
+// 	}
+// 	close(fd);
+// 	printf("debug");
 /* 	temp = get_next_line(0);
 	while (temp)
 	{
@@ -289,7 +299,7 @@ int main() {
 	else
 	 	write(1, "OK\n", 3); */
 	//free(temp);
-}  
+//}  
  
 
 void here_doc_pipe_start(t_info loc, char **envp, char **argv, int argc)
@@ -297,8 +307,10 @@ void here_doc_pipe_start(t_info loc, char **envp, char **argv, int argc)
 	int i = 3;
 	int fork_count = argc - 4;
 	int start = -1;
+	int tmp_fd;
 
-	printf("start : %d", start);
+	get_next(loc);
+	tmp_fd = open(".here_doc_tmp", O_RDONLY);
 	while (++start < fork_count)
 	{
 		if (start > 1)
@@ -319,13 +331,13 @@ void here_doc_pipe_start(t_info loc, char **envp, char **argv, int argc)
 			if (start == 0)
 			{
 				close(loc.pipe_fds_to_next[0]);
+				//dup2(tmp_fd, STDIN_FILENO);
 				
-                //g
+				
 				dup2(loc.pipe_fds_to_next[0], STDIN_FILENO);
-				get_next(loc.pipe_fds_to_next[0]);
-				close(loc.pipe_fds_to_next[0]);
-
+				
 				dup2(loc.pipe_fds_to_next[1], STDOUT_FILENO);
+				close(loc.pipe_fds_to_next[0]);
 				close(loc.pipe_fds_to_next[1]);
 				loc.argv_command_one = ft_split(argv[i], ' ');
 	
@@ -379,6 +391,9 @@ void here_doc_pipe_start(t_info loc, char **envp, char **argv, int argc)
 	close(loc.pipe_fds_from_prev[1]);
 	while(wait(NULL) > 0)
 			;	
+	//
+	close(tmp_fd);
+	unlink(".here_doc_tmp");
 } 
 
 

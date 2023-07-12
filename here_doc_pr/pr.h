@@ -1,6 +1,5 @@
-
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PR_H
+# define PR_H
 
 # include <fcntl.h>
 # include <unistd.h>
