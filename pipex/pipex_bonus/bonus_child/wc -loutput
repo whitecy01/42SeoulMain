@@ -1,6 +1,0 @@
--rw-r--r--  1 jaeyojun  2023_seoul   1293 Jul  8 14:55 error_free.c
--rw-r--r--  1 jaeyojun  2023_seoul   1417 Jul  8 14:55 findpath.c
--rw-r--r--  1 jaeyojun  2023_seoul   2361 Jul  8 14:55 path_split.c
--rw-r--r--  1 jaeyojun  2023_seoul   9578 Jul  8 20:34 pipex.c
--rw-r--r--  1 jaeyojun  2023_seoul   2135 Jul  8 14:55 split.c
--rw-r--r--  1 jaeyojun  2023_seoul      0 Jul  8 20:34 wc -loutput
