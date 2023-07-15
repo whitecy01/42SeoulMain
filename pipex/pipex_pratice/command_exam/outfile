@@ -1,0 +1,9 @@
+A.c
+B.h
+C.txt
+outfile
+total 8
+-rw-r--r--  1 jaeyojun  2023_seoul   0 Jul  6 17:25 A.c
+-rw-r--r--  1 jaeyojun  2023_seoul   0 Jul  6 17:25 B.h
+-rw-r--r--  1 jaeyojun  2023_seoul   0 Jul 15 15:40 C.txt
+-rw-r--r--  1 jaeyojun  2023_seoul  22 Jul 15 15:42 outfile

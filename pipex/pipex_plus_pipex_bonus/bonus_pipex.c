@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:24:58 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/13 18:05:38 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/15 15:28:05 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -379,7 +379,6 @@ void here_doc_pipe_start(t_info loc, char **envp, char **argv, int argc)
 	close(loc.pipe_fds_from_prev[1]);
 	while(wait(NULL) > 0)
 			;	
-	//
 	close(tmp_fd);
 	unlink(".here_doc_tmp");
 } 
