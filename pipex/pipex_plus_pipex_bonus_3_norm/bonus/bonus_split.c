@@ -6,10 +6,9 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:14:38 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/13 17:43:59 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/16 20:24:10 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "./bonus_head/pipex.h"
 
@@ -41,7 +40,6 @@ int	malloc_count(char const *s, char c)
 	}	
 	return (count);
 }
-
 
 char	*word_input(char const *s, char c)
 {
@@ -98,4 +96,3 @@ char	**ft_split(char const *s, char c)
 	temp[count] = 0;
 	return (temp);
 }
-

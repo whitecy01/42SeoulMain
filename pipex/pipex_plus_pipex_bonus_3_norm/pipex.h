@@ -6,10 +6,9 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:46:32 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/16 15:05:02 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/16 20:22:31 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef PIPEX_H
 # define PIPEX_H
@@ -53,7 +52,5 @@ int		string_check(char s, char c);
 int		malloc_count(char const *s, char c);
 char	*word_input(char const *s, char c);
 char	**ft_split(char const *s, char c);
-
-
 
 #endif 

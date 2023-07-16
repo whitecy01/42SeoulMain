@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:25:48 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/03 14:29:25 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/16 20:22:08 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char	*word_split(char *envp_path)
 	tmp[i] = '\0';
 	return (tmp);
 }
-
 
 int	ma_count(char *envp_path)
 {

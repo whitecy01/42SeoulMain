@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:14:38 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/07 16:36:03 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/16 20:22:40 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	malloc_count(char const *s, char c)
 	}	
 	return (count);
 }
-
 
 char	*word_input(char const *s, char c)
 {

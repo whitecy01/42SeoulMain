@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_findpath.c                                   :+:      :+:    :+:   */
+/*   bonus_findpath_libft.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:24:56 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/13 17:43:25 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/16 15:44:28 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,14 @@ char	**find_path(char **envp)
 	while (envp_split_reslt[i])
 		i++;
 	return (envp_split_reslt);
+}
+
+int	count_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

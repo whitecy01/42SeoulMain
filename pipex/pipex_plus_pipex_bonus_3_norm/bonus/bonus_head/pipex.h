@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 17:42:41 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/16 13:09:44 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/16 20:25:07 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,81 +17,43 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <string.h>
-
-#include <sys/types.h>
-  #include <sys/wait.h>
 
 # define BUFFER_SIZE 5
 
 typedef struct s_info
 {
-    //1. infile, outfile 검사
-    int infile;
-    int outfile;
-
-	//check_here_doc
-	int check_here_doc;
-
-    //2. 명령어를 공백 기준으로 split 한 다음 넣기 
-    char **argv_command_one;
-    char **argv_command_two;
-	
-	//3. 환경변수 PATH split 한 후 가져오기
-	char **PATH;
-
-	//acces를 하기 위한 자료
-	char *com_path_combine1;
-	char *com_path_combine2;
-	//pipe
-	int	pid;
-	//pipe_fds
-	//int pipe_fds[2];
-	int pipe_fds_from_prev[2];
-	int pipe_fds_to_next[2];
-
-	int her_doc_fd;
-	
-	//gert_next 입력종료 조조건건
-	char *argv_two;
-
+	int		infile;
+	int		outfile;
+	int		check_here_doc;
+	char	**argv_command_one;
+	char	**argv_command_two;
+	char	**path;
+	char	*com_path_combine1;
+	char	*com_path_combine2;
+	int		pid;
+	int		pipe_fds_from_prev[2];
+	int		pipe_fds_to_next[2];
+	int		her_doc_fd;
+	char	*argv_two;
+	char	**argv;
 }	t_info;
 
-
-//error_free.c
 void	error(char *error);
 char	**ft_free(char **word);
-
-//findpath.c
+void	ft_putstr_fd(char *str, int fd);
+void	check_argument(int argc, int check);
+char	*combine_command(char *first_loc_command, char **path);
+char	*ft_strjoin_gnl(char *s1, char *s2);
 int		number_compare(const char *str1, const char *str2, size_t n);
 char	**find_path(char **envp);
-
-//path_split.c
+int		count_str(char *str);
 int		separator_slash(char tmp);
 int		separator_colon(char tmp);
 char	*word_split(char *envp_path);
 int		ma_count(char *envp_path);
 char	**envp_split(char *envp_path);
-
-//pipex.c
-int		count_str(char *str);
-
-//split.c
-int		string_check(char s, char c);
-int		malloc_count(char const *s, char c);
-char	*word_input(char const *s, char c);
-char	**ft_split(char const *s, char c);
-
-
-
-char	*ft_strchr(const char *s, int c);
-
-int	ft_strlen_gnl(const char *s);
-
-
-char	*get_next_line(int fd);
-
+int		ft_strlen_gnl(const char *s);
 char	*ft_substr_gnl(char *s, unsigned int start, unsigned int len);
 char	*ft_strdup(char *string);
 char	*ft_strjoin(char *s1, char *s2, int s2_len, int count);
@@ -100,4 +62,27 @@ char	*readline(int fd, char *line);
 int		len_check(char *line);
 char	*change_line(char **line, char **backup);
 char	*get_next_line(int fd);
+void	main_next(t_info loc, int argc, char **envp);
+int		separator_slash(char tmp);
+int		separator_colon(char tmp);
+char	*word_split(char *envp_path);
+int		ma_count(char *envp_path);
+char	**envp_split(char *envp_path);
+int		string_check(char s, char c);
+int		malloc_count(char const *s, char c);
+char	*word_input(char const *s, char c);
+char	**ft_split(char const *s, char c);
+void	open_outfile_heredoc(t_info loc, int argc, char **argv);
+void	get_next(t_info loc);
+void	here_doc_child_first(t_info loc, int i, char **envp);
+void	here_doc_pipe_start(t_info loc, char **envp, int argc);
+void	open_outfile__infile_multipipe(t_info loc, int argc, char **argv);
+void	multipipex_child_first(t_info loc, int start, char **envp);
+void	pipe_start(t_info loc, char **envp, int argc);
+void	close_prev(t_info loc);
+void	child_process(int start, int fork_count, t_info loc, char **envp);
+void	child_parents_pro(t_info loc, int start, int fork_count, char **envp);
+void	child_last(t_info loc, int i, char **envp);
+void	child_middle(t_info loc, int i, char **envp);
+
 #endif 

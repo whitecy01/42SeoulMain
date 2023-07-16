@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:24:58 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/16 15:03:25 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/16 20:22:17 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	pipe_start(t_info loc, char **envp)
 	while (wait(NULL) > 0)
 		;
 }
-
 
 int	main(int argc, char **argv, char **envp)
 {
