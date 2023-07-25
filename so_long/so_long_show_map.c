@@ -6,11 +6,11 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 16:04:03 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/24 21:01:06 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/25 17:35:45 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./head/so_long.h"
+#include "so_long.h"
 
 void	put_img(t_game *game, int y, int x, char *file)
 {
@@ -45,10 +45,7 @@ void	categorize_case(t_game *game, int x, int y, int index)
 	else if (game->map_line[index] == 'C')
 	{
 		put_img(game, y, x, "./images/back_ground.xpm");
-		//if (index % 2 == 0)
-			put_img(game, y, x, "./images/eat.xpm");
-		//else
-			//put_img(game, y, x, "./images/eat.xpm");
+		put_img(game, y, x, "./images/eat.xpm");
 	}
 	else if (game->map_line[index] == 'P')
 	{
@@ -59,10 +56,14 @@ void	categorize_case(t_game *game, int x, int y, int index)
 
 void	show_map(t_game *game)
 {
+	int	x;
+	int	index;
+	int	y;
+
+	x = -1;
+	index = 0;
+	y = -1;
 	mlx_clear_window(game->mlx, game->win);
-	int x = -1;
-	int index = 0;
-	int y = -1;
 	while (++x < game->map_all_row)
 	{
 		y = -1;
@@ -72,8 +73,10 @@ void	show_map(t_game *game)
 			index++;
 		}
 	}
-	if (game->map_line[game->p_index] == game->map_line[game->e_index] && (game->c_check == game->c))
-	{	goodbye_game(game);
-		return;
+	if (game->map_line[game->p_index] == game->map_line[game->e_index] \
+		&& (game->c_check == game->c))
+	{	
+		goodbye_game(game);
+		return ;
 	}
 }

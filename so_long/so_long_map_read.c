@@ -6,16 +6,18 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 15:57:22 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/24 15:59:46 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/25 17:35:41 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./head/so_long.h"
+#include "so_long.h"
 
 int	line_string_count(char *line)
 {
 	int	i;
 
+	if (!line)
+		return (0);
 	i = 0;
 	while (line[i])
 	{
@@ -49,20 +51,18 @@ int	check_line(char *line, int line_len, t_game *game, int i)
 			game->p_index = ((game->map_all_row - 1) * line_len) + i;
 		}
 		else
-			return (0);
+			error("invalid input map\n");
 	}
 	return (1);
 }
 
-char	*read_map(t_game *game, char *filename)
+char	*read_map(t_game *game, int fd)
 {
-	int		fd;
 	char	*line;
-	char	*map_buff;
+	char	*map_buf;
 	int		line_len;
 
-	fd = open(filename, O_RDONLY);
-	map_buff = NULL;
+	map_buf = NULL;
 	line = NULL;
 	while (1)
 	{
@@ -72,17 +72,14 @@ char	*read_map(t_game *game, char *filename)
 		line_len = line_string_count(line);
 		game->map_all_row++;
 		if (check_line(line, line_len, game, -1) == 1)
-			map_buff = ft_strjoin(map_buff, line, line_len, \
-				ft_strlen(map_buff));
+			map_buf = ft_strjoin(map_buf, line, line_len, ft_strlen(map_buf));
 		else
 		{
-			free(map_buff);
-			map_buff = NULL;
+			ft_free(map_buf);
 			break ;
 		}
-		free(line);
-		line = NULL;
+		ft_free(line);
 	}
 	free(line);
-	return (map_buff);
+	return (map_buf);
 }

@@ -6,11 +6,11 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:24:29 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/22 16:08:18 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/25 17:35:19 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./head/so_long.h"
+#include "so_long.h"
 
 char	*readline(int fd, char *line)
 {
