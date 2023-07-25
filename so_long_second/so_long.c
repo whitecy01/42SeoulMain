@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 16:25:53 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/25 17:35:49 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/25 20:50:16 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	check_argc_argv(int argc, char *argv)
 		return (1);
 	return (error("ber Error\n"));
 }
-
 
 int	main(int argc, char **argv)
 {

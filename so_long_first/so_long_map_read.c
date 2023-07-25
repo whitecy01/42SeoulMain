@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 15:57:22 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/25 17:35:41 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/25 20:27:01 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_line(char *line, int line_len, t_game *game, int i)
 	if (game->map_all_col == 0)
 		game->map_all_col = line_len;
 	if (game->map_all_col != line_len)
-		return (0);
+		error("rectangle map error");
 	while (++i < line_len)
 	{
 		if (line[i] == '0' || line[i] == '1')
