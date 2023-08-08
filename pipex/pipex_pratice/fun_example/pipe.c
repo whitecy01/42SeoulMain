@@ -83,7 +83,7 @@ int main()
 	state = pipe(fd);
 	if (state == -1)
 	{
-		puts("fuck");
+		puts("error");
 		exit(1);
 	}
 	pid = fork();

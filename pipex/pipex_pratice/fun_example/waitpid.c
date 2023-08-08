@@ -12,7 +12,7 @@ int main()
 	if (pid == 0)
 	{
 		puts("자식 프로세스");
-		//sleep(3);
+		sleep(5);
 		//exit(0);
 	}
 	else

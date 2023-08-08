@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:24:58 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/07/18 14:17:02 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/07/30 18:04:56 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	parents_process(t_info loc, char **envp)
 	dup2(loc.outfile, STDOUT_FILENO);
 	close(loc.pipe_fds[0]);
 	close(loc.outfile);
-	waitpid(loc.pid, NULL, WNOHANG);
+	//waitpid(loc.pid, NULL, WNOHANG);
 	if (execve(loc.com_path_combine2, loc.argv_command_two, envp) == -1)
 		ft_putstr_fd("bash : command not found\n", 2);
 }
