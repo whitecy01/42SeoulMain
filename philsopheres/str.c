@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   str.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/11 15:31:39 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/08/11 19:55:18 by jaeyojun         ###   ########seoul.kr  */
+/*   Created: 2023/08/11 15:43:23 by jaeyojun          #+#    #+#             */
+/*   Updated: 2023/08/11 15:43:32 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "philo.h"
 
-#include <unistd.h>
-#include <stdio.h>
-
-# define SUCCESS	1
-# define FAIL		0
-
-typedef struct s_info
+int	str_length(char *tmp)
 {
-	//argv 인자
-	int	phio_number;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	must_eat;
-	int	death_flag;
-}t_info;
+	int	i;
 
-int	str_length(char *tmp);
-
-#endif
+	if (tmp == (void *)0)
+		return (0);
+	i = 0;
+	while (tmp[i])
+		i++;
+	return (i);
+}
