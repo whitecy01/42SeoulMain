@@ -1,39 +1,5 @@
 
 #include "get.h"
-
-// int main()
-// {
-//     struct timevala mytime;
-
-//     // 현재 시간을 얻어온다.
-//     gettimeofday(&mytime, NULL);
-//     printf("%ld:%ld\n", mytime.tv_sec, mytime.tv_usec);
-
-//     // 시간을 1시간 뒤로 되돌려서 설정한다.
-//    // mytime.tv_sec -= 3600;
-//    // settimeofday(&mytime, NULL);
-//     return 0;
-// }
-
-
-#include <sys/time.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
-
-int main()
-{
-    struct timeval mytime;
-
-    // 현재 시간을 얻어온다.
-    gettimeofday(&mytime, NULL);
-    printf("%ld:%d\n", mytime.tv_sec, mytime.tv_usec);
-
-    // 시간을 1시간 뒤로 되돌려서 설정한다.
-    mytime.tv_sec -= 3600;
-    settimeofday(&mytime, NULL);
-    return 0;
-}
 // #include <stdio.h>
 // #include <sys/time.h>
 
@@ -52,3 +18,26 @@ int main()
 
 //     return 0;
 // }
+
+#include <stdio.h>
+#include <sys/time.h>
+
+int main()
+{
+    struct timeval startTime, endTime;
+    double diffTime;
+
+    gettimeofday(&startTime, NULL);
+      // 특정 작업 수행
+      sleep(1);
+    gettimeofday(&endTime, NULL);
+
+    printf("Seconds: %ld\n", startTime.tv_sec);       // 초 (1970년 1월 1일부터의 초)
+    printf("Microseconds: %ld\n", startTime.tv_usec); // 마이크로초 (1000000분의 1초)
+
+        printf("entTime : Seconds: %ld\n", endTime.tv_sec);       // 초 (1970년 1월 1일부터의 초)
+    printf("entTime : Microseconds: %ld\n", endTime.tv_usec); // 마이크로초 (1000000분의 1초)
+    diffTime = ( endTime.tv_sec - startTime.tv_sec ) + (( endTime.tv_usec - startTime.tv_usec ) / 1000000);
+    printf("%f s\n", diffTime);
+    return 0;
+}
