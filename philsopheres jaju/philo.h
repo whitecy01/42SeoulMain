@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:31:39 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/08/13 20:19:05 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/08/13 19:12:42 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ typedef struct s_info
 int	str_length(char *tmp);
 int	init_mutex(t_info *info);
 int	init(t_info *info, char **argv, int argc);
-long int	time_init(int init);
+
 long	atoi_while(char *str);
-//long int	time_init(void);
+long int	time_init(void);
 void	print_error(char *tmp);
 
 #endif
