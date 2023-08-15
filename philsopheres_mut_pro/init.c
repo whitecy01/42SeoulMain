@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 16:40:59 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/08/13 20:20:14 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/08/15 20:53:02 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ int	init_philo(t_info *info)
 		info->philo[i].fork_left = (i + 1) % info->philo_number;
 		info->philo[i].fork_right = i;
 		info->philo[i].eat = 0;
-		info->philo[i].thread_time = time_init(0);
+		info->philo[i].thread_time = time_init();
 		info->philo[i].info = info;
+		pthread_mutex_init(&info->philo[i].eye, NULL);
 		i++;
 	}
 	return (0);
@@ -63,7 +64,7 @@ int	init_mutex(t_info *info)
 {
 	int	i;
 
-	info->start_time = time_init(0);
+	info->start_time = time_init();
 	pthread_mutex_init(&info->count_eat, NULL);
 	pthread_mutex_init(&info->print, NULL);
 	pthread_mutex_init(&info->death_m, NULL);

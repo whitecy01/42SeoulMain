@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:32:10 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/08/13 20:22:43 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/08/13 20:25:41 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,34 @@ void	print_error(char *tmp)
 	return ;
 }
 
-long int	time_init(void)
+// long int	time_init(void)
+// {
+// 	long int			time;
+// 	struct timeval		current_time;
+
+
+// 	time = 0;
+// 	if (gettimeofday(&current_time, NULL) == -1)
+// 		print_error("Gettimeofday returned\n");
+// 	//printf("current_time.tv_sec : %ld current_time.tv_usec : %d\n",current_time.tv_sec , current_time.tv_usec);
+// 	//printf("current_time.tv_sec  * 1000 : %ld current_time.tv_usec / 1000 : %d\n",current_time.tv_sec * 1000 , current_time.tv_usec / 1000);
+// 	time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
+// 	//printf("time : %ld\n", time);
+// 	return (time);
+// }
+
+long int	time_init(int init)
 {
-	long int			time;
-	struct timeval		current_time;
+	static unsigned int	start_time;
+	struct timeval		t;
 
-
-	time = 0;
-	if (gettimeofday(&current_time, NULL) == -1)
-		print_error("Gettimeofday returned\n");
-	//printf("current_time.tv_sec : %ld current_time.tv_usec : %d\n",current_time.tv_sec , current_time.tv_usec);
-	//printf("current_time.tv_sec  * 1000 : %ld current_time.tv_usec / 1000 : %d\n",current_time.tv_sec * 1000 , current_time.tv_usec / 1000);
-	time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
-	//printf("time : %ld\n", time);
-	return (time);
+	gettimeofday(&t, NULL);
+	if (init)
+	{
+		start_time = t.tv_usec / 1000 + t.tv_sec * 1000;
+		return (0);
+	}
+	return (t.tv_usec / 1000 + t.tv_sec * 1000 - start_time);
 }
 
 // static unsigned int	ft_get_time(int init)
@@ -110,10 +124,10 @@ void	ft_pass_time(long int time_to_eat, t_info *info)
 	long int	start;
 	long int	now;
 
-	start = time_init();
+	start = time_init(0);
 	while (!(info->death_flag))
 	{
-		now = time_init();
+		now = time_init(0);
 		if ((now - start) >= time_to_eat)
 			break ;
 		usleep(500);
@@ -124,7 +138,9 @@ int	printf_time_number(t_philo *philo, char *msg)
 {
 	long int now;
 
-	now = time_init();
+	now = time_init(0);
+	//printf("now : %ld\n", now);
+	//printf("philo : %ld\n", philo->thread_time);
 	pthread_mutex_lock(&(philo->info->print));
 	if (philo->info->death_flag == 1)
 	{
@@ -148,7 +164,7 @@ int	thread_eat(t_philo *philo)
 	printf_time_number(philo, "has taken a fork");
 	printf_time_number(philo, "is eating");
 	philo->eat = philo->eat + 1;
-	philo->thread_time = time_init();
+	//philo->thread_time = time_init(0);
 	//죽음 체크 usleep 함수 == eat time만큼 sleep 시켜주는 함수만들기
 	//ft_usleep(philo->info->time_to_eat, philo->philo_name);
 	ft_pass_time(philo->info->time_to_eat, philo->info);
@@ -211,8 +227,8 @@ void	ft_philo_check_finish(t_philo *philo)
 			i = 0;
 			while (i < philo->info->philo_number)
 			{
-				now = time_init();
-				if ((now - philo[i].thread_time) >= philo->info->time_to_die)
+				now = time_init(0);
+				if ((now - philo[i].thread_time) > philo->info->time_to_die)
 				{
 					printf_time_number(philo, "died");
 					philo->info->death_flag = 1;
@@ -228,9 +244,11 @@ int	ft_philo_start(t_info *info)
 {
 	int i = 0;
 
+	time_init(1);
 	while (i < info->philo_number)
 	{
-		//info->philo[i].thread_time = time_init();
+		info->philo[i].thread_time = time_init(0);
+		//printf("time : %ld\n", info->philo[i].thread_time);
 		pthread_create(&(info->philo[i].thread), NULL, action_thread, &(info->philo[i]));
 		i++;
 	}
