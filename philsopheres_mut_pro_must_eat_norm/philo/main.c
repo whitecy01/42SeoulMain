@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:32:10 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/08/16 13:35:37 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2023/08/16 18:25:47 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,20 +71,24 @@
 
 int	check_death(t_philo *philo)
 {
-	int result;
+	int	result;
 
 	pthread_mutex_lock(&(philo->info->death_m));
-	result = philo->info->death_flag;
+	result = 0;
+	if (philo->info->death_flag != 0)
+		result = philo->info->death_flag;
 	pthread_mutex_unlock(&(philo->info->death_m));
 	return (result);
 }
 
 int	check_death2(t_info *info)
 {
-	int result;
+	int	result;
 
 	pthread_mutex_lock(&(info->death_m));
-	result = info->death_flag;
+	result = 0;
+	if (info->death_flag != 0)
+		result = info->death_flag;
 	pthread_mutex_unlock(&(info->death_m));
 	return (result);
 }
@@ -104,26 +108,9 @@ long int	time_init(void)
 	time = 0;
 	if (gettimeofday(&current_time, NULL) == -1)
 		print_error("Gettimeofday returned\n");
-	//printf("current_time.tv_sec : %ld current_time.tv_usec : %d\n",current_time.tv_sec , current_time.tv_usec);
-	//printf("current_time.tv_sec  * 1000 : %ld current_time.tv_usec / 1000 : %d\n",current_time.tv_sec * 1000 , current_time.tv_usec / 1000);
 	time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
-	//printf("time : %ld\n", time);
 	return (time);
 }
-
-// static unsigned int	ft_get_time(int init)
-// {
-// 	static unsigned int	start_time;
-// 	struct timeval		t;
-
-// 	gettimeofday(&t);
-// 	if (init)
-// 	{
-// 		start_time = t.tv_usec / 1000 + t.tv_sec * 1000;
-// 		return (0);
-// 	}
-// 	return (t.tv_usec / 1000 + t.tv_sec * 1000 - start_time);
-// }
 
 void	ft_pass_time(long int time_to_eat, t_info *info)
 {
@@ -131,30 +118,26 @@ void	ft_pass_time(long int time_to_eat, t_info *info)
 	long int	now;
 
 	start = time_init();
-	//pthread_mutex_lock(&(info->death_m));
 	while (!(check_death2(info)))
 	{
 		now = time_init();
 		if ((now - start) >= time_to_eat)
 			break ;
 		usleep(500);
-		//pthread_mutex_unlock(&(info->death_m));
 	}
-	//pthread_mutex_unlock(&(info->death_m));
 }
 
 int	printf_time_number(t_philo *philo, char *msg)
 {
-	//long int now;
 
-	//= time_init();
 	pthread_mutex_lock(&(philo->info->print));
 	if (check_death(philo))
 	{
-		//pthread_mutex_unlock(&(philo->info->print));
+		pthread_mutex_unlock(&(philo->info->print));
 		return (1);
 	}
-	printf("%ld %d %s\n", time_init() - philo->info->start_time , philo->philo_name, msg);
+	printf("%ld %d %s\n", time_init() - philo->info->start_time, \
+		philo->philo_name, msg);
 	pthread_mutex_unlock(&(philo->info->print));
 	return (0);
 }
@@ -170,11 +153,8 @@ int	thread_eat(t_philo *philo)
 	pthread_mutex_lock(&(philo->info->fork_m[philo->fork_right]));
 	printf_time_number(philo, "has taken a fork");
 	printf_time_number(philo, "is eating");
-	philo->eat = philo->eat + 1;
+	philo->eat++;
 	philo->thread_time = time_init();
-	//philo->last_eat = philo->thread_time;
-	//죽음 체크 usleep 함수 == eat time만큼 sleep 시켜주는 함수만들기
-	//ft_usleep(philo->info->time_to_eat, philo->philo_name);
 	ft_pass_time(philo->info->time_to_eat, philo->info);
 	pthread_mutex_unlock(&(philo->info->fork_m[philo->fork_right]));
 	pthread_mutex_unlock(&(philo->info->fork_m[philo->fork_left]));
@@ -184,32 +164,30 @@ int	thread_eat(t_philo *philo)
 void	*action_thread(void *tmp)
 {
 	t_philo *philo = (t_philo *)tmp;
-	
+
 	if (philo->philo_name % 2 == 0)
-		usleep(1000 * philo->philo_name);
-	//usleep(100 * philo->philo_name);
-	//printf("action_thread_philo->name : %d\n", philo->philo_name);
-	//printf("philo->name : %d\n", philo->philo_name);
-	//eat, think, sleep
+		usleep(1000);
 	pthread_mutex_lock(&(philo->info->death_m));
-	while(!(philo->info->death_flag))
+	while (!(philo->info->death_flag))
 	{
 		pthread_mutex_unlock(&(philo->info->death_m));
-		//먹는 거 (집는 거, 내리는 거, 출력하는 것)
 		if (thread_eat(philo) == 1)
-		{
-			pthread_mutex_unlock(&(philo->info->death_m));
 			return (0);
+		pthread_mutex_lock(&(philo->info->eat_mutex));
+		if (philo->info->must_eat == philo->eat)
+		{
+			philo->info->finished_eat++;
+			pthread_mutex_unlock(&(philo->info->eat_mutex));
+			break ;
 		}
-		//자는 거
+		pthread_mutex_unlock(&(philo->info->eat_mutex));
 		printf_time_number(philo, "is sleeping");
 		ft_pass_time(philo->info->time_to_eat, philo->info);
-		//생각하기
 		printf_time_number(philo, "is thinking");
-		//philo->thread_time = time_init();
 		pthread_mutex_lock(&(philo->info->death_m));
 	}
-	pthread_mutex_unlock(&(philo->info->death_m));
+	if (philo->info->must_eat != philo->eat)
+		pthread_mutex_unlock(&(philo->info->death_m));
 
 	return ((void *)0);
 }
@@ -217,7 +195,7 @@ void	*action_thread(void *tmp)
 
 int	check_time(t_philo philo)
 {
-	int result;
+	int	result;
 
 	pthread_mutex_lock(&(philo.info->death_m));
 	result = philo.info->time_to_die;
@@ -237,53 +215,57 @@ int check(t_philo philo)
 	return (0);
 }
 
+int	must_eat_check(t_philo *philo)
+{
+	pthread_mutex_lock(&(philo->info->eat_mutex));
+	if (philo->info->must_eat > 0 && philo->info->philo_number == \
+		philo->info->finished_eat)
+	{
+		pthread_mutex_lock(&(philo->info->death_m));
+		philo->info->death_flag = 1;
+		pthread_mutex_unlock(&(philo->info->death_m));
+		pthread_mutex_unlock(&(philo->info->eat_mutex));
+		return (1);
+	}
+	pthread_mutex_unlock(&(philo->info->eat_mutex));
+	return (0);
+}
+
 void	ft_philo_check_finish(t_philo *philo)
 {
 	int			i;
-	//long int	now;
 
-	if (philo->info->must_eat > 0)
+	while (!(check_death(philo)))
 	{
-			// if ((philo->info->must_eat != 0) && (philo->info->philo_number == philo->info->))
-			// {
-			// 	philo->info->death_flag = 1;
-			// 	break ;
-			// }
-	}
-	else
-	{
-		while (!(check_death(philo)))
+		if (must_eat_check(philo))
+			break ;
+		i = 0;
+		while (i < philo->info->philo_number)
 		{
-			i = 0;
-			while (i < philo->info->philo_number)
+			if (check(philo[i]))
 			{
-				pthread_mutex_lock(&(philo->info->print));
-				if (check(philo[i]))
-				{
-					printf_time_number(philo, "died");
-					pthread_mutex_lock(&(philo->info->death_m));
-					philo->info->death_flag = 1;
-					pthread_mutex_unlock(&(philo->info->death_m));
-					pthread_mutex_unlock(&(philo->info->print));
-					break ;
-				}
-				pthread_mutex_unlock(&(philo->info->print));
-				i++;
+				printf_time_number(philo, "died");
+				pthread_mutex_lock(&(philo->info->death_m));
+				philo->info->death_flag = 1;
+				pthread_mutex_unlock(&(philo->info->death_m));
+				return ;
 			}
+			i++;
 		}
 	}
-	
 }
 
 int	ft_philo_start(t_info *info)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	info->start_time = time_init();
 	while (i < info->philo_number)
 	{
 		info->philo[i].thread_time = time_init();
-		pthread_create(&(info->philo[i].thread), NULL, action_thread, &(info->philo[i]));
+		pthread_create(&(info->philo[i].thread), NULL, \
+			action_thread, &(info->philo[i]));
 		i++;
 	}
 	ft_philo_check_finish(info->philo);
@@ -293,10 +275,8 @@ int	ft_philo_start(t_info *info)
 		pthread_join(info->philo[i].thread, NULL);
 		i++;
 	}
-	//free
 	return (0);
 }
-
 
 
 int	main(int argc, char **argv)
@@ -321,6 +301,8 @@ int	main(int argc, char **argv)
 	//뮤텍스 init
 	//쓰레드 액션
 	ft_philo_start(&info);
+	
+	//free
 	
 }
 
