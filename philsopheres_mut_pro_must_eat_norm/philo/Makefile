@@ -11,8 +11,8 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-SRC = main.c init.c str.c
+CFLAGS = -Wall -Wextra -Werror 
+SRC = main.c init.c str.c print.c monitor.c time.c
 OBJ = $(SRC:.c=.o)
 NAME = philo
 
