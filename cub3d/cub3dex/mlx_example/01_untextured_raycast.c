@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_untextured_raycast.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohlee <yohlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 12:12:25 by yohan             #+#    #+#             */
-/*   Updated: 2020/07/21 08:08:19 by yohlee           ###   ########.fr       */
+/*   Updated: 2023/09/03 16:25:44 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,28 @@ void	calc(t_info *info)
 	while (x < width)
 	{
 		double cameraX = 2 * x / (double)width - 1;
+		//printf("camera  : %f\n", cameraX);
 		double rayDirX = info->dirX + info->planeX * cameraX;
 		double rayDirY = info->dirY + info->planeY * cameraX;
+		//printf("dirX  : %f planeX : %f, cameraX : %f\n", info->dirX, info->planeX, cameraX);
+		//printf("dirY  : %f planeY : %f, cameraX : %f\n", info->dirY, info->planeY, cameraX);
+		//printf("rayDirX : %f\n", rayDirX);
+		//printf("rayDirY : %f\n", rayDirY);
 		
+		//DDA ㅇㅏㄹㄱㅣ즘
 		int mapX = (int)info->posX;
 		int mapY = (int)info->posY;
-
+		printf("mapX : %d\n", mapX);
+		printf("mapY : %d\n", mapY);
 		//length of ray from current position to next x or y-side
 		double sideDistX;
 		double sideDistY;
 		
+
 		 //length of ray from one x or y-side to next x or y-side
 		double deltaDistX = fabs(1 / rayDirX);
 		double deltaDistY = fabs(1 / rayDirY);
+
 		double perpWallDist;
 		
 		//what direction to step in x or y-direction (either +1 or -1)
@@ -126,7 +135,8 @@ void	calc(t_info *info)
 			stepY = 1;
 			sideDistY = (mapY + 1.0 - info->posY) * deltaDistY;
 		}
-
+		//printf("sizeDistX : %f\n", sideDistX);
+		//printf("sizeDistY : %f\n", sideDistY);
 		while (hit == 0)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
