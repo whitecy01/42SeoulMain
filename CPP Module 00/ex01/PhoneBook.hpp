@@ -2,7 +2,6 @@
 # define PHONEBOOK_HPP
 
 # include <iostream>
-# include <string>
 # include "Contact.hpp"
 # include <iomanip>
 

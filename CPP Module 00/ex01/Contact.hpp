@@ -12,6 +12,8 @@ private:
 	std::string darkset_secret;
 public:
 	
+	Contact();
+	~Contact();
 	void	setFirstName(std::string First_Name);
 	void	setLastName(std::string last_name);
 	void	setNickName(std::string nick_name);

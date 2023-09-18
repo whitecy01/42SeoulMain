@@ -9,6 +9,11 @@ int main(void)
 	{
 		phoneBook.startUp();
 		std::getline(std::cin, temp);
+		if (std::cin.eof())
+		{
+			std::cout << "EOF meet finish" << std::endl;
+			return (0); 
+		}
 		if (temp == "ADD")
 			phoneBook.addInfo();
 		else if (temp == "SEARCH")
@@ -24,7 +29,7 @@ int main(void)
 		else if (temp == "EXIT")
 		{
 			std::cout << "Program EXIT" << "\n";
-			return (1);
+			return (0);
 		}
 	}
 }
