@@ -19,6 +19,12 @@ public:
 	void	setDarkestSecret(std::string darkset_secret);
 
 	std::string getFirstName();
+	std::string getLastName();
+	std::string getNickName();
+	std::string getPhoneNumber();
+	std::string getDarkestSecret();
+
+	void	setAllContact(Contact contact);
 };
 
 #endif

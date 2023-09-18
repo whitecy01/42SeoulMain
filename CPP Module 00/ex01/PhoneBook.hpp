@@ -4,6 +4,7 @@
 # include <iostream>
 # include <string>
 # include "Contact.hpp"
+# include <iomanip>
 
 class PhoneBook{
 private:
@@ -11,11 +12,16 @@ private:
 	int size;
 public:
 
-
+	PhoneBook();
+	~PhoneBook();
 	void startUp();
 	void addInfo();
-	void setContactInfo();
+	int  getSize();
+	bool setContactInfo(bool isFull);
+	bool Emptystring(Contact contact);
 	void showInfo();
+	void showDetail();
+	
 };
 
 #endif

@@ -21,3 +21,17 @@ void	Contact::setDarkestSecret(std::string darkset_secret){
 }
 
 std::string Contact::getFirstName() {return this->First_name;}
+std::string Contact::getLastName() {return this->last_name;}
+std::string Contact::getNickName() {return this->nick_name;}
+std::string Contact::getPhoneNumber() {return this->phone_number;}
+std::string Contact::getDarkestSecret() {return this->darkset_secret;}
+
+
+void	Contact::setAllContact(Contact contact)
+{
+	this->First_name = contact.First_name;
+	this->last_name = contact.last_name;
+	this->nick_name = contact.nick_name;
+	this->phone_number = contact.phone_number;
+	this->darkset_secret = contact.darkset_secret;
+}
