@@ -1,10 +1,10 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = megaphone.cpp
+SRC = main.cpp Zombie.cpp randomChump.cpp newZombie.cpp
 OBJ = $(SRC:.cpp=.o)
 
-NAME = megaphone
+NAME = Zombie
 
 all : $(NAME)
 
@@ -14,7 +14,7 @@ $(NAME) : $(OBJ)
 clean :
 	rm -rf $(OBJ)
 
-fclean :
+fclean : clean
 	rm -rf $(NAME)
 
 re : fclean all
