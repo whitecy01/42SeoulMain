@@ -22,7 +22,6 @@ public:
 	void showInfo();
 	void showDetail();
 	int	 checkspace(std::string str);
-	int  string_length(std::string str);
 	
 };
 

@@ -35,7 +35,7 @@ bool PhoneBook::Emptystring(Contact contact)
 
 int	PhoneBook::checkspace(std::string str)
 {
-	for (int i = 0; i < string_length(str); i++)
+	for (int i = 0; i < str.length(); i++)
 	{
 		if (str[i] != ' ')
 		{
@@ -118,15 +118,12 @@ void PhoneBook::showInfo()
 		std::string firstName = this->contact[i].getFirstName();
 		std::string lastName = this->contact[i].getLastName();
 		std::string nickName = this->contact[i].getNickName();
-		if (string_length(firstName) > 10)
-			//firstName.replace(9, firstName.length() - 9, ".");
-			firstName = firstName.substr(0, 9) + ".";
-		if (string_length(lastName) > 10)
-			//lastName.replace(9, lastName.length() - 9, ".");
-			lastName = lastName.substr(0, 9) + ".";
-		if (string_length(nickName) > 10)
-			//nickName.replace(9, nickName.length() - 9, ".");
-			nickName = nickName.substr(0, 9) + ".";
+		if (firstName.length() > 10)
+			firstName.replace(9, firstName.length() - 9, ".");
+		if (lastName.length() > 10)
+			lastName.replace(9, lastName.length() - 9, ".");
+		if (nickName.length() > 10)
+			nickName.replace(9, nickName.length() - 9, ".");
 		std::cout << "|";
 		std::cout << std::setw(10) << i + 1 << "|";
 		std::cout << std::setw(10) << firstName << "|";
@@ -138,14 +135,6 @@ void PhoneBook::showInfo()
 			  << "\n";
 }
 
-int	PhoneBook::string_length(std::string str)
-{
-	int i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 void PhoneBook::showDetail()
 {
 	std::string str;
@@ -153,7 +142,7 @@ void PhoneBook::showDetail()
 	std::getline(std::cin, str);
 	if (std::cin.fail())
 		return ;
-	for (int i = 0; i < string_length(str); i++)
+	for (int i = 0; i < str.length(); i++)
 	{
 		if (!std::isdigit(str[i]))
 		{
@@ -161,12 +150,10 @@ void PhoneBook::showDetail()
 			return;
 		}
 	}
-	const char *ptr = &str[0];
+	const char *ptr = str.c_str();
 	int	number;
 
 	number = atoi(ptr);
-
-
 	if (!(number <= 8 && number >= 1 && number <= this->size))
 	{
 		std::cout << "Out of range" << "\n";
