@@ -1,18 +1,18 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = Account.cpp tests.cpp
+SRC = main.cpp Zombie.cpp ZombieHorde.cpp
 OBJ = $(SRC:.cpp=.o)
 
-NAME = Dreams
-
-all : $(NAME)
+NAME = Zombie
 
 %.o : %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
+all : $(NAME)
+
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean :
 	rm -rf $(OBJ)

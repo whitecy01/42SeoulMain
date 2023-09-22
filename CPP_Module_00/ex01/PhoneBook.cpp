@@ -35,7 +35,7 @@ bool PhoneBook::Emptystring(Contact contact)
 
 int	PhoneBook::checkspace(std::string str)
 {
-	for (int i = 0; i < str.length(); i++)
+	for (unsigned int i = 0; i < str.length(); i++)
 	{
 		if (str[i] != ' ')
 		{
@@ -76,7 +76,6 @@ bool PhoneBook::setContactInfo()
 	if (std::cin.fail())
 		return (0);
 	contact.setDarkestSecret(str);
-
 	if (!Emptystring(contact))
 	{
 		this->contact[index].setFirstName(contact.getFirstName());
@@ -142,7 +141,7 @@ void PhoneBook::showDetail()
 	std::getline(std::cin, str);
 	if (std::cin.fail())
 		return ;
-	for (int i = 0; i < str.length(); i++)
+	for (unsigned int i = 0; i < str.length(); i++)
 	{
 		if (!std::isdigit(str[i]))
 		{

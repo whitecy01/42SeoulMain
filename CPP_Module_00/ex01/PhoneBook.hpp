@@ -4,23 +4,23 @@
 # include <iostream>
 # include "Contact.hpp"
 # include <iomanip>
+# include <cstdlib>
 
 class PhoneBook{
 private:
 	Contact contact[8];
 	int size;
+	bool setContactInfo();
+	bool Emptystring(Contact contact);
+	int	 checkspace(std::string str);
 public:
-
 	PhoneBook();
 	~PhoneBook();
 	void startUp();
 	void addInfo();
 	int  getSize();
-	bool setContactInfo();
-	bool Emptystring(Contact contact);
 	void showInfo();
 	void showDetail();
-	int	 checkspace(std::string str);
 	
 };
 
