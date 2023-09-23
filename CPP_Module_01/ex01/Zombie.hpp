@@ -2,7 +2,7 @@
 # define ZOMBIE_HPP
 
 # include <iostream>
-# include <sstream>
+
 class Zombie
 {
 	private:
