@@ -4,7 +4,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 SRC = main.cpp
 OBJ = $(SRC:.cpp=.o)
 
-NAME = Brain
+NAME = brain
 
 %.o : %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

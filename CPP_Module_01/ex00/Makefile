@@ -4,7 +4,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 SRC = main.cpp Zombie.cpp randomChump.cpp newZombie.cpp
 OBJ = $(SRC:.cpp=.o)
 
-NAME = Zombie
+NAME = zombie
 
 %.o : %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

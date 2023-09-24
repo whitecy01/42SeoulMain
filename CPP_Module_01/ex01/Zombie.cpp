@@ -1,12 +1,13 @@
 #include "Zombie.hpp"
 
-Zombie::Zombie() : name("") // 기본 생성자 구현
+Zombie::Zombie()
 {
 }
 
-Zombie::Zombie(std::string name) 
+
+Zombie::Zombie(std::string name) : name(name)
 {
-	this->name = name;
+
 }
 
 Zombie::~Zombie()
