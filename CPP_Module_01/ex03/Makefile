@@ -5,13 +5,14 @@ SRC = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 OBJ = $(SRC:.cpp=.o)
 
 NAME = violence
+INCLUDE = HumanA.hpp HumanB.hpp
 
-%.o : %.cpp
+%.o : %.cpp $(INCLUDE)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(INCLUDE)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean :

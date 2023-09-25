@@ -4,14 +4,15 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 SRC = main.cpp Zombie.cpp randomChump.cpp newZombie.cpp
 OBJ = $(SRC:.cpp=.o)
 
+INCLUDE = Zombie.hpp
 NAME = zombie
 
-%.o : %.cpp
+%.o : %.cpp $(INCLUDE)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(INCLUDE)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean :

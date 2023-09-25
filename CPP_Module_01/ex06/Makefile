@@ -6,12 +6,14 @@ OBJ = $(SRC:.cpp=.o)
 
 NAME = harlFilter
 
-%.o : %.cpp
+INCLUDE = Harl.hpp
+
+%.o : %.cpp $(INCLUDE)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(INCLUDE)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean :
