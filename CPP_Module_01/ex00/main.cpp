@@ -9,5 +9,4 @@ int	main(void)
 	zombie_stack.announce();
 	heap_zombie->announce();
 	delete heap_zombie;
-	return (0);
 }

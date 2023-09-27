@@ -31,11 +31,11 @@ void	Harl::error(void)
 void Harl::complain(std::string level) 
 {
 	std::string types[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-	void (Harl::*f[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	void (Harl::*fun[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 
 	for (int i = 0; i < 4; i++)
 	{
 		if (types[i] == level) 
-		   	(this->*f[i])();
-  }
+		   	(this->*fun[i])();
+	}
 }
