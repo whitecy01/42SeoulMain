@@ -26,5 +26,4 @@ int	main(void)
 	std::cout << "a : getAttackDamage " << a.getAttackDamage() << std::endl;
 	std::cout << "a : getEnergyPoint " << a.getEnergyPoint() << std::endl;
 	std::cout << "a : getHitPoint " << a.getHitPoint() << std::endl;
-	return (0);
 }

@@ -42,7 +42,6 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &ScavTrap)
 	this->attackDamage = ScavTrap.getAttackDamage();
 	this->hitPoint = ScavTrap.getHitPoint();
 	this->energyPoint = ScavTrap.getEnergyPoint();
-	std::cout << "ScavTrap operator = " << name << " called" << std::endl;
 	return (*this);
 }
 
