@@ -44,8 +44,6 @@ void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 	this->checkExecuteGrade(executor);
 	std::ofstream File;
 	std::string tmp = target + "_shrubbery";
-	//std::string plus_str = "_shrubbery";
-	//std::string tmp = target.append(plus_str);
 	File.open(tmp.c_str());
 	
 	std::string ascii ="                      - - - \n\
