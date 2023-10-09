@@ -5,7 +5,7 @@ SRC = main.cpp Convert.cpp
 OBJ = $(SRC:.cpp=.o)
 
 INCLUDE = Convert.hpp
-NAME = a.out
+NAME = convert
 
 %.o : %.cpp $(INCLUDE)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

@@ -23,7 +23,7 @@ public:
     void doubleConvert() const;
     void convertAll() const;
 
-    bool checkValid(std::string value) const;
+   // bool checkValid(std::string value) const;
     bool checkInfo() const;
 
     std::string getValue(void) const;

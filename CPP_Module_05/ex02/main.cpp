@@ -4,6 +4,7 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
+
 int main(void) {
     Bureaucrat king("king", 1);
     Bureaucrat jaeyojun("jaeyojun", 150);

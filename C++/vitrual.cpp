@@ -8,6 +8,7 @@ class Animal
 	virtual ~Animal();
 	virtual getHP()
 		return hp;
+	//push, delete = 0;
 }
 8byte
 
@@ -17,6 +18,9 @@ class Dog : Animal
 	int b;
 	//int	*a = new int[6];
 	//Aniaml *ptr = new Animal();
+
+//push
+	push
 	getHP(){
 		return hp * 2;
 	}

@@ -18,16 +18,13 @@ public:
 	AForm &operator=(AForm const &form);
 	~AForm(void);
 
-	/* getter */
 	std::string getName(void) const;
 	bool getSign(void) const;
 	int	getSignGrade(void) const;
 	int getExecGrade(void) const;
 
-	/* setter */
 	void setSign(bool sign);
 
-	/* mnember function */
 	void beSigned(Bureaucrat const &person);
 	virtual void execute(Bureaucrat const &executor) const = 0;
 	void checkExecuteGrade(Bureaucrat const &executor) const;

@@ -6,7 +6,12 @@ int main(int argc, char **argv)
         std::cout << "Wrong Arguments\n";
     else
     {
-        Convert convert(argv[1]);
+		if (argv[1][0] == '\0')
+		{
+			std::cout << "Wrong Arguments\n";
+			return (0);
+		}
+		Convert convert(argv[1]);
         convert.convertAll();
     } 
 }

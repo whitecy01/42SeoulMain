@@ -5,7 +5,6 @@
 #include "AForm.hpp"
 #include <cstdlib>
 
-
 class RobotomyRequestForm : public AForm
 {
 private:

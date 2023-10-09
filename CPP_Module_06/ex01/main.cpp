@@ -1,10 +1,4 @@
-#include <iostream>
-#include <stdint.h>
-
-struct Data
-{
-	std::string name;
-};
+#include "Data.hpp"
 
 uintptr_t serialize(Data* ptr)
 {
@@ -16,25 +10,37 @@ Data* deserialize(uintptr_t raw)
 	return(reinterpret_cast<Data *>(raw));
 }
 
-int main(int ac, char *av[])
+int main(void)
 {
 	Data prev;
 	Data *next;
 	uintptr_t ptr;
 
-	if (ac != 2)
-	{
-		std::cout << "argument count is not 2" << std::endl;
-		return (1);
-	}	
-	prev.name = av[1];
-	std::cout << "prev : " << prev.name << std::endl;
+
+	prev._data = "jaeyojun";
+	std::cout << "prev : " << prev._data << std::endl;
 
 	ptr = serialize(&prev);
 	std::cout << "ptr : " << ptr << std::endl;
 
 	next = deserialize(ptr);
-	std::cout << "next : " << next->name << std::endl;
+	std::cout << "next : " << next->_data << std::endl;
+
+	std::cout << "=========================================\n";
+
+	Data d;
+	Data *a;
+	uintptr_t memory;
+
+	d._data = "jaeyo";
+
+	memory = serialize(&d);
+	std::cout << "memory : " << memory << std::endl;
+
+	a = deserialize(memory);
+
+	std::cout << "a : " << a->_data << std::endl;
+
 
 	return (0);
 }

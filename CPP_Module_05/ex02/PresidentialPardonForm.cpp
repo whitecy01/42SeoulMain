@@ -7,7 +7,7 @@ PresidentialPardonForm::PresidentialPardonForm(void)
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string target)
-	:AForm("PresidentialPardonForm Request AForm" , 25, 5), target(target)
+	:AForm("Presidential" , 25, 5), target(target)
 {
 	std::cout << this->getName() <<	 " Constructor called\n";
 }

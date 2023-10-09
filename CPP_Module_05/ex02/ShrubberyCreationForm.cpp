@@ -8,7 +8,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(void) \
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string target)\
-	:AForm("Shrubbery Creation AForm", 145, 137), target(target)
+	:AForm("Shrubbery", 145, 137), target(target)
 {
 	std::cout << this->getName() <<	 " Constructor called\n";
 }

@@ -5,6 +5,7 @@
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
+
 int main(void) {
 
     try {
@@ -34,7 +35,7 @@ int main(void) {
 			AForm* rrf;
 
 			rrf = someRandomIntern.makeForm("robotomy request" , "Bender");
-			std::cout << rrf << "\n";
+			std::cout << *rrf << "\n";
 			delete rrf;
 
 		}

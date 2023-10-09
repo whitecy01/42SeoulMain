@@ -7,7 +7,7 @@ RobotomyRequestForm::RobotomyRequestForm(void) \
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string target) \
-	:AForm("RobotomyRequestForm" , 72, 45), target(target)
+	:AForm("Robotomy" , 72, 45), target(target)
 {
 	std::cout << this->getName() <<	 " Constructor called\n";
 }
@@ -38,7 +38,7 @@ void RobotomyRequestForm::execute(const Bureaucrat &executor) const
 	this->checkExecuteGrade(executor);
 	int tmp = (rand() % 2); 
 
-	std::cout << "Drill... Drrr\n" << std::endl;
+	std::cout << "Drill... Drrr\n";
 
 	if (tmp)
 	{

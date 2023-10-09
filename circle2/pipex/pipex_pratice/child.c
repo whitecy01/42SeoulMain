@@ -1,23 +1,23 @@
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <string.h>
-#include <fcntl.h>
+// #include <unistd.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <sys/stat.h>
+// #include <string.h>
+// #include <fcntl.h>
 
-int main()
-{
-	pid_t pid;
+// int main()
+// {
+// 	pid_t pid;
 
-	pid = fork();
-	if (pid == 0)
-	{
-		printf("부모\n");
-	}
-	else
-		printf("자식\n");
-}
+// 	pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		printf("부모\n");
+// 	}
+// 	else
+// 		printf("자식\n");
+// }
 
 
 // #include <stdio.h>
@@ -85,7 +85,7 @@ int main()
 //         close(pipefd[0]);
 
 //         // 파이프의 쓰기 단에 메시지를 씀
-//         //write(pipefd[1], message, strlen(message) + 1);
+//         write(pipefd[1], message, strlen(message) + 1);
 
 //         // 자식 프로세스 종료
 //         return 0;

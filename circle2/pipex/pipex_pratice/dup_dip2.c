@@ -89,13 +89,13 @@ int main(void)
 		//printf("fd1[1] : %d\n", fd1[1]);
         write(fd1[1], "(자식에서 입력)\n", 25);
 		//sleep(2);
-        read(fd2[0], buffer, 25);
+        //read(fd2[0], buffer, 25);
         printf("\n자식출력: %s\n", buffer);
     }
     else
     {
        write(fd2[1], "(부모에서 입력)", 25);
-        read(fd1[0], buffer, BUFFER_SIZE);
+       read(fd1[0], buffer, BUFFER_SIZE);
         printf("\n부모출력: %s\n", buffer);
     }
     return (0);
