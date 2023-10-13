@@ -1,27 +1,21 @@
-#include "whatever.hpp"
-#include <iostream>
-
-int main()
-{
-	int a = 2;
-	int b = 3;
+#include "iter.hpp"
 
 
-	std::cout << "swap [Before]\n";
-	std::cout << "a : " << a << "\n";
-	std::cout << "b : " << b << "\n"; 
-	swap(a, b);
-	std::cout << "swap [After]\n";
-	std::cout << "a : " << a << "\n";
-	std::cout << "b : " << b << "\n"; 
+int main(void) {
+    int arrInt[5] = {1, 2, 3, 4, 5};
+    iter(arrInt, 5, func);
+    std::cout << "\n";
 
-	std::cout << "========================\n";
+    char arrChar[5] = {'a', 'b', 'c', 'd', 'e'};
+    iter(arrChar, 5, func);
+    std::cout << "\n";
 
-	std::cout << "min : ";
-	std::cout << min(a, b) << "\n";
+    std::string arrString[5] = {"Hi", "My", "name", "is", "jaeyojun"};
+    iter(arrString, 5, func);
+    std::cout << "\n";
+    
+    double arrDouble[5] = {0.1, 0.2, 0.3, 0.4, 0.5};
+    iter(arrDouble, 5, func);
 
-	std::cout << "max : ";
-	std::cout << max(a, b) << "\n";
-
-
+    return 0;
 }
