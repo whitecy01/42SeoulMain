@@ -16,6 +16,11 @@ int main(void) {
     
     double arrDouble[5] = {0.1, 0.2, 0.3, 0.4, 0.5};
     iter(arrDouble, 5, func);
+	std::cout << "\n";
+
+    
+    int arr[5] = {6, 7, 8, 9, 10};
+    iter(arr, -2, func);
 
     return 0;
 }

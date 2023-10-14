@@ -6,7 +6,11 @@
 template<typename T>
 void iter(T *array, int len, void (*func)(T &))
 {
-	//음수 예외 처리 
+	if (len <= 0)
+	{
+		std::cout << "Please enter a positive value\n";
+		return ;
+	}
 	for (int i = 0; i < len; i++)
 	{
 		func(array[i]);

@@ -18,7 +18,6 @@ public:
 
     Array(unsigned int len)
     {
-        std::cout << "unsigned\n";
         this->arr = new T[len];
         this->_len = len;
         for (unsigned int i = 0; i < len; i++)
@@ -47,9 +46,9 @@ public:
         this->arr = NULL;
         *this = array;
     }
+
     Array &operator=(const Array &array)
     {
-        std::cout << "awd\n";
         if (this == &array)
             return (*this);
         this->_len = array._len;
@@ -63,19 +62,8 @@ public:
         return *this;
     }
 
-    T& operator[] (int index)
-    {
-        //         std::cout << "_len : " << _len << "\n";
-        std::cout << "index : " << index << "\n"; 
-        //if (index >= this->_len)
-            throw std::out_of_range("index is out of bounds");
-        //return this->arr[index];
-    };
-
     T& operator[] (unsigned int index)
     {
-        //         std::cout << "_len : " << _len << "\n";
-        std::cout << "index : " << index << "\n"; 
         if (index >= this->_len)
             throw std::out_of_range("index is out of bounds");
         return this->arr[index];
@@ -83,29 +71,11 @@ public:
 
     const T& operator[] (unsigned int index) const
     {
-        //std::cout << "_len : " << _len << "\n";
-        std::cout << "index : " << index << "\n"; 
         if (index >= this->_len)
             throw std::out_of_range("index is out of bounds\n");
         return this->arr[index];
     };
 
-    void ShowAllData(const Array& ref) const
-    { 
-        for(unsigned int idx=0; idx<_len; idx++)
-            std::cout<<ref[idx]<< std::endl; //컴파일 에러 발생
-    }
-
-    int *getArray(void)
-    {
-        return this->arr;
-    }
-
-    unsigned int *getArrayunsigined(void)
-    {
-        return this->arr;
-    }
-    
     unsigned int size(void) const
     {
         return this->_len;
