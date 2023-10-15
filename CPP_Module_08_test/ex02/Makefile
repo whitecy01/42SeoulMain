@@ -4,7 +4,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 SRC = main.cpp
 OBJ = $(SRC:.cpp=.o)
 
-INCLUDE = easyfind.hpp
+INCLUDE = MutantStack.hpp
 NAME = a.out
 
 %.o : %.cpp $(INCLUDE)

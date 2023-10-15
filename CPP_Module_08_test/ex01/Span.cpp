@@ -27,24 +27,10 @@ Span &Span::operator=(Span const &span)
 	return *this;
 }
 
-bool Span::checkDup(int num)
-{
-	for (std::vector<int>::iterator iter = vec.begin(); iter != vec.end(); iter++)
-	{
-		if (num == *iter)
-			return true;
-	}
-	return false;
-}
-
 void Span::addNumber(int num)
 {
 	try
 	{
-		if (checkDup(num))
-		{
-			throw std::runtime_error("it's already inside");
-		}
 		if (vec.size() >= this->N)
 		{
 			throw std::runtime_error("The size of the vector exceeds N");

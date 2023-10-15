@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <stack>
 #include <vector>
 
 class Animal {
@@ -36,6 +37,8 @@ public:
 
 int main() {
 
+std::deque<int> s;
+std::stack<int> a;
     std::vector<Animal*> v;
     v.__emplace_back(new Cat("나비"));
     v.__emplace_back(new Dog("멍멍이"));

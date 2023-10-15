@@ -29,8 +29,6 @@ public:
 		}
 	}
 
-	bool checkDup(int num);
-
 	int shortestSpan() const;
 	int longestSpan() const;
 
