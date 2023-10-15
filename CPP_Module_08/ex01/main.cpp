@@ -17,5 +17,10 @@ int main()
 	std::cout << sp.shortestSpan() << std::endl;
 	std::cout << sp.longestSpan() << std::endl;
 	
+	std::cout << "========================== add many in one ==========================\n";
+    Span sp2 = Span(100);
+    sp2.addNumbers(100);
+    std::cout << sp2.getN() << std::endl;
+    sp2.getElement();
     
 }

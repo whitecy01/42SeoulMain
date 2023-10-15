@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
-
+#include <limits.h>
 
 class Span{
 private:
@@ -21,6 +21,7 @@ public:
 	
 
 	void addNumber(int num);
+	void addNumbers(int num);
 	bool checkDup(int num) ;
 
 	int shortestSpan() const;
@@ -29,6 +30,7 @@ public:
 	std::vector<int> sortVector() const;
 
 	unsigned int getN() const;
+	void getElement() const;
 
 };
 

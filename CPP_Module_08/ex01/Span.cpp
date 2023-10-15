@@ -1,5 +1,6 @@
 #include "Span.hpp"
 
+
 Span::Span()
 {	 
 	N = 0;
@@ -49,14 +50,44 @@ void Span::addNumber(int num)
 	vec.push_back(num);
 }
 
+void Span::addNumbers(int num)
+{
+	while (num > 0)
+	{
+		int random = rand();
+		try
+		{
+			addNumber(random);
+			num--;
+		}
+		catch(const std::exception& e) { }
+	}
+}
+
 int Span::shortestSpan() const
 {
 	if (this->vec.size() < 2)
 		throw std::runtime_error("size is under 2");
 	std::vector<int> sorted = sortVector();
-	std::vector<int>::const_iterator iter = sorted.begin();
+	long ret = LONG_MAX;
+	int prev;
+	for (std::vector<int>::iterator iter = sorted.begin(); iter != sorted.end(); iter++)
+	{
+		if (iter == sorted.begin())
+		{
+			prev = *iter;
+		}
+		else
+		{
+			if (ret > *iter - prev)
+			{
+				ret = *iter - prev;
+			}
+			prev = *iter;
+		}
+	}
 
-	return *iter;
+	return ret;
 }
 
 int Span::longestSpan() const 
@@ -71,6 +102,15 @@ std::vector<int> Span::sortVector() const
 	std::vector <int> sorted(this->vec);
 	std::sort(sorted.begin(), sorted.end());
 	return sorted;
+}
+
+void Span::getElement() const
+{
+	for (unsigned int i = 0; i < N; i++)
+	{
+		std::cout << vec[i] << "\n";
+	}
+	
 }
 
 
