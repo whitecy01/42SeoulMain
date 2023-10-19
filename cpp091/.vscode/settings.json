@@ -1,0 +1,10 @@
+{
+	"files.associations": {
+		"string": "cpp",
+		"string_view": "cpp",
+		"stdexcept": "cpp",
+		"__tree": "cpp",
+		"algorithm": "cpp",
+		"map": "cpp"
+	}
+}

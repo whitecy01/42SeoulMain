@@ -10,7 +10,9 @@
 class BitcoinExchange
 {
 private:
-	std::map < std::string , float> data;
+	std::map < std::string , float> coinMap;
+	std::string first;
+	std::string last;
 public:
 	BitcoinExchange();
 	~BitcoinExchange();
@@ -19,13 +21,25 @@ public:
 
 	/* data.csv */
 	BitcoinExchange(const char *data);
-	void csv_line_check(std::string line);
-	
+	int csv_line_check(std::string line);
+	int isValidDate(std::string date);
+	int isValidValue(std::string value);
+
 	/* showError*/
 	void showErrorMessage(std::string message);
-	
-	
 
-}
+	void fillCoinMap(std::string date, float value);
+
+
+	// 모든 출력
+	void outputelement();
+
+	/* calcBitcoin*/
+	void calcBitcoin(const char *argv);
+	void findDate(std::string line, float value);
+	int handleError(std::string line);
+	void printResult(std::map<std::string, float>::iterator iter, std::string date, float value);
+	void showErrorContinue(std::string message);
+};
 
 #endif

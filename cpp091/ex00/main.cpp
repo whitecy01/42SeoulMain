@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv)
 {
-    if (argc >= 3)
+    if (argc != 2)
     {
         std::cout << "Wrong argument!";
         return 1;
