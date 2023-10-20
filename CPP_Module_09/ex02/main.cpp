@@ -7,6 +7,13 @@ int main(int argc, char **argv)
         return 1;
     }
     PmergeMe pm;
-    pm.showResult(argv);
+    pm.parsing_sort(argv, argc);
+	// std::cout << argc << std::endl;
+	// for (int i = 0; i < argc; i++)
+	// {
+	// 	std::cout << argv[i] << std::endl;
+	// }
+	
+
     return 0;
 }
