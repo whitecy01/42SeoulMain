@@ -6,13 +6,18 @@
 #include <iostream>
 #include <cstdlib>
 
+
 class PmergeMe 
 {
 private:
 	std::vector<int> vector;
 	std::vector<int> res;
-	std::list<int> list;
+	std::vector<int> res_copy;
 	int size;
+	//야콥스탈 수 넣어주가
+	std::vector<int> jascbsthal;
+	std::list<int> list;
+
 public:
 	PmergeMe();
 	~PmergeMe();
@@ -23,13 +28,15 @@ public:
 	void handleError(std::string message);
 
 	/* vector 정렬 */
-	void vector_sort(std::vector<int> &vector, int left, int right);
+	void vector_sort(std::vector<int> &vector);
 	std::vector<int> mergeSort(const std::vector<int>& input);
 	std::vector<int> merge(const std::vector<int>& left, const std::vector<int>& right);
-	double calc_jascbsthal(size_t number, double Jacobsthal_number);
+	void calc_jascbsthal(std::vector<int> vector);
 	
 	void ford_John(std::vector<std::vector<int> > &result);
 	//void merge();
+	std::vector<int> resFindPair(std::vector<std::vector<int> > &result);
+	void sort_j(std::vector<int> &pend);
 };
 
 #endif
