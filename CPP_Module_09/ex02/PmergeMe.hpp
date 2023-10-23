@@ -8,6 +8,8 @@
 #include <iostream>
 #include <iterator>
 #include <cstdlib>
+#include <climits>
+#include <algorithm>
 
 
 class PmergeMe 

@@ -63,6 +63,8 @@ int RPN::checkValue(char math)
         return number;
     else if (math == '-' || math == '+' || math == '/' || math == '*')
         return operand;
+	else
+		return -1;
 	return -1;
 }
 
