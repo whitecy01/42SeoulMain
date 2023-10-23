@@ -150,7 +150,6 @@ int RPN::handleError(std::string math)
 		i++;
 	}
 
-	//중간에 공백이 잘 오는 지
 	i = 0;
 	int flag2 = 0;
 	while (math[i])

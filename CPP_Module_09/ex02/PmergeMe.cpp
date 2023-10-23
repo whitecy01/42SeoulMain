@@ -97,7 +97,7 @@ void PmergeMe::parsing_sort(char **argv, int argc)
 
 	duration = (double)(end - start) / CLOCKS_PER_SEC;
     std::cout << "Time to process a range of " << std::setw(4) << size;
-    std::cout << " elements with std::list<int> : " << duration << " ms" << "\n";
+    std::cout << " elements with std::list<int> : " << duration << " us" << "\n";
 
 	// std::cout << "res_vector: ";
 	// for (std::vector<int>::iterator it = this->res.begin(); it != this->res.end(); ++it)
@@ -535,7 +535,6 @@ void PmergeMe::sort_j(void)
     iter = std::find(mainchin.begin(), mainchin.end(), 0);
     if (iter == mainchin.end())
 	{
-		std::cout << "mainchin_size : " << mainchin_size << std::endl;
 		mainchin_size  = mainchin.size();
 	}
 	else
