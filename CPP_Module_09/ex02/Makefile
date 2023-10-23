@@ -1,10 +1,10 @@
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
 
 SRC = main.cpp PmergeMe.cpp
 OBJ = $(SRC:.cpp=.o)
 
-INCLUDE = PmergeMe.cpp
+INCLUDE = PmergeMe.hpp
 NAME = PmergeMe
 
 %.o : %.cpp $(INCLUDE)

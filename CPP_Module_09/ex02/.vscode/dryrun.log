@@ -1,0 +1,7 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/jaeyojun/Desktop/42서울본과정커밋1/CPP_Module_09/ex02'
+c++ -Wall -Wextra -Werror -g -std=c++98 -c -o main.o main.cpp
+c++ -Wall -Wextra -Werror -g -std=c++98 -c -o PmergeMe.o PmergeMe.cpp
+c++ -Wall -Wextra -Werror -g -std=c++98 main.o PmergeMe.o -o PmergeMe
+make: Leaving directory `/Users/jaeyojun/Desktop/42서울본과정커밋1/CPP_Module_09/ex02'
+ 

@@ -193,7 +193,7 @@ void PmergeMe::showResult(char **argv) {
 
     std::cout << "Time to process a range of " << std::setw(4) << size;
     std::cout.precision(6);
-    std::cout << " elements with std::vector<int> : " << std::fixed << duration << " ms" << "\n";
+    std::cout << " elements with std::vector<int> : " << std::fixed << duration << " us" << "\n";
     
     start = clock();
     // 데크 정렬

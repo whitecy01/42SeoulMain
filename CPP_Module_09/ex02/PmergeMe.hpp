@@ -3,20 +3,33 @@
 
 #include <vector>
 #include <list>
+# include <ctime>
+# include <iomanip>
 #include <iostream>
+#include <iterator>
 #include <cstdlib>
 
 
 class PmergeMe 
 {
 private:
+	/* vector */
 	std::vector<int> vector;
+	std::vector<int> mainchin;
+	std::vector<int> pending;
+	/* 결과물*/
 	std::vector<int> res;
-	std::vector<int> res_copy;
+
 	int size;
-	//야콥스탈 수 넣어주가
 	std::vector<int> jascbsthal;
+
+
+	/* list */
 	std::list<int> list;
+	std::list<int> mainchin_list;
+	std::list<int> pending_list;
+	std::list<int> jascbsthal_list;
+	std::list<int> res_list;
 
 public:
 	PmergeMe();
@@ -24,19 +37,28 @@ public:
 	PmergeMe(PmergeMe const &pmergeme);
 	PmergeMe&operator=(PmergeMe const &pmergeme);
 
+	void showNums_result_vector(void);
+
 	void parsing_sort(char **argv, int argc);
 	void handleError(std::string message);
 
 	/* vector 정렬 */
 	void vector_sort(std::vector<int> &vector);
-	std::vector<int> mergeSort(const std::vector<int>& input);
-	std::vector<int> merge(const std::vector<int>& left, const std::vector<int>& right);
 	void calc_jascbsthal(std::vector<int> vector);
-	
-	void ford_John(std::vector<std::vector<int> > &result);
+	void resFindPair(std::vector<std::vector<int> > &result);
+	void sort_j(void);
+
+
+	void binaryInsert(std::vector<int>& arr, int element) ;
+	void binaryInsertionSort(int elemnt);
+
+	/* list 정렬 */
+	void list_sort(std::list<int> &list);
+	void resFindPair_list(std::list<std::list<int> > &result);
+	void sort_j_list(void);
+	void binaryInsert_list(std::list<int>& arr, int element) ;
+	void binaryInsertionSort_list(int elemnt);
 	//void merge();
-	std::vector<int> resFindPair(std::vector<std::vector<int> > &result);
-	void sort_j(std::vector<int> &pend);
 };
 
 #endif
