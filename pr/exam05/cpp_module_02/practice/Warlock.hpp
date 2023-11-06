@@ -6,6 +6,7 @@
 #include "ASpell.hpp"
 #include <map>
 #include <iterator>
+#include "SpellBook.hpp"
 
 class Warlock
 {
@@ -15,7 +16,7 @@ class Warlock
         Warlock();
         Warlock(Warlock const &warlock);
         Warlock &operator=(Warlock const &warlock);
-        std::map<std::string, ASpell *> _SpellBook;
+        SpellBook _SpellBook;
     public:
         std::string const &getName() const;
         std::string const &getTitle() const;

@@ -1,73 +1,73 @@
 #include "Warlock.hpp"
 
-
-Warlock::Warlock()
+Warlock::Warlock(std::string name, std::string title)\
+: name(name), title(title)
 {
-
+    std::cout << name << ": " << "This looks like another boring day." << std::endl;
 }
-
-Warlock::Warlock(std::string name, std::string title)
-{
-    this->name = name;
-    this->title = title;
-    std::cout << this->name << ": This looks like another boring day." << std::endl;
-}
-
 
 Warlock::~Warlock()
 {
-    std::cout << this->name << ": My job here is done!" << std::endl;
+    std::cout << name << ": My job here is done!" << std::endl;
 }
 
-Warlock::Warlock(const Warlock &warlock)
+Warlock::Warlock(Warlock const &warlock)
 {
     *this = warlock;
 }
 
-Warlock &Warlock::operator=(const Warlock &warlock)
+Warlock &Warlock::operator=(Warlock const &warlock)
 {
     if (this == &warlock)
-        return (*this);
-    this->name = warlock.getName();
-    this->title = warlock.getTitle();
+        return *this;
+    name = warlock.name;
+    title = warlock.title;
     return *this;
 }
 
-void Warlock::introduce() const 
-{
-    std::cout << this->name << ": I am " << this->name << ", " << this->title << "!" << std::endl;
-}
-
-std::string Warlock::getName() const
-{
-    return this->name;
-}
+Warlock::Warlock(){ }
 
 void Warlock::setTitle(std::string const &title)
 {
     this->title = title;
 }
 
-std::string Warlock::getTitle() const
+std::string const &Warlock::getName() const
+{
+    return this->name;
+}
+
+std::string const &Warlock::getTitle() const
 {
     return this->title;
 }
 
-void Warlock::learnSpell(ASpell* spell)
+void Warlock::introduce() const
 {
-	if (spell)
-		if (_SpellBook.find(spell->getName()) == _SpellBook.end())
-			_SpellBook[spell->getName()] = spell->clone();
+    std::cout << name << ": I am " << name << ", " << title << "!" << std::endl;
 }
 
-void Warlock::forgetSpell(std::string SpellName)
+void Warlock::learnSpell(ASpell *aspell)
 {
-	if (_SpellBook.find(SpellName) != _SpellBook.end())
-		_SpellBook.erase(_SpellBook.find(SpellName));
+    if (aspell)
+        if (_SpellBook.find(aspell->getName()) == _SpellBook.end())
+            _SpellBook[aspell->getName()] = aspell->clone();
 }
 
-void Warlock::launchSpell(std::string SpellName, ATarget & target)
+void Warlock::forgetSpell(std::string name)
 {
-	if (_SpellBook.find(SpellName) != _SpellBook.end())
-		_SpellBook[SpellName]->launch(target);
+    if (_SpellBook.find(name) != _SpellBook.end())
+    {
+        std::map<std::string, ASpell *>::iterator iter = _SpellBook.find(name);
+        delete iter->second;
+        _SpellBook.erase(name);
+    }
+}
+
+void Warlock::launchSpell(std::string name, ATarget &atarget)
+{
+    if (_SpellBook.find(name) != _SpellBook.end())
+    {
+        _SpellBook[name]->launch(atarget);
+    }
 }

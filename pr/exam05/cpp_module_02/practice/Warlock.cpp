@@ -46,3 +46,19 @@ void Warlock::introduce() const
 {
     std::cout << name << ": I am " << name << ", " << title << "!" << std::endl;
 }
+
+void Warlock::learnSpell(ASpell *aspell)
+{
+    _SpellBook.learnSpell(aspell);
+}
+
+void Warlock::forgetSpell(std::string name)
+{
+    _SpellBook.forgetSpell(name);
+}
+
+void Warlock::launchSpell(std::string name, ATarget &atarget)
+{
+    if (_SpellBook.createSpell(name))
+        _SpellBook.createSpell(name)->launch(atarget);
+}

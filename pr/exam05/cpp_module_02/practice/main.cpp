@@ -14,7 +14,6 @@ void check()
     system ("leaks a.out");
 }
 
-
 int main()
 {
   Warlock richard("Richard", "foo");
@@ -36,8 +35,9 @@ int main()
   richard.introduce();
   richard.launchSpell("Polymorph", *wall);
   richard.launchSpell("Fireball", *wall);
-  delete fireball;
+  //std::exit(1);
   delete polymorph;
-  delete wall;
-    atexit(check);
+  delete fireball;
+//  delete wall;
+  atexit(check);
 }
