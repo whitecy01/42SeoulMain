@@ -1,0 +1,122 @@
+Assignment name  : cpp_module_00
+Expected files   : Warlock.cpp Warlock.hpp
+--------------------------------------------------------------------------------
+
+Make a Warlock class. It has to be in Coplien's form.
+
+It has the following private attributes :
+* name (string)
+* title (string)
+
+워록 클래스를 만드세요. Coplien의 형식이어야 합니다.
+
+여기에는 다음과 같은 비공개 속성이 있습니다.
+* 이름(문자열)
+* 제목(문자열)
+
+Since they're private, you will write the following getters :
+* getName, returns a reference to constant string
+* getTitle, returns a reference to constant string
+
+Both these functions will have to be callable on a constant Warlock.
+
+Create the following setter: 
+* setTitle, returns void and takes a reference to constant string
+
+Your Warlock will also have, in addition to whatever's required by Coplien's
+form, a constructor that takes, in this order, its name and title. Your Warlock
+will not be able to be copied, instantiated by copy, or instantiated without a
+name and a title.
+
+
+비공개이므로 다음 getter를 작성합니다.
+* getName, 상수 문자열에 대한 참조를 반환합니다.
+* getTitle, 상수 문자열에 대한 참조를 반환합니다.
+
+이 두 함수는 모두 상수 워록에서 호출 가능해야 합니다.
+
+다음 세터를 만듭니다.
+* setTitle, void를 반환하고 상수 문자열에 대한 참조를 사용합니다.
+
+또한 Warlock에는 Coplien의 형식에서 요구하는 모든 것 외에도 이 순서대로 이름과 제목을 취하는 생성자가 있습니다. 
+귀하의 흑마법사는 복사되거나, 사본으로 인스턴스화되거나, 이름과 직위 없이 인스턴스화될 수 없습니다.
+
+For example :
+
+Warlock bob;                            //Does not compile
+Warlock bob("Bob", "the magnificent");  //Compiles
+Warlock jim("Jim", "the nauseating");   //Compiles
+bob = jim;                              //Does not compile
+Warlock jack(jim);                      //Does not compile
+
+Upon creation, the Warlock says :
+
+<NAME>: This looks like another boring day.
+
+Of course, whenever we use placeholders like <NAME>, <TITLE>, etc...
+in outputs, you will replace them by the appropriate value. Without the < and >.
+
+When he dies, he says:
+
+생성 후 흑마법사는 다음과 같이 말합니다.
+
+<NAME>: 오늘도 지루한 하루인 것 같네요.
+
+물론 <NAME>, <TITLE> 등과 같은 자리 표시자를 사용할 때마다...
+출력에서는 이를 적절한 값으로 대체합니다. < 및 >가 없습니다.
+
+그는 죽을 때 이렇게 말합니다.
+
+
+<NAME>: My job here is done!
+
+Our Warlock must also be able to introduce himself, while boasting with all its might.
+
+So you will write the following function:
+* void introduce() const;
+
+It must display:
+
+<NAME>: I am <NAME>, <TITLE>!
+
+Here's an example of a test main function and its associated output:
+
+<NAME>: 여기서 내 일은 끝났어요!
+
+우리 흑마법사도 자신을 소개하면서 온 힘을 다해 자랑할 수 있어야 합니다.
+
+따라서 다음 함수를 작성합니다.
+* 무효 소개() const;
+
+다음이 표시되어야 합니다.
+
+<NAME>: 저는 <NAME>, <TITLE>입니다!
+
+다음은 테스트 기본 기능 및 관련 출력의 예입니다.
+
+int main()
+{
+  Warlock const richard("Richard", "Mistress of Magma");
+  richard.introduce();
+  std::cout << richard.getName() << " - " << richard.getTitle() << std::endl;
+
+  Warlock* jack = new Warlock("Jack", "the Long");
+  jack->introduce();
+  jack->setTitle("the Mighty");
+  jack->introduce();
+
+  delete jack;
+
+  return (0);
+}
+
+~$ ./a.out | cat -e
+Richard: This looks like another boring day.$
+Richard: I am Richard, Mistress of Magma!$
+Richard - Mistress of Magma$
+Jack: This looks like another boring day.$
+Jack: I am Jack, the Long!$
+Jack: I am Jack, the Mighty!$
+Jack: My job here is done!$
+Richard: My job here is done!$
+~$
