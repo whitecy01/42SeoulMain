@@ -1,7 +1,5 @@
 #include "ATarget.hpp"
 
-ATarget::ATarget(){
-}
 
 ATarget::ATarget(std::string type) : type(type)
 {
@@ -22,12 +20,14 @@ ATarget &ATarget::operator=(ATarget const &atarget)
     type = atarget.type;
     return *this;
 }
+
 std::string const &ATarget::getType() const
 {
     return this->type;
 }
 
+
 void ATarget::getHitBySpell(ASpell const &aspell) const
 {
-    std::cout << type << ": has been " << aspell.getEffects() << "!" << std::endl;
+ std::cout << type << " has benn " << aspell.getEffects() << "!" << std::endl;
 }

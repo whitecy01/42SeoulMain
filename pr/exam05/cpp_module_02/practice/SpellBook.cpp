@@ -1,6 +1,5 @@
 #include "SpellBook.hpp"
 
-
 SpellBook::SpellBook()
 {
 
@@ -8,19 +7,11 @@ SpellBook::SpellBook()
 
 SpellBook::~SpellBook()
 {
-    std::map<std::string, ASpell *>::iterator iter = _SpellBook.begin();
-
-            for ( ; iter != _SpellBook.end(); iter++)
-            {
-                delete iter->second;
-              
-            }
-
-
-    // for (std::map<std::string, ASpell*>::iterator it = _SpellBook.begin(); it != _SpellBook.end(); ++it) {
-	// 	delete it->second;
-	// }
-	//_SpellBook.clear();
+    for (std::map<std::string, ASpell *>::iterator iter = _SpallBook.begin(); iter != _SpallBook.end(); ++iter)
+    {
+        delete iter->second;
+    }
+    _SpallBook.clear();
 }
 
 SpellBook::SpellBook(SpellBook const &spellbook)
@@ -32,34 +23,32 @@ SpellBook &SpellBook::operator=(SpellBook const &spellbook)
 {
     if (this == &spellbook)
         return *this;
-    _SpellBook = spellbook._SpellBook;
+    _SpallBook = spellbook._SpallBook;
     return *this;
 }
 
-void SpellBook::learnSpell(ASpell *aspell)
+void SpellBook::learnSpell(ASpell* aspell)
 {
     if (aspell)
-    {
-        _SpellBook[aspell->getName()] = aspell->clone();
-    }
-}
-void SpellBook::forgetSpell(std::string const &name)
-{
-    if (_SpellBook.find(name) != _SpellBook.end())
-    {
-        std::map<std::string, ASpell *>::iterator iter = _SpellBook.find(name);
-        delete iter->second;
-        _SpellBook.erase(iter);
-    }
+        _SpallBook[aspell->getName()] = aspell->clone();
 }
 
+void SpellBook::forgetSpell(std::string const &name)
+{
+    std::map<std::string, ASpell *>::iterator iter = _SpallBook.find(name);
+    if (iter != _SpallBook.end())
+    {
+        delete iter->second;
+        _SpallBook.erase(iter);
+    }
+}
 
 ASpell* SpellBook::createSpell(std::string const &name)
 {
     ASpell *tmp = NULL;
-    if (_SpellBook.find(name) != _SpellBook.end())
+    if (_SpallBook.find(name) != _SpallBook.end())
     {
-        tmp = _SpellBook[name];
+        tmp = _SpallBook[name];
     }
     return tmp;
 }

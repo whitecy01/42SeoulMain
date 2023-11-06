@@ -1,11 +1,11 @@
 #ifndef WARLOCK_HPP
-#define WARLOCK_HPP
+# define WARLOCK_HPP
 
 #include <iostream>
 
 class Warlock
 {
-    private: 
+    private:
         std::string name;
         std::string title;
         Warlock();
@@ -15,9 +15,11 @@ class Warlock
         std::string const &getName() const;
         std::string const &getTitle() const;
         void setTitle(std::string const &title);
+~Warlock();
         Warlock(std::string name, std::string title);
-        ~Warlock();
         void introduce() const;
+
+        
 };
 
 #endif

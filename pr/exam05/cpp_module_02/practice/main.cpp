@@ -9,10 +9,8 @@
 #include "SpellBook.hpp"
 #include "TargetGenerator.hpp"
 
-void check()
-{
-    system ("leaks a.out");
-}
+
+
 
 int main()
 {
@@ -35,9 +33,7 @@ int main()
   richard.introduce();
   richard.launchSpell("Polymorph", *wall);
   richard.launchSpell("Fireball", *wall);
-  //std::exit(1);
-  delete polymorph;
   delete fireball;
-//  delete wall;
-  atexit(check);
+  delete polymorph;
+
 }

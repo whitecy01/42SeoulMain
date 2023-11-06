@@ -1,12 +1,8 @@
 #include "Warlock.hpp"
-#include "Fwoosh.hpp"
+#include "ASpell.hpp"
+#include "ATarget.hpp"
 #include "Dummy.hpp"
-
-void check()
-{
-    system("leaks a.out");
-}
-
+#include "Fwoosh.hpp"
 
 int main()
 {
@@ -22,6 +18,6 @@ int main()
 
   richard.forgetSpell("Fwoosh");
   richard.launchSpell("Fwoosh", bob);
+
   delete fwoosh;
-    atexit(check);
 }

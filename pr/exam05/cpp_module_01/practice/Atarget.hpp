@@ -11,19 +11,16 @@ class ATarget
 {
     private:
         std::string type;
-
     public:
         std::string const &getType() const;
         virtual ATarget *clone() const = 0;
-        virtual ~ATarget();
-        
         ATarget(std::string type);
-        ATarget();
-        ATarget &operator=(ATarget const &atarget);
+        virtual ~ATarget();
+
         ATarget(ATarget const &atarget);
+        ATarget &operator=(ATarget const &atarget);
 
         void getHitBySpell(ASpell const &aspell) const;
-
 };
 
 #endif
