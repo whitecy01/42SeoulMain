@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb
+    restart: always
+    build: requirements/mariadb
+    expose:
+            - "3306"
+    volumes:
+            - mariadb-volume:/var/lib/mysql
+    networks:
+            - intra-network
+    env_file:
+            - .env
+  wordpress:
+    depends_on:
+      - mariadb
+    restart: always
+    build: requirements/wordpress
+    container_name: wordpress
+    image: wordpress
+    expose:
+            - "9000"
+    volumes:
+            - wordpress-volume:/var/www/html
+    networks:
+            - intra-network
+    env_file:
+            - .env
+  nginx:
+    depends_on:
+            - wordpress
+    restart: always
+    build: requirements/nginx
+    container_name: nginx
+    image: nginx
+    ports:
+            - "443:443"
+    volumes:
+            - wordpress-volume:/var/www/html
+    networks:
+            - intra-network
+    env_file:
+            - .env
+
+networks:
+   intra-network:
+           driver: bridge
+           name: intra-network
+
+volumes:
+   mariadb-volume:
+           driver: local
+           driver_opts:
+                   type: none
+                   o : bind
+                   device : /home/jaeyojun/data/mariadb
+   wordpress-volume:
+                driver: local
+                driver_opts:
+                        type: none
+                        o: bind
+                        device: /home/jaeyojun/data/wordpress
