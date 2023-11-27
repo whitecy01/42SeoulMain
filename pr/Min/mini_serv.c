@@ -32,7 +32,7 @@ int main(int ac, char **av) {
     if (ac != 2)
         ft_err("Wrong number arguments\n");
     int sockfd;
-    struct sockaddr_in servaddr, cli;
+    struct sockaddr_in servaddr, cli; // IP 
     socklen_t len;
     // socket create and verification
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -53,6 +53,7 @@ int main(int ac, char **av) {
     FD_ZERO(&sockets);
     FD_SET(sockfd,&sockets);
     bzero(clients, sizeof(clients));
+
     while (1){
         read_sock = write_sock = sockets;
         if (select(max_fd + 1, &read_sock, &write_sock, NULL, NULL) < 0)
