@@ -27,8 +27,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/User/Documents/GitHub/42SeoulMain/pr/exam05/cpp_module_00/practice",
-      "program": "c:/Users/User/Documents/GitHub/42SeoulMain/pr/exam05/cpp_module_00/practice/build/Debug/outDebug",
+      "cwd": "c:/Users/User/Documents/GitHub/42SeoulMain/circle5/ft_irc_jaeyojun/src",
+      "program": "c:/Users/User/Documents/GitHub/42SeoulMain/circle5/ft_irc_jaeyojun/src/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
