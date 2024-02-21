@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/jaeyojun/Desktop/42서울본과정커밋1/circle5/CPP_Module_05'
+make: Leaving directory `/Users/jaeyojun/Desktop/42서울본과정커밋1/circle5/CPP_Module_05'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+

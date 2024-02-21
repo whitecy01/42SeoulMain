@@ -1,0 +1,12 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/jaeyojun/Desktop/42서울본과정/pipex'
+cc -Wall -Wextra -Werror -c -o error_free.o error_free.c
+cc -Wall -Wextra -Werror -c -o findpath_libft.o findpath_libft.c
+cc -Wall -Wextra -Werror -c -o path_split.o path_split.c
+cc -Wall -Wextra -Werror -c -o pipex.o pipex.c
+cc -Wall -Wextra -Werror -c -o split.o split.c
+ 
+cc -Wall -Wextra -Werror -c -o combine_acces.o combine_acces.c
+cc -Wall -Wextra -Werror -o pipex error_free.o findpath_libft.o path_split.o pipex.o split.o combine_acces.o 
+make: Leaving directory `/Users/jaeyojun/Desktop/42서울본과정/pipex'
+ 

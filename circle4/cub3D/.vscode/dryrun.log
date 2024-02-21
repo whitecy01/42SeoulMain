@@ -1,0 +1,28 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/jaeyojun/Desktop/42서울본과정커밋1/circle4/cub3D'
+CC -Wall -Wextra -Werror -c -o main.o main.c
+ 
+CC -Wall -Wextra -Werror -c -o error_free.o error_free.c
+CC -Wall -Wextra -Werror -c -o read_map.o read_map.c
+CC -Wall -Wextra -Werror -c -o get_direction.o get_direction.c
+CC -Wall -Wextra -Werror -c -o set_rgb.o set_rgb.c
+CC -Wall -Wextra -Werror -c -o check_map.o check_map.c
+CC -Wall -Wextra -Werror -c -o check_wall.o check_wall.c
+CC -Wall -Wextra -Werror -c -o check_zero.o check_zero.c
+CC -Wall -Wextra -Werror -c -o check_overlap.o check_overlap.c
+CC -Wall -Wextra -Werror -c -o str/str.o str/str.c
+CC -Wall -Wextra -Werror -c -o str/split.o str/split.c
+CC -Wall -Wextra -Werror -c -o str/str2.o str/str2.c
+CC -Wall -Wextra -Werror -c -o dda.o dda.c
+CC -Wall -Wextra -Werror -c -o keyhook.o keyhook.c
+ 
+CC -Wall -Wextra -Werror -c -o render.o render.c
+CC -Wall -Wextra -Werror -c -o init.o init.c
+CC -Wall -Wextra -Werror -c -o texture.o texture.c
+ 
+CC -Wall -Wextra -Werror -c -o get_next_line/get_next_line.o get_next_line/get_next_line.c
+CC -Wall -Wextra -Werror -c -o get_next_line/get_next_line_utils.o get_next_line/get_next_line_utils.c
+make -C ./mlx
+CC -Wall -Wextra -Werror main.o error_free.o read_map.o get_direction.o set_rgb.o check_map.o check_wall.o check_zero.o check_overlap.o str/str.o str/split.o str/str2.o dda.o keyhook.o render.o init.o texture.o get_next_line/get_next_line.o get_next_line/get_next_line_utils.o -o cub3D -L./mlx -lmlx -framework OpenGL -framework Appkit
+make: Leaving directory `/Users/jaeyojun/Desktop/42서울본과정커밋1/circle4/cub3D'
+ 

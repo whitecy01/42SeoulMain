@@ -10,7 +10,6 @@ class Intern
 {
 private:
 public:
-
 	Intern(void);
 	Intern(Intern const &intern);
 	Intern &operator=(Intern const &intern);

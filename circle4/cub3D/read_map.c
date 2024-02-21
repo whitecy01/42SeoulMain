@@ -6,7 +6,7 @@
 /*   By: jaeyojun <jaeyojun@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 20:03:19 by jaeyojun          #+#    #+#             */
-/*   Updated: 2023/09/16 17:53:44 by jaeyojun         ###   ########seoul.kr  */
+/*   Updated: 2024/02/05 22:57:09 by jaeyojun         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static int	check_line(char *line, int line_len, t_game *game)
 			game->player_count++;
 		else
 		{
-			if (line_len - 1 == i)
-			{
-				if (line[i] != '\n')
-					return (0);
-			}
-			else
+			// if (line_len - 1 == i)
+			// {
+			// 	if (line[i] != '\n')
+			// 		return (0);
+			// }
+			// else
 				return (0);
 		}
 	}

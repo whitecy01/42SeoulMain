@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
+
 int main(void) {
     Bureaucrat jaeyojunA("jaeyojunA", 1);
     Bureaucrat jaeyojunB("jaeyojunB", 130);
