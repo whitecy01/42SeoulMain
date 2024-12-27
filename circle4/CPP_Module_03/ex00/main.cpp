@@ -18,11 +18,11 @@ int	main(void)
 	std::cout << "b : getEnergyPoint " << b.getEnergyPoint() << std::endl;
 	std::cout << "b : getHitPoint " << b.getHitPoint() << std::endl;
 	b.attack("A");
-	a.takeDamage(10);
+	a.takeDamage(100);
 	std::cout << "a : getAttackDamage " << a.getAttackDamage() << std::endl;
 	std::cout << "a : getEnergyPoint " << a.getEnergyPoint() << std::endl;
 	std::cout << "a : getHitPoint " << a.getHitPoint() << std::endl;
-	a.beRepaired(10);
+	a.beRepaired(100);
 	std::cout << "a : getAttackDamage " << a.getAttackDamage() << std::endl;
 	std::cout << "a : getEnergyPoint " << a.getEnergyPoint() << std::endl;
 	std::cout << "a : getHitPoint " << a.getHitPoint() << std::endl;
