@@ -1,0 +1,19 @@
+{
+  "new":"New",
+  "channel": "Channel",
+  "creator": "Creator",
+  "users": "Users",
+  "type": "Type",
+  "channelEmpty": "There is no chatting yet",
+  "searchChannels": "Search Channels",
+  "create": "Create",
+  "cancel": "Cancel",
+  "password" : "Password",
+  "channelName": "Channel Name",
+  "channelPolicy": "Channel Policy",
+  "public": "Public",
+  "private": "Private",
+  "maxUser": "Maximum no. of Users",
+  "enterPassword": "Enter Password",
+  "enter": "Enter"
+}
